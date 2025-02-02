@@ -50,8 +50,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EstadoAdmin.cs" />
     <Compile Include="EstadoLogIn.cs" />
     <Compile Include="EstadoMenu.cs" />
+    <Compile Include="FormAdministradorUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAdministradorUsuario.Designer.cs">
+      <DependentUpon>FormAdministradorUsuario.cs</DependentUpon>
+    </Compile>
     <Compile Include="GestorFormulario.cs" />
     <Compile Include="IEstado.cs" />
     <Compile Include="FormularioLogIn.cs">
@@ -68,6 +75,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormAdministradorUsuario.resx">
+      <DependentUpon>FormAdministradorUsuario.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormularioLogIn.resx">
       <DependentUpon>FormularioLogIn.cs</DependentUpon>
     </EmbeddedResource>

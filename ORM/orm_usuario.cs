@@ -20,24 +20,43 @@ namespace ORM
             dtUsuario = dao.RetornarTabla("Usuario");
         }
 
-        public void AltaUsuario(string nombreUsuario, string contraseñaUsuario, string posicionLaboral, string emailUsuario)
+        public void AltaUsuario(string nombreUsuario, string contraseñaUsuario,string nombre, string apellido, string rol, string emailUsuario,bool estado, int intentos)
         {
-            dtUsuario.Rows.Add(dtUsuario.NewRow().ItemArray = new object[] { nombreUsuario, contraseñaUsuario, posicionLaboral, emailUsuario });   
+            dtUsuario.Rows.Add(dtUsuario.NewRow().ItemArray = new object[] { nombreUsuario, contraseñaUsuario,nombre,apellido, rol, emailUsuario, estado, intentos });
+            dao.Update(dtUsuario);
+        }
+
+        public void Baja(Usuario usuario)
+        {
+            dtUsuario.Rows.Find(usuario).Delete();
+            dao.Update(dtUsuario);
+        }
+
+        public void Modificar(Usuario usuario)
+        {
+            DataRow dr = dtUsuario.Rows.Find(usuario);
+            dr.ItemArray = new object[] { dr.Field<int>(0), usuario.contraseñaUsuario, usuario.nombre, usuario.apellido, usuario.rolUsuario, usuario.emailUsuario, usuario.estado, usuario.intentos};
+            dao.Update(dtUsuario);
         }
 
         public bool ValidarUsuario(string nombreUsuario, string contraseñaUsuario)
         {
             bool existe = false;
-            if(dtUsuario.Rows.Find(nombreUsuario)!=null  && dtUsuario.Rows.Find(nombreUsuario)[1].ToString() == contraseñaUsuario)
+            if(dtUsuario.Rows.Find(nombreUsuario)!=null  && dtUsuario.Rows.Find(nombreUsuario)["contraseña"].ToString() == contraseñaUsuario)
             {
                 existe = true;
             }
             return existe;
         }
 
-        public List<usuario> RetornarUsuarios(string tipoConsulta=" ",string campo = " ",string valor1 = " ", string valor2 = " " )
+        public List<Usuario> RetornarUsuarios()
         {
-            
+            List<Usuario> listaUsuarios = new List<Usuario>();
+            foreach (DataRow dr in dtUsuario.Rows)
+            {
+                listaUsuarios.Add(new Usuario(dr.ItemArray));
+            }
+            return listaUsuarios;
         }
     }
 }

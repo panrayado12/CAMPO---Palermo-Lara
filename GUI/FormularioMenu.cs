@@ -35,8 +35,7 @@ namespace GUI
         {
             try
             {
-                string nombreUsuario = Interaction.InputBox("Nombre de usuario: ");
-                string contraseña = Interaction.InputBox("")
+                GestorFormulario.gestorFormSG.DefinirEstado(new EstadoAdmin());
             }
             catch (Exception)
             {

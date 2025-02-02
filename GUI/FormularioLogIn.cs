@@ -25,12 +25,9 @@ namespace GUI
         {
             try
             {
-              
                if(bll.ValidarUsuario(txtNombreUsuario.Text, txtContraseñaUsuario.Text)==true)
                {
-                    sessionManager.Gestor.LogIn()
                     GestorFormulario.gestorFormSG.DefinirEstado(new EstadoMenu());
-
                }
             }
             catch (Exception)
@@ -38,6 +35,11 @@ namespace GUI
 
                 throw;
             }
+        }
+
+        private void FormularioLogIn_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

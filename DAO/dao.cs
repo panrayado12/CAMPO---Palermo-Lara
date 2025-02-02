@@ -34,5 +34,10 @@ namespace DAO
             dt.PrimaryKey = new DataColumn[] { dt.Columns[0] };
             return dt;
         }
+
+        public void Update(DataTable dt)
+        {
+            adapter.Update(dt);
+        }
     }
 }

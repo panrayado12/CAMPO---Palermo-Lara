@@ -77,6 +77,7 @@
             this.Controls.Add(this.btnIniciarSesion);
             this.Name = "FormularioLogIn";
             this.Text = "log in ";
+            this.Load += new System.EventHandler(this.FormularioLogIn_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

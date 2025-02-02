@@ -9,7 +9,7 @@ namespace SERVICIOS
 {
     public class sessionManager
     {
-        public usuario usuarioSession;
+        public Usuario usuarioSession;
         private static sessionManager instance;
 
         public static sessionManager Gestor
@@ -24,7 +24,7 @@ namespace SERVICIOS
             }
         }
 
-        public void LogIn(usuario usuarioLogIn)
+        public void LogIn(Usuario usuarioLogIn)
         {
             if(Gestor.usuarioSession == null)
             {
