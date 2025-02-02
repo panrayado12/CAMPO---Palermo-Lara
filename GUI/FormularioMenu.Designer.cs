@@ -30,6 +30,7 @@
         {
             this.button1 = new System.Windows.Forms.Button();
             this.btnAdministrarUsuarios = new System.Windows.Forms.Button();
+            this.btnCambiarContraseña = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -52,11 +53,22 @@
             this.btnAdministrarUsuarios.UseVisualStyleBackColor = true;
             this.btnAdministrarUsuarios.Click += new System.EventHandler(this.btnAñadirUsuario_Click);
             // 
+            // btnCambiarContraseña
+            // 
+            this.btnCambiarContraseña.Location = new System.Drawing.Point(663, 458);
+            this.btnCambiarContraseña.Name = "btnCambiarContraseña";
+            this.btnCambiarContraseña.Size = new System.Drawing.Size(275, 47);
+            this.btnCambiarContraseña.TabIndex = 2;
+            this.btnCambiarContraseña.Text = "Cambiar contraseña";
+            this.btnCambiarContraseña.UseVisualStyleBackColor = true;
+            this.btnCambiarContraseña.Click += new System.EventHandler(this.btnCambiarContraseña_Click);
+            // 
             // FormularioMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1623, 905);
+            this.Controls.Add(this.btnCambiarContraseña);
             this.Controls.Add(this.btnAdministrarUsuarios);
             this.Controls.Add(this.button1);
             this.Name = "FormularioMenu";
@@ -69,5 +81,6 @@
 
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnAdministrarUsuarios;
+        private System.Windows.Forms.Button btnCambiarContraseña;
     }
 }

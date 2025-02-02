@@ -10,22 +10,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Security.Cryptography;
 
 namespace GUI
 {
     public partial class FormAdministradorUsuario : Form
     {
-        bll_usuario bll;
+        bll_usuario bllUsuario;
+        bll_seguridad bllSeguridad;
         public FormAdministradorUsuario()
         {
             InitializeComponent();
-            bll = new bll_usuario();
+            bllUsuario = new bll_usuario();
+            bllSeguridad = new bll_seguridad();
         }
 
         private void FormAdministradorUsuario_Load(object sender, EventArgs e)
         {
             dataUsuarios.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            CargarGrillaUsuario(bll.RetornarUsuarios());
+            CargarGrillaUsuario(bllUsuario.RetornarUsuarios());
         }
 
         public void CargarGrillaUsuario(List<Usuario> usuariosLista)
@@ -41,15 +44,71 @@ namespace GUI
         {
             try
             {
-                string nombreUsuario = txtNombreUsuario.Text;
-                string apellidoUsuario = txtApellidoUsuario.Text;   
-                string usuario = Interaction.InputBox("Nombre de usuario: ");
+                string nombre = txtNombreUsuario.Text;
+                string apellido = txtApellidoUsuario.Text;   
+                string nombreUsuario = Interaction.InputBox("Nombre de usuario: ");
                 string contraseña = txtContraseña.Text;
                 string email = txtEmailUsuario.Text;
                 string rolUsuario = txtRolUsuario.Text;
-                Usuario u = new Usuario(usuario, contraseña, nombreUsuario, apellidoUsuario, rolUsuario,email, true, 0);
-                bll.Alta(usuario, contraseña,nombreUsuario, apellidoUsuario, rolUsuario, email, true,0);
-                CargarGrillaUsuario(bll.RetornarUsuarios());
+                string contraseñaHasheada = bllSeguridad.GetSHA256(contraseña);
+                Usuario u = new Usuario(nombreUsuario, contraseñaHasheada, nombre, apellido, rolUsuario,email, true, 0);
+                if (bllUsuario.ValidarUsuario(nombreUsuario, contraseñaHasheada) == true) throw new Exception("Usuario ya existente");
+                bllUsuario.Alta(nombreUsuario, contraseñaHasheada,nombre, apellido, rolUsuario, email, true,0);
+                CargarGrillaUsuario(bllUsuario.RetornarUsuarios());
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private void btnBajaUsuario_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string nombreUsuario = dataUsuarios.SelectedRows[0].Cells[0].Value.ToString();
+                Usuario usuario = bllUsuario.RetornarUsuarios().Find(x => x.nombreUsuario == nombreUsuario);
+                bllUsuario.Baja(usuario);
+                CargarGrillaUsuario(bllUsuario.RetornarUsuarios());
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private void btnModificarUsuario_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string nombreUsuario = dataUsuarios.SelectedRows[0].Cells[0].Value.ToString();
+                Usuario usuario = bllUsuario.RetornarUsuarios().Find(x => x.nombreUsuario == nombreUsuario);
+                usuario.nombre = txtNombreUsuario.Text;
+                usuario.apellido = txtApellidoUsuario.Text;
+                usuario.contraseñaUsuario = txtContraseña.Text;
+                usuario.emailUsuario = txtEmailUsuario.Text;
+                usuario.rolUsuario = txtRolUsuario.Text;
+                bllUsuario.Modificar(usuario);
+                CargarGrillaUsuario(bllUsuario.RetornarUsuarios());
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private void dataUsuarios_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                txtNombreUsuario.Text = dataUsuarios.SelectedRows[0].Cells[2].Value.ToString();
+                txtApellidoUsuario.Text = dataUsuarios.SelectedRows[0].Cells[3].Value.ToString();
+                txtContraseña.Text = dataUsuarios.SelectedRows[0].Cells[1].Value.ToString();
+                txtRolUsuario.Text = dataUsuarios.SelectedRows[0].Cells[4].Value.ToString();
+                txtEmailUsuario.Text = dataUsuarios.SelectedRows[0].Cells[5].Value.ToString();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private void btnDesbloquearUsuario_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string nombreUsuario = dataUsuarios.SelectedRows[0].Cells[0].Value.ToString();
+                Usuario usuario = bllUsuario.RetornarUsuarios().Find(x => x.nombreUsuario == nombreUsuario);
+                bllUsuario.BloquearDesbloquearUsuario(usuario);
+                CargarGrillaUsuario(bllUsuario.RetornarUsuarios());
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }

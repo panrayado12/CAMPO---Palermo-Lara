@@ -1,4 +1,6 @@
-﻿using Microsoft.VisualBasic;
+﻿using BE;
+using BLL;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,9 +15,11 @@ namespace GUI
 {
     public partial class FormularioMenu : Form
     {
+        bll_usuario bll;
         public FormularioMenu()
         {
             InitializeComponent();
+            bll = new bll_usuario();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -42,6 +46,24 @@ namespace GUI
 
                 throw;
             }
+        }
+
+        private void btnCambiarContraseña_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string nombreUsuario = Interaction.InputBox("Ingrese su nombre de usuario: ", "USUARIO");
+                Usuario usuario = bll.RetornarUsuarios().Find(x => x.nombreUsuario == nombreUsuario);
+                if(usuario==null)
+                {
+                    MessageBox.Show("USUARIO NO ENCONTRADO");
+                    throw new Exception();
+                }
+                usuario.contraseñaUsuario = Interaction.InputBox("Ingrese la nueva contraseña: ", "NUEVA CONTRASEÑA");
+                bll.Modificar(usuario);
+                MessageBox.Show("Su contraseña a sido modificada con exito");
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
     }
 }

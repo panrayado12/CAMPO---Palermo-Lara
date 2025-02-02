@@ -28,14 +28,14 @@ namespace ORM
 
         public void Baja(Usuario usuario)
         {
-            dtUsuario.Rows.Find(usuario).Delete();
+            dtUsuario.Rows.Find(usuario.nombreUsuario).Delete();
             dao.Update(dtUsuario);
         }
 
         public void Modificar(Usuario usuario)
         {
-            DataRow dr = dtUsuario.Rows.Find(usuario);
-            dr.ItemArray = new object[] { dr.Field<int>(0), usuario.contraseñaUsuario, usuario.nombre, usuario.apellido, usuario.rolUsuario, usuario.emailUsuario, usuario.estado, usuario.intentos};
+            DataRow dr = dtUsuario.Rows.Find(usuario.nombreUsuario);
+            dr.ItemArray = new object[] { dr.Field<string>(0), usuario.contraseñaUsuario, usuario.nombre, usuario.apellido, usuario.rolUsuario, usuario.emailUsuario, usuario.estado, usuario.intentos};
             dao.Update(dtUsuario);
         }
 
@@ -57,6 +57,20 @@ namespace ORM
                 listaUsuarios.Add(new Usuario(dr.ItemArray));
             }
             return listaUsuarios;
+        }
+
+        public void BloquearDesbloquearUsuario(Usuario usuario)
+        {
+            DataRow usuarioModificable = dtUsuario.Rows.Find(usuario.nombreUsuario);
+            if(usuario.estado == true)
+            {
+                usuarioModificable[6] = false;
+            }
+            else
+            {
+                usuarioModificable[6] = true;  
+            }
+
         }
     }
 }
