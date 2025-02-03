@@ -15,11 +15,13 @@ namespace GUI
 {
     public partial class FormularioMenu : Form
     {
-        bll_usuario bll;
+        bll_usuario bllUsuario;
+        bll_seguridad bllSeguridad;
         public FormularioMenu()
         {
             InitializeComponent();
-            bll = new bll_usuario();
+            bllUsuario = new bll_usuario();
+            bllSeguridad = new bll_seguridad();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -53,14 +55,14 @@ namespace GUI
             try
             {
                 string nombreUsuario = Interaction.InputBox("Ingrese su nombre de usuario: ", "USUARIO");
-                Usuario usuario = bll.RetornarUsuarios().Find(x => x.nombreUsuario == nombreUsuario);
+                Usuario usuario = bllUsuario.RetornarUsuarios().Find(x => x.nombreUsuario == nombreUsuario);
                 if(usuario==null)
                 {
                     MessageBox.Show("USUARIO NO ENCONTRADO");
                     throw new Exception();
                 }
-                usuario.contraseñaUsuario = Interaction.InputBox("Ingrese la nueva contraseña: ", "NUEVA CONTRASEÑA");
-                bll.Modificar(usuario);
+                usuario.contraseñaUsuario = bllSeguridad.GetSHA256(Interaction.InputBox("Ingrese la nueva contraseña: ", "NUEVA CONTRASEÑA"));
+                bllUsuario.Modificar(usuario);
                 MessageBox.Show("Su contraseña a sido modificada con exito");
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }

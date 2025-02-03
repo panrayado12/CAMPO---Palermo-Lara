@@ -45,5 +45,10 @@ namespace BLL
         {
             orm.BloquearDesbloquearUsuario(usuario);
         }
+
+        public bool RetornarEstadoDeUsuario(Usuario usuario)
+        {
+            return orm.EstadoDeUsuario(usuario);
+        }
     }
 }

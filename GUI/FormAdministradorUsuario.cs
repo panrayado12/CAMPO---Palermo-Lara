@@ -36,7 +36,7 @@ namespace GUI
             dataUsuarios.Rows.Clear();
             foreach(Usuario u in usuariosLista)
             {
-                dataUsuarios.Rows.Add(u.nombreUsuario, u.nombre, u.apellido, u.contraseñaUsuario, u.rolUsuario, u.emailUsuario, u.estado, u.intentos);
+                dataUsuarios.Rows.Add(u.nombreUsuario, u.contraseñaUsuario, u.nombre, u.apellido, u.rolUsuario, u.emailUsuario, u.estado, u.intentos);
             }
         }
 
@@ -79,7 +79,7 @@ namespace GUI
                 Usuario usuario = bllUsuario.RetornarUsuarios().Find(x => x.nombreUsuario == nombreUsuario);
                 usuario.nombre = txtNombreUsuario.Text;
                 usuario.apellido = txtApellidoUsuario.Text;
-                usuario.contraseñaUsuario = txtContraseña.Text;
+                usuario.contraseñaUsuario = bllSeguridad.GetSHA256(txtContraseña.Text);
                 usuario.emailUsuario = txtEmailUsuario.Text;
                 usuario.rolUsuario = txtRolUsuario.Text;
                 bllUsuario.Modificar(usuario);

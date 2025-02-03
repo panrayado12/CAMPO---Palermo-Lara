@@ -26,9 +26,9 @@ namespace BE
         public Usuario(object[] datos)
         {
             nombreUsuario = datos[0].ToString();
-            contraseñaUsuario = datos[3].ToString();
-            nombre = datos[1].ToString();
-            apellido = datos[2].ToString();
+            contraseñaUsuario = datos[1].ToString();
+            nombre = datos[2].ToString();
+            apellido = datos[3].ToString();
             rolUsuario = datos[4].ToString();
             emailUsuario = datos[5].ToString();
             estado = Convert.ToBoolean(datos[6]);

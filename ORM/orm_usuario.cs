@@ -42,7 +42,7 @@ namespace ORM
         public bool ValidarUsuario(string nombreUsuario, string contraseñaUsuario)
         {
             bool existe = false;
-            if(dtUsuario.Rows.Find(nombreUsuario)!=null  && dtUsuario.Rows.Find(nombreUsuario)["contraseña"].ToString() == contraseñaUsuario)
+            if (dtUsuario.Rows.Find(nombreUsuario)!=null  && dtUsuario.Rows.Find(nombreUsuario)["contraseña"].ToString() == contraseñaUsuario)
             {
                 existe = true;
             }
@@ -71,6 +71,16 @@ namespace ORM
                 usuarioModificable[6] = true;  
             }
 
+        }
+
+        public bool EstadoDeUsuario(Usuario usuario)
+        {
+            bool activo = false;
+            if(usuario.estado==true)
+            {
+                activo = true;
+            }
+            return activo;
         }
     }
 }

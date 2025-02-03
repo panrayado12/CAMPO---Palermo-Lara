@@ -1,4 +1,5 @@
-﻿using BLL;
+﻿using BE;
+using BLL;
 using SERVICIOS;
 using System;
 using System.Collections.Generic;
@@ -14,20 +15,27 @@ namespace GUI
 {
     public partial class FormularioLogIn : Form
     {
-        bll_usuario bll;
+        bll_usuario bllUsuario;
+        bll_seguridad bllSeguridad;
         public FormularioLogIn()
         {
             InitializeComponent();
-            bll = new bll_usuario();
+            bllUsuario = new bll_usuario();
+            bllSeguridad = new bll_seguridad();
         }
 
         private void btnIniciarSesion_Click(object sender, EventArgs e)
         {
             try
             {
-               if(bll.ValidarUsuario(txtNombreUsuario.Text, txtContraseñaUsuario.Text)==true)
+                string contraseñaHasheada = bllSeguridad.GetSHA256(txtContraseñaUsuario.Text);
+                if (bllUsuario.ValidarUsuario(txtNombreUsuario.Text, contraseñaHasheada )==true)
                {
-                    GestorFormulario.gestorFormSG.DefinirEstado(new EstadoMenu());
+                    Usuario usuario = bllUsuario.RetornarUsuarios().Find(x => x.nombreUsuario == txtNombreUsuario.Text);
+                    if(bllUsuario.RetornarEstadoDeUsuario(usuario)==true)
+                    {
+                        GestorFormulario.gestorFormSG.DefinirEstado(new EstadoMenu());
+                    }
                }
             }
             catch (Exception)
