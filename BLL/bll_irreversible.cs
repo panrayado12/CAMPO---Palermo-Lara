@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BLL
 {
-    public class bll_seguridad
+    public class bll_irreversible
     {
         public string GetSHA256(string str)
         {

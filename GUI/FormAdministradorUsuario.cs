@@ -17,12 +17,11 @@ namespace GUI
     public partial class FormAdministradorUsuario : Form
     {
         bll_usuario bllUsuario;
-        bll_seguridad bllSeguridad;
         public FormAdministradorUsuario()
         {
             InitializeComponent();
             bllUsuario = new bll_usuario();
-            bllSeguridad = new bll_seguridad();
+  
         }
 
         private void FormAdministradorUsuario_Load(object sender, EventArgs e)
@@ -50,10 +49,7 @@ namespace GUI
                 string contraseña = txtContraseña.Text;
                 string email = txtEmailUsuario.Text;
                 string rolUsuario = txtRolUsuario.Text;
-                string contraseñaHasheada = bllSeguridad.GetSHA256(contraseña);
-                Usuario u = new Usuario(nombreUsuario, contraseñaHasheada, nombre, apellido, rolUsuario,email, true, 0);
-                if (bllUsuario.ValidarUsuario(nombreUsuario, contraseñaHasheada) == true) throw new Exception("Usuario ya existente");
-                bllUsuario.Alta(nombreUsuario, contraseñaHasheada,nombre, apellido, rolUsuario, email, true,0);
+                bllUsuario.Alta(nombreUsuario, contraseña,nombre, apellido, rolUsuario, email, true,0);
                 CargarGrillaUsuario(bllUsuario.RetornarUsuarios());
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
@@ -79,7 +75,6 @@ namespace GUI
                 Usuario usuario = bllUsuario.RetornarUsuarios().Find(x => x.nombreUsuario == nombreUsuario);
                 usuario.nombre = txtNombreUsuario.Text;
                 usuario.apellido = txtApellidoUsuario.Text;
-                usuario.contraseñaUsuario = bllSeguridad.GetSHA256(txtContraseña.Text);
                 usuario.emailUsuario = txtEmailUsuario.Text;
                 usuario.rolUsuario = txtRolUsuario.Text;
                 bllUsuario.Modificar(usuario);

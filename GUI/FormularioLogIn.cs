@@ -16,27 +16,26 @@ namespace GUI
     public partial class FormularioLogIn : Form
     {
         bll_usuario bllUsuario;
-        bll_seguridad bllSeguridad;
+        bll_irreversible bllSeguridad;
         public FormularioLogIn()
         {
             InitializeComponent();
             bllUsuario = new bll_usuario();
-            bllSeguridad = new bll_seguridad();
+            bllSeguridad = new bll_irreversible();
         }
 
         private void btnIniciarSesion_Click(object sender, EventArgs e)
         {
             try
             {
-                string contraseñaHasheada = bllSeguridad.GetSHA256(txtContraseñaUsuario.Text);
-                if (bllUsuario.ValidarUsuario(txtNombreUsuario.Text, contraseñaHasheada )==true)
-               {
+                if (bllUsuario.ValidarUsuario(txtNombreUsuario.Text, txtContraseñaUsuario.Text )==true)
+                {
                     Usuario usuario = bllUsuario.RetornarUsuarios().Find(x => x.nombreUsuario == txtNombreUsuario.Text);
                     if(bllUsuario.RetornarEstadoDeUsuario(usuario)==true)
                     {
                         GestorFormulario.gestorFormSG.DefinirEstado(new EstadoMenu());
                     }
-               }
+                }
             }
             catch (Exception)
             {

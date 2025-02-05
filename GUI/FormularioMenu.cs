@@ -16,12 +16,12 @@ namespace GUI
     public partial class FormularioMenu : Form
     {
         bll_usuario bllUsuario;
-        bll_seguridad bllSeguridad;
+        bll_irreversible bllSeguridad;
         public FormularioMenu()
         {
             InitializeComponent();
             bllUsuario = new bll_usuario();
-            bllSeguridad = new bll_seguridad();
+            bllSeguridad = new bll_irreversible();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -61,7 +61,6 @@ namespace GUI
                     MessageBox.Show("USUARIO NO ENCONTRADO");
                     throw new Exception();
                 }
-                usuario.contraseñaUsuario = bllSeguridad.GetSHA256(Interaction.InputBox("Ingrese la nueva contraseña: ", "NUEVA CONTRASEÑA"));
                 bllUsuario.Modificar(usuario);
                 MessageBox.Show("Su contraseña a sido modificada con exito");
             }
