@@ -43,6 +43,7 @@ namespace BLL
 
         public void Baja(Usuario usuario)
         {
+            usuario.nombreUsuario = bllReversible.Encrypt(usuario.nombreUsuario);
             orm.Baja(usuario);
         }
 
