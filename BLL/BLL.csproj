@@ -46,8 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="bll_irreversible.cs" />
-    <Compile Include="bll_reversible.cs" />
+    <Compile Include="bll_BackupRestore.cs" />
     <Compile Include="bll_usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

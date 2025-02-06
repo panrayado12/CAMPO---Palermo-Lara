@@ -70,7 +70,7 @@ namespace ORM
             {
                 usuarioModificable[6] = true;  
             }
-
+            dao.Update(dtUsuario);
         }
 
         public bool EstadoDeUsuario(Usuario usuario)

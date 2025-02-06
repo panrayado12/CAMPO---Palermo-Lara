@@ -15,13 +15,11 @@ namespace GUI
 {
     public partial class FormularioLogIn : Form
     {
-        bll_usuario bllUsuario;
-        bll_irreversible bllSeguridad;
+        bll_usuario bllUsuario;     
         public FormularioLogIn()
         {
             InitializeComponent();
             bllUsuario = new bll_usuario();
-            bllSeguridad = new bll_irreversible();
         }
 
         private void btnIniciarSesion_Click(object sender, EventArgs e)

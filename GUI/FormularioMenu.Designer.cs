@@ -31,6 +31,8 @@
             this.button1 = new System.Windows.Forms.Button();
             this.btnAdministrarUsuarios = new System.Windows.Forms.Button();
             this.btnCambiarContraseña = new System.Windows.Forms.Button();
+            this.btnRestore = new System.Windows.Forms.Button();
+            this.btnBackUp = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -63,11 +65,33 @@
             this.btnCambiarContraseña.UseVisualStyleBackColor = true;
             this.btnCambiarContraseña.Click += new System.EventHandler(this.btnCambiarContraseña_Click);
             // 
+            // btnRestore
+            // 
+            this.btnRestore.Location = new System.Drawing.Point(964, 385);
+            this.btnRestore.Name = "btnRestore";
+            this.btnRestore.Size = new System.Drawing.Size(275, 47);
+            this.btnRestore.TabIndex = 3;
+            this.btnRestore.Text = "Restore";
+            this.btnRestore.UseVisualStyleBackColor = true;
+            this.btnRestore.Click += new System.EventHandler(this.btnRestore_Click);
+            // 
+            // btnBackUp
+            // 
+            this.btnBackUp.Location = new System.Drawing.Point(964, 314);
+            this.btnBackUp.Name = "btnBackUp";
+            this.btnBackUp.Size = new System.Drawing.Size(275, 47);
+            this.btnBackUp.TabIndex = 4;
+            this.btnBackUp.Text = "Back up";
+            this.btnBackUp.UseVisualStyleBackColor = true;
+            this.btnBackUp.Click += new System.EventHandler(this.btnBackUp_Click);
+            // 
             // FormularioMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1623, 905);
+            this.Controls.Add(this.btnBackUp);
+            this.Controls.Add(this.btnRestore);
             this.Controls.Add(this.btnCambiarContraseña);
             this.Controls.Add(this.btnAdministrarUsuarios);
             this.Controls.Add(this.button1);
@@ -82,5 +106,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnAdministrarUsuarios;
         private System.Windows.Forms.Button btnCambiarContraseña;
+        private System.Windows.Forms.Button btnRestore;
+        private System.Windows.Forms.Button btnBackUp;
     }
 }

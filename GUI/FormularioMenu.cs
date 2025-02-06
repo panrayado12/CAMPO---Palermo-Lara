@@ -16,12 +16,12 @@ namespace GUI
     public partial class FormularioMenu : Form
     {
         bll_usuario bllUsuario;
-        bll_irreversible bllSeguridad;
+        bll_BackupRestore bllBackupRestore;
         public FormularioMenu()
         {
             InitializeComponent();
             bllUsuario = new bll_usuario();
-            bllSeguridad = new bll_irreversible();
+            bllBackupRestore = new bll_BackupRestore();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -63,6 +63,40 @@ namespace GUI
                 }
                 bllUsuario.Modificar(usuario);
                 MessageBox.Show("Su contraseña a sido modificada con exito");
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private void btnBackUp_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "Archivo de Backup (*.bak)|*.bak";
+                saveFileDialog.Title = "Guardar Backup";
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string rutaDestino = saveFileDialog.FileName;
+                    bllBackupRestore.BackUp(rutaDestino);
+                    MessageBox.Show("Backup realizado con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private void btnRestore_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.Filter = "Archivo de Backup (*.bak)|*.bak";
+                openFileDialog.Title = "Seleccionar Backup";
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string rutaBackup = openFileDialog.FileName;
+                    bllBackupRestore.Restore(rutaBackup);
+                    MessageBox.Show("Base de datos restaurada con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }

@@ -5,10 +5,25 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BLL
+namespace SERVICIOS
 {
-    internal class bll_reversible
+    public class seguridad
     {
+        #region CIFRADO IRREVERSIBLE SHA-256 (contraseña)
+        public string GetSHA256(string str)
+        {
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                byte[] stream = sha256.ComputeHash(Encoding.UTF8.GetBytes(str));
+                StringBuilder sb = new StringBuilder();
+                foreach (byte b in stream)
+                    sb.AppendFormat("{0:x2}", b);
+                return sb.ToString();
+            }
+        }
+        #endregion
+
+        #region CIFRADO REVERSIBLE AES (nombre de usuario)
         private static readonly byte[] key = new byte[32] {
         0x2B, 0x7E, 0x15, 0x16, 0x28, 0xAE, 0xD2, 0xA6,
         0xAB, 0xF7, 0xCF, 0x40, 0x44, 0x35, 0x5C, 0xE5,
@@ -52,5 +67,6 @@ namespace BLL
                 return Encoding.UTF8.GetString(decryptedBytes);
             }
         }
+        #endregion
     }
 }
