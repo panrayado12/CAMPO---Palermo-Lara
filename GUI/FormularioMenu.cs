@@ -1,6 +1,7 @@
 ﻿using BE;
 using BLL;
 using Microsoft.VisualBasic;
+using SERVICIOS;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,12 +17,12 @@ namespace GUI
     public partial class FormularioMenu : Form
     {
         bll_usuario bllUsuario;
-        bll_BackupRestore bllBackupRestore;
+        BackupRestore backupRestore;
         public FormularioMenu()
         {
             InitializeComponent();
             bllUsuario = new bll_usuario();
-            bllBackupRestore = new bll_BackupRestore();
+            backupRestore = new BackupRestore();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -77,7 +78,7 @@ namespace GUI
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     string rutaDestino = saveFileDialog.FileName;
-                    bllBackupRestore.BackUp(rutaDestino);
+                    backupRestore.BackUp(rutaDestino);
                     MessageBox.Show("Backup realizado con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
@@ -94,7 +95,7 @@ namespace GUI
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     string rutaBackup = openFileDialog.FileName;
-                    bllBackupRestore.Restore(rutaBackup);
+                    backupRestore.Restore(rutaBackup);
                     MessageBox.Show("Base de datos restaurada con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
