@@ -107,5 +107,14 @@ namespace GUI
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                GestorFormulario.gestorFormSG.DefinirEstado(new EstadoMenu());
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
     }
 }
