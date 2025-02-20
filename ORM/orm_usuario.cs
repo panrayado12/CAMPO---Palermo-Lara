@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ORM
 {
@@ -42,9 +43,26 @@ namespace ORM
         public bool ValidarUsuario(string nombreUsuario, string contraseñaUsuario)
         {
             bool existe = false;
-            if (dtUsuario.Rows.Find(nombreUsuario)!=null  && dtUsuario.Rows.Find(nombreUsuario)["contraseña"].ToString() == contraseñaUsuario)
+            if (dtUsuario.Rows.Find(nombreUsuario)!=null)
             {
-                existe = true;
+                if(dtUsuario.Rows.Find(nombreUsuario)["contraseña"].ToString() == contraseñaUsuario)
+                {
+                    existe = true;
+                }
+                else
+                {
+                    DataRow usuario = dtUsuario.Rows.Find(nombreUsuario);
+                    int intentos = (int)usuario[7];
+                    if(intentos < 3)
+                    {
+                        usuario[7] = intentos + 1;
+                        dao.Update(dtUsuario);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Usuario bloqueado");
+                    }
+                }
             }
             return existe;
         }
@@ -68,7 +86,8 @@ namespace ORM
             }
             else
             {
-                usuarioModificable[6] = true;  
+                usuarioModificable[6] = true;
+                usuarioModificable[7] = 0;
             }
             dao.Update(dtUsuario);
         }

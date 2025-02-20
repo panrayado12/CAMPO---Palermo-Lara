@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BackupRestore.cs" />
+    <Compile Include="bitacora.cs" />
     <Compile Include="seguridad.cs" />
     <Compile Include="sessionManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
