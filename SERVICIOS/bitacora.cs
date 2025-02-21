@@ -8,7 +8,7 @@ namespace SERVICIOS
 {
     public class bitacora
     {
-        public void Alta()
+        public void Alta(string usuario, DateTime fecha, TimeSpan tiempo, string modulo, string descripcion, int criticidad)
         {
 
         }
