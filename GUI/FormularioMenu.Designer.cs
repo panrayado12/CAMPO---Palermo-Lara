@@ -33,6 +33,7 @@
             this.btnCambiarContraseña = new System.Windows.Forms.Button();
             this.btnRestore = new System.Windows.Forms.Button();
             this.btnBackUp = new System.Windows.Forms.Button();
+            this.btnBitacora = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -85,11 +86,22 @@
             this.btnBackUp.UseVisualStyleBackColor = true;
             this.btnBackUp.Click += new System.EventHandler(this.btnBackUp_Click);
             // 
+            // btnBitacora
+            // 
+            this.btnBitacora.Location = new System.Drawing.Point(964, 458);
+            this.btnBitacora.Name = "btnBitacora";
+            this.btnBitacora.Size = new System.Drawing.Size(275, 47);
+            this.btnBitacora.TabIndex = 5;
+            this.btnBitacora.Text = "Bitacora";
+            this.btnBitacora.UseVisualStyleBackColor = true;
+            this.btnBitacora.Click += new System.EventHandler(this.btnBitacora_Click);
+            // 
             // FormularioMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1623, 905);
+            this.Controls.Add(this.btnBitacora);
             this.Controls.Add(this.btnBackUp);
             this.Controls.Add(this.btnRestore);
             this.Controls.Add(this.btnCambiarContraseña);
@@ -97,6 +109,7 @@
             this.Controls.Add(this.button1);
             this.Name = "FormularioMenu";
             this.Text = "Menu";
+            this.Load += new System.EventHandler(this.FormularioMenu_Load);
             this.ResumeLayout(false);
 
         }
@@ -108,5 +121,6 @@
         private System.Windows.Forms.Button btnCambiarContraseña;
         private System.Windows.Forms.Button btnRestore;
         private System.Windows.Forms.Button btnBackUp;
+        private System.Windows.Forms.Button btnBitacora;
     }
 }

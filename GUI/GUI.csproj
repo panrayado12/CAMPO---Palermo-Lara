@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EstadoAdmin.cs" />
+    <Compile Include="EstadoBitacora.cs" />
     <Compile Include="EstadoLogIn.cs" />
     <Compile Include="EstadoMenu.cs" />
     <Compile Include="FormAdministradorUsuario.cs">
@@ -58,6 +59,12 @@
     </Compile>
     <Compile Include="FormAdministradorUsuario.Designer.cs">
       <DependentUpon>FormAdministradorUsuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormularioBitacoraEventos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormularioBitacoraEventos.Designer.cs">
+      <DependentUpon>FormularioBitacoraEventos.cs</DependentUpon>
     </Compile>
     <Compile Include="GestorFormulario.cs" />
     <Compile Include="IEstado.cs" />
@@ -77,6 +84,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormAdministradorUsuario.resx">
       <DependentUpon>FormAdministradorUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormularioBitacoraEventos.resx">
+      <DependentUpon>FormularioBitacoraEventos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormularioLogIn.resx">
       <DependentUpon>FormularioLogIn.cs</DependentUpon>

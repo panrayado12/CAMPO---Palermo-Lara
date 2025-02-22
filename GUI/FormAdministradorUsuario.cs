@@ -17,9 +17,11 @@ namespace GUI
     public partial class FormAdministradorUsuario : Form
     {
         bll_usuario bllUsuario;
+        bll_bitacora bllBitacora;
         public FormAdministradorUsuario()
         {
             InitializeComponent();
+            bllBitacora = new bll_bitacora();
             bllUsuario = new bll_usuario();
   
         }
@@ -50,9 +52,11 @@ namespace GUI
                 string email = txtEmailUsuario.Text;
                 string rolUsuario = txtRolUsuario.Text;
                 bllUsuario.Alta(nombreUsuario, contraseña,nombre, apellido, rolUsuario, email, true,0);
+                bllBitacora.Alta("Formulario Administrador de usuarios", "Alta usuario", 2);
                 CargarGrillaUsuario(bllUsuario.RetornarUsuarios());
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            catch (Exception ex) { MessageBox.Show(ex.Message); bllBitacora.Alta("Formulario Administrador de usuarios", "Error alta usuario", 2);
+            }
         }
 
         private void btnBajaUsuario_Click(object sender, EventArgs e)
@@ -62,9 +66,11 @@ namespace GUI
                 string nombreUsuario = dataUsuarios.SelectedRows[0].Cells[0].Value.ToString();
                 Usuario usuario = bllUsuario.RetornarUsuarios().Find(x => x.nombreUsuario == nombreUsuario);
                 bllUsuario.Baja(usuario);
+                bllBitacora.Alta("Formulario Administrador de usuarios", "Baja usuario", 2);
                 CargarGrillaUsuario(bllUsuario.RetornarUsuarios());
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            catch (Exception ex) { MessageBox.Show(ex.Message); bllBitacora.Alta("Formulario Administrador de usuarios", "Error baja usuario", 2);
+            }
         }
 
         private void btnModificarUsuario_Click(object sender, EventArgs e)
@@ -78,9 +84,11 @@ namespace GUI
                 usuario.emailUsuario = txtEmailUsuario.Text;
                 usuario.rolUsuario = txtRolUsuario.Text;
                 bllUsuario.Modificar(usuario);
+                bllBitacora.Alta("Formulario Administrador de usuarios", "Modificar usuario", 2);
                 CargarGrillaUsuario(bllUsuario.RetornarUsuarios());
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            catch (Exception ex) { MessageBox.Show(ex.Message); bllBitacora.Alta("Formulario Administrador de usuarios", "Error modificar usuario", 2);
+            }
         }
 
         private void dataUsuarios_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -103,9 +111,11 @@ namespace GUI
                 string nombreUsuario = dataUsuarios.SelectedRows[0].Cells[0].Value.ToString();
                 Usuario usuario = bllUsuario.RetornarUsuarios().Find(x => x.nombreUsuario == nombreUsuario);
                 bllUsuario.BloquearDesbloquearUsuario(usuario);
+                bllBitacora.Alta("Formulario Administrador de usuarios", "Desbloquear/Bloquear usuario", 2);
                 CargarGrillaUsuario(bllUsuario.RetornarUsuarios());
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            catch (Exception ex) { MessageBox.Show(ex.Message); bllBitacora.Alta("Formulario Administrador de usuarios", "Error desbloqueo/bloqueo usuario", 2);
+            }
         }
 
         private void btnSalir_Click(object sender, EventArgs e)

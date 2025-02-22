@@ -40,6 +40,8 @@ namespace BLL
             return orm.ValidarUsuario(nombreUsuarioCifrado, contraseñaHasheada);
         }
 
+       
+
         public void Baja(Usuario usuario)
         {
             usuario.nombreUsuario = seguridad.Encrypt(usuario.nombreUsuario);

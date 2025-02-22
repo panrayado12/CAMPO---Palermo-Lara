@@ -17,18 +17,22 @@ namespace GUI
     public partial class FormularioMenu : Form
     {
         bll_usuario bllUsuario;
+        bll_bitacora bllBitacora;
         BackupRestore backupRestore;
         public FormularioMenu()
         {
             InitializeComponent();
             bllUsuario = new bll_usuario();
             backupRestore = new BackupRestore();
+            bllBitacora = new bll_bitacora();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             try
             {
+                bllBitacora.Alta("Formulario Menú", "Cerrar sesión", 1);
+                sessionManager.Gestor.LogOut();
                 GestorFormulario.gestorFormSG.DefinirEstado(new EstadoLogIn());
             }
             catch (Exception)
@@ -64,6 +68,7 @@ namespace GUI
                 }
                 bllUsuario.Modificar(usuario);
                 MessageBox.Show("Su contraseña a sido modificada con exito");
+                bllBitacora.Alta("Formulario Menú", "Cambio de contraseña", 2);
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
@@ -80,9 +85,14 @@ namespace GUI
                     string rutaDestino = saveFileDialog.FileName;
                     backupRestore.BackUp(rutaDestino);
                     MessageBox.Show("Backup realizado con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    bllBitacora.Alta("Formulario Menú", "BackUp", 2);
                 }
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            catch (Exception ex) 
+            {
+                bllBitacora.Alta("Formulario Menú", "Error BackUp", 2);
+                MessageBox.Show(ex.Message); 
+            }
         }
 
         private void btnRestore_Click(object sender, EventArgs e)
@@ -97,7 +107,23 @@ namespace GUI
                     string rutaBackup = openFileDialog.FileName;
                     backupRestore.Restore(rutaBackup);
                     MessageBox.Show("Base de datos restaurada con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    bllBitacora.Alta("Formulario Menú", "Restore", 2);
                 }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); bllBitacora.Alta("Formulario Menú", "Error Restore", 2); }
+        }
+
+        private void FormularioMenu_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnBitacora_Click(object sender, EventArgs e)
+        {
+            try
+            {
+           
+                GestorFormulario.gestorFormSG.DefinirEstado(new EstadoBitacora());
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }

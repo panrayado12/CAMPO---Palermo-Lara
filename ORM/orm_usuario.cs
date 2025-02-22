@@ -67,6 +67,7 @@ namespace ORM
             return existe;
         }
 
+
         public List<Usuario> RetornarUsuarios()
         {
             List<Usuario> listaUsuarios = new List<Usuario>();
@@ -95,7 +96,7 @@ namespace ORM
         public bool EstadoDeUsuario(Usuario usuario)
         {
             bool activo = false;
-            if(usuario.estado==true)
+            if(usuario.intentos>3)
             {
                 activo = true;
             }
