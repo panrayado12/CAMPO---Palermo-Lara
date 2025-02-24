@@ -39,6 +39,7 @@ namespace GUI
                     }
                     else
                     {
+                        MessageBox.Show("Usuario bloqueado");
                         bllBitacora.Alta("Formulario de Inicio de Sesión", "Error de inicio de sesión", 2);
                     }
                 }

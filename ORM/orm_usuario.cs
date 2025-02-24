@@ -96,7 +96,7 @@ namespace ORM
         public bool EstadoDeUsuario(Usuario usuario)
         {
             bool activo = false;
-            if(usuario.intentos>3)
+            if(usuario.intentos<3)
             {
                 activo = true;
             }

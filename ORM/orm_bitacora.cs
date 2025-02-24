@@ -23,7 +23,7 @@ namespace ORM
         public void Alta(string usuario, string fecha, string hora, string modulo, string descripcion, int criticidad)
         {
             dtBitacora.Columns["Codigo"].AutoIncrement = true;
-            dtBitacora.Columns["Codigo"].AutoIncrementSeed = 1; 
+            dtBitacora.Columns["Codigo"].AutoIncrementSeed = dtBitacora.Rows.Count; 
             dtBitacora.Columns["Codigo"].AutoIncrementStep = 1;
             DataRow nuevaFila = dtBitacora.NewRow();
             nuevaFila["Usuario"] = usuario;
