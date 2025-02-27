@@ -29,5 +29,10 @@ namespace BLL
         {
             return orm.RetornarBitacora();
         }
+
+        public List<object[]> RetornarConsulta(string usuario, string descripcion, string modulo, string criticidad, string desde, string hasta)
+        {
+            return orm.Consulta(usuario,descripcion,modulo,criticidad, desde, hasta);
+        }
     }
 }
