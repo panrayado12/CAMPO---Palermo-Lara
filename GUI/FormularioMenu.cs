@@ -14,26 +14,36 @@ using System.Windows.Forms;
 
 namespace GUI
 {
-    public partial class FormularioMenu : Form
+    public partial class FormularioMenu : Form, IObservadorTraduccion
     {
         bll_usuario bllUsuario;
         bll_bitacora bllBitacora;
         BackupRestore backupRestore;
-        public FormularioMenu()
+        private GestorDeTraducciones gestorTraducciones;
+
+
+        public FormularioMenu(GestorDeTraducciones gestor)
         {
             InitializeComponent();
             bllUsuario = new bll_usuario();
             backupRestore = new BackupRestore();
             bllBitacora = new bll_bitacora();
+            gestorTraducciones = gestor; // Asignamos el gestor recibido
+            // Registra los controles en el JSON
+            gestorTraducciones.RegistrarControles(this);
+            // Se registra como observador
+            gestorTraducciones.RegistrarObservador(this);
+            // Aplica la traducción actual
+            Load += (s, e) => ActualizarTraduccion();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnCerrarSesion_Click(object sender, EventArgs e)
         {
             try
             {
                 bllBitacora.Alta("Formulario Menú", "Cerrar sesión", 1);
                 sessionManager.Gestor.LogOut();
-                GestorFormulario.gestorFormSG.DefinirEstado(new EstadoLogIn());
+                GestorFormulario.gestorFormSG.DefinirEstado(new EstadoLogIn(gestorTraducciones));
             }
             catch (Exception)
             {
@@ -46,7 +56,7 @@ namespace GUI
         {
             try
             {
-                GestorFormulario.gestorFormSG.DefinirEstado(new EstadoAdmin());
+                GestorFormulario.gestorFormSG.DefinirEstado(new EstadoAdmin(gestorTraducciones));
             }
             catch (Exception)
             {
@@ -123,9 +133,22 @@ namespace GUI
             try
             {
            
-                GestorFormulario.gestorFormSG.DefinirEstado(new EstadoBitacora());
+                GestorFormulario.gestorFormSG.DefinirEstado(new EstadoBitacora(gestorTraducciones));
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        public void ActualizarTraduccion()
+        {
+            try
+            {
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }

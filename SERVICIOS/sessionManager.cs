@@ -26,7 +26,6 @@ namespace SERVICIOS
 
         public string RetornarUsuarioSession()
         {
-            
             return usuarioSession;
         }
 

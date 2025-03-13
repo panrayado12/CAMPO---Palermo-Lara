@@ -1,5 +1,6 @@
 ﻿using BE;
 using BLL;
+using SERVICIOS;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,16 +13,24 @@ using System.Windows.Forms;
 
 namespace GUI
 {
-    public partial class FormularioBitacoraEventos: Form
+    public partial class FormularioBitacoraEventos: Form, IObservadorTraduccion
     {
         bll_bitacora bllBitacora;
         bll_usuario bllUsuario;
-        public FormularioBitacoraEventos()
+        private GestorDeTraducciones gestorTraducciones;
+        public FormularioBitacoraEventos(GestorDeTraducciones gestor)
         {
             InitializeComponent();
             bllBitacora = new bll_bitacora();
             bllUsuario = new bll_usuario();
             MostrarBitacora(bllBitacora.RetornarBitacora());
+            gestorTraducciones = gestor; // Asignamos el gestor recibido
+            // Registra los controles en el JSON
+            gestorTraducciones.RegistrarControles(this);
+            // Se registra como observador
+            gestorTraducciones.RegistrarObservador(this);
+            // Aplica la traducción actual
+            Load += (s, e) => ActualizarTraduccion();
         }
 
         private void MostrarBitacora(List<object[]> bitacora)
@@ -37,7 +46,7 @@ namespace GUI
         {
             try
             {
-                GestorFormulario.gestorFormSG.DefinirEstado(new EstadoMenu());
+                GestorFormulario.gestorFormSG.DefinirEstado(new EstadoMenu(gestorTraducciones));
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
@@ -149,6 +158,20 @@ namespace GUI
         private void checkBoxFechaConsulta_CheckedChanged(object sender, EventArgs e)
         {
             RealizarConsulta();
+        }
+
+        public void ActualizarTraduccion()
+        {
+            gestorTraducciones.TraducirControles(this);
+        }
+
+        private void btnCambiarIdioma_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                gestorTraducciones.CambiarIdioma("en");
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
     }
 }

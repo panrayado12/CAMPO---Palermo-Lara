@@ -9,138 +9,86 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
+
 namespace SERVICIOS
 {
-    class traductor
+    public class traductor
     {
-        private string rutaJSON = "traducciones.json";
-        private Dictionary<string, Dictionary<string, string>> textos;
-        private string idiomaActual;
+        private Dictionary<string, Dictionary<string, string>> traducciones;
+        private string archivoTraduccion = "traducciones.json";
+        private string idiomaActual = "es"; // Idioma por defecto
 
         public traductor()
         {
-            if (File.Exists(rutaJSON))
-            {
-                string json = File.ReadAllText(rutaJSON);
-                var data = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, object>>(json);
+            CargarTraducciones();
+        }
 
-                idiomaActual = ((JsonElement)data["Configuracion"]).GetProperty("IdiomaPredeterminado").GetString();
-                textos = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, Dictionary<string, string>>>(data["Textos"].ToString());
+        private void CargarTraducciones()
+        {
+            if (File.Exists(archivoTraduccion))
+            {
+                string json = File.ReadAllText(archivoTraduccion);
+                traducciones = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>>(json);
             }
             else
             {
-                foreach (Control control in form.Controls)
+                // Si no existe el archivo, lo inicializamos con los idiomas base
+                traducciones = new Dictionary<string, Dictionary<string, string>>
                 {
-                    if (control is Label || control is Button || control is MenuStrip || control is DataGridView)
-                    {
-                        if (!textos.ContainsKey(control.Name))
-                        {
-                            textos[control.Name] = new Dictionary<string, string> { { idiomaActual, control.Text } };
-                        }
-                    }
-                }
-
-                // Guardamos en JSON
-                var datosActualizados = new Dictionary<string, object>
-                {
-                    { "Configuracion", new Dictionary<string, string> { { "IdiomaPredeterminado", idiomaActual } } },
-                    { "Textos", textos }
+                    { "es", new Dictionary<string, string>() },
+                    { "en", new Dictionary<string, string>() }
                 };
-
-                string jsonNuevo = System.Text.Json.JsonSerializer.Serialize(datosActualizados, new System.Text.Json.JsonSerializerOptions { WriteIndented = true });
-                File.WriteAllText(rutaJSON, jsonNuevo);
+                GuardarTraducciones();
             }
         }
 
-        public string Traducir(string clave)
+        private void GuardarTraducciones()
         {
-            if (textos.ContainsKey(clave) && textos[clave].ContainsKey(idiomaActual))
-            {
-                return textos[clave][idiomaActual];
-            }
-            return clave; // Si no encuentra traducción, devuelve la clave original
+            string json = JsonConvert.SerializeObject(traducciones, Formatting.Indented);
+            File.WriteAllText(archivoTraduccion, json);
         }
 
-        public void TraducirFormulario(Control control)
+        public void RegistrarControlSiNoExiste(string controlName, string textoDefault)
         {
-            if (control == null) return;
+            if (string.IsNullOrEmpty(controlName)) return;
 
-            // Intentar traducir cualquier control con propiedad Text
-            if (!string.IsNullOrEmpty(control.Text))
-            {
-                control.Text = Traducir(control.Name);
-            }
+            bool actualizado = false;
 
-            // Si el control es un DataGridView, traducir los encabezados de columna
-            if (control is DataGridView dgv)
+            foreach (var idioma in traducciones.Keys)
             {
-                foreach (DataGridViewColumn col in dgv.Columns)
+                if (!traducciones[idioma].ContainsKey(controlName))
                 {
-                    col.HeaderText = Traducir(col.Name);
+                    traducciones[idioma][controlName] = textoDefault; // Usa el texto original como base
+                    actualizado = true;
                 }
             }
 
-            // Si el control es un MenuStrip, traducir los elementos del menú
-            if (control is MenuStrip menu)
+            if (actualizado)
             {
-                foreach (ToolStripMenuItem item in menu.Items)
-                {
-                    TraducirMenuItem(item);
-                }
-            }
-
-            // Recorrer controles anidados (dentro de Paneles, GroupBox, TabPages, etc.)
-            foreach (Control subControl in control.Controls)
-            {
-                TraducirFormulario(subControl);
-            }
-        }
-
-        private void TraducirMenuItem(ToolStripMenuItem item)
-        {
-            if (!string.IsNullOrEmpty(item.Text))
-            {
-                item.Text = Traducir(item.Name);
-            }
-
-            // Traducir submenús si existen
-            foreach (ToolStripItem subItem in item.DropDownItems)
-            {
-                if (subItem is ToolStripMenuItem subMenuItem)
-                {
-                    TraducirMenuItem(subMenuItem);
-                }
+                GuardarTraducciones();
             }
         }
 
         public void CambiarIdioma(string nuevoIdioma)
         {
-            idiomaActual = nuevoIdioma;
+            if (traducciones.ContainsKey(nuevoIdioma))
+            {
+                idiomaActual = nuevoIdioma;
+            }
+        }
 
-            string json = File.ReadAllText(rutaJSON);
-            var data = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, object>>(json);
-
-            var config = (JsonElement)data["Configuracion"];
-            var dicConfig = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, string>>(config.ToString());
-            dicConfig["IdiomaPredeterminado"] = nuevoIdioma;
-            data["Configuracion"] = dicConfig;
-
-            string nuevoJson = System.Text.Json.JsonSerializer.Serialize(data, new JsonSerializerOptions { WriteIndented = true });
-            File.WriteAllText(rutaJSON, nuevoJson);
+        public string Traducir(string clave)
+        {
+            if (traducciones.ContainsKey(idiomaActual) && traducciones[idiomaActual].ContainsKey(clave))
+            {
+                return traducciones[idiomaActual][clave];
+            }
+            return clave; // Si no hay traducción, retorna la clave original
         }
 
         public string ObtenerIdiomaActual()
         {
             return idiomaActual;
-        }
-
-        public List<string> ObtenerIdiomas()
-        {
-            if (textos.Count > 0)
-            {
-                return new List<string>(textos.Values.First().Keys);
-            }
-            return new List<string>();
         }
     }
 }

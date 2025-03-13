@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnCerrarSesion = new System.Windows.Forms.Button();
             this.btnAdministrarUsuarios = new System.Windows.Forms.Button();
             this.btnCambiarContraseña = new System.Windows.Forms.Button();
             this.btnRestore = new System.Windows.Forms.Button();
@@ -36,15 +36,15 @@
             this.btnBitacora = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // button1
+            // btnCerrarSesion
             // 
-            this.button1.Location = new System.Drawing.Point(663, 314);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(275, 47);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Cerrar Sesión";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnCerrarSesion.Location = new System.Drawing.Point(663, 314);
+            this.btnCerrarSesion.Name = "btnCerrarSesion";
+            this.btnCerrarSesion.Size = new System.Drawing.Size(275, 47);
+            this.btnCerrarSesion.TabIndex = 0;
+            this.btnCerrarSesion.Text = "Cerrar Sesión";
+            this.btnCerrarSesion.UseVisualStyleBackColor = true;
+            this.btnCerrarSesion.Click += new System.EventHandler(this.btnCerrarSesion_Click);
             // 
             // btnAdministrarUsuarios
             // 
@@ -106,7 +106,7 @@
             this.Controls.Add(this.btnRestore);
             this.Controls.Add(this.btnCambiarContraseña);
             this.Controls.Add(this.btnAdministrarUsuarios);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnCerrarSesion);
             this.Name = "FormularioMenu";
             this.Text = "Menu";
             this.Load += new System.EventHandler(this.FormularioMenu_Load);
@@ -116,7 +116,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnCerrarSesion;
         private System.Windows.Forms.Button btnAdministrarUsuarios;
         private System.Windows.Forms.Button btnCambiarContraseña;
         private System.Windows.Forms.Button btnRestore;

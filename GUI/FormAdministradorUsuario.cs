@@ -11,19 +11,27 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Security.Cryptography;
+using SERVICIOS;
 
 namespace GUI
 {
-    public partial class FormAdministradorUsuario : Form
+    public partial class FormAdministradorUsuario : Form, IObservadorTraduccion
     {
         bll_usuario bllUsuario;
         bll_bitacora bllBitacora;
-        public FormAdministradorUsuario()
+        private GestorDeTraducciones gestorTraducciones;
+        public FormAdministradorUsuario(GestorDeTraducciones gestor)
         {
             InitializeComponent();
             bllBitacora = new bll_bitacora();
             bllUsuario = new bll_usuario();
-  
+            gestorTraducciones = gestor; // Asignamos el gestor recibido
+            // Registra los controles en el JSON
+            gestorTraducciones.RegistrarControles(this);
+            // Se registra como observador
+            gestorTraducciones.RegistrarObservador(this);
+            // Aplica la traducción actual
+            Load += (s, e) => ActualizarTraduccion();
         }
 
         private void FormAdministradorUsuario_Load(object sender, EventArgs e)
@@ -122,9 +130,22 @@ namespace GUI
         {
             try
             {
-                GestorFormulario.gestorFormSG.DefinirEstado(new EstadoMenu());
+                GestorFormulario.gestorFormSG.DefinirEstado(new EstadoMenu(gestorTraducciones));
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        public void ActualizarTraduccion()
+        {
+            try
+            {
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }

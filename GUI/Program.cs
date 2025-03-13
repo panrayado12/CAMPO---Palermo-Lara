@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SERVICIOS;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,9 +15,10 @@ namespace GUI
         [STAThread]
         static void Main()
         {
+            GestorDeTraducciones gestorDeTraducciones = new GestorDeTraducciones();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            GestorFormulario.gestorFormSG.DefinirEstado(new EstadoLogIn());
+            GestorFormulario.gestorFormSG.DefinirEstado(new EstadoLogIn(gestorDeTraducciones));
         }
     }
 }
