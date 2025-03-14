@@ -13,43 +13,30 @@ using System.Windows.Forms;
 
 namespace GUI
 {
-    public partial class FormularioLogIn : Form, IObservadorTraduccion
+    public partial class FormularioLogIn : Form
     {
         bll_usuario bllUsuario;
         bll_bitacora bllBitacora;
-        private GestorDeTraducciones gestorTraducciones;
-        public FormularioLogIn(GestorDeTraducciones gestor)
+        public FormularioLogIn()
         {
             InitializeComponent();
             bllBitacora = new bll_bitacora();
             bllUsuario = new bll_usuario();
-            gestorTraducciones = gestor; // Asignamos el gestor recibido
-            // Registra los controles en el JSON
-            gestorTraducciones.RegistrarControles(this);
-            // Se registra como observador
-            gestorTraducciones.RegistrarObservador(this);
-            // Aplica la traducción actual
-            Load += (s, e) => ActualizarTraduccion();
+            GestorDeTraducciones.Gestor.NotificarCambioIdioma();
         }
-
-        public void ActualizarTraduccion()
-        {
-            gestorTraducciones.TraducirControles(this);
-        }
-
 
         private void btnIniciarSesion_Click(object sender, EventArgs e)
         {
             try
             {
-                sessionManager.Gestor.LogIn(txtNombreUsuario.Text);
                 if (bllUsuario.ValidarUsuario(txtNombreUsuario.Text, txtContraseñaUsuario.Text )==true)
                 {
                     Usuario usuario = bllUsuario.RetornarUsuarios().Find(x => x.nombreUsuario == txtNombreUsuario.Text);
                     if (bllUsuario.RetornarEstadoDeUsuario(usuario)==true)
                     {
+                        sessionManager.Gestor.LogIn(txtNombreUsuario.Text, usuario.lenguaje);
                         bllBitacora.Alta("Formulario de Inicio de Sesión", "Inicio de sesión", 1);
-                        GestorFormulario.gestorFormSG.DefinirEstado(new EstadoMenu(gestorTraducciones));
+                        GestorFormulario.gestorFormSG.DefinirEstado(new EstadoMenu());
                     }
                     else
                     {
@@ -65,18 +52,6 @@ namespace GUI
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
-        private void FormularioLogIn_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnCambiarIdioma_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                gestorTraducciones.CambiarIdioma(comboBoxIdioma.Text);
-            }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
-        }
+        
     }
 }

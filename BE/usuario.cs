@@ -11,7 +11,7 @@ namespace BE
     {
         public Usuario() { }
 
-        public Usuario(string nombreUsuarioP,string nombreP, string apellidoP, string contraseñaUsuarioP, string rolP,string emailUsuarioP, bool estadoP, int intentosP)
+        public Usuario(string nombreUsuarioP,string nombreP, string apellidoP, string contraseñaUsuarioP, string rolP,string emailUsuarioP, bool estadoP, int intentosP, string pLenguaje)
         {
             nombreUsuario = nombreUsuarioP;
             contraseñaUsuario = contraseñaUsuarioP;
@@ -21,6 +21,7 @@ namespace BE
             emailUsuario = emailUsuarioP;
             estado = estadoP;
             intentos = intentosP;
+            lenguaje = pLenguaje;
         }
 
         public Usuario(object[] datos)
@@ -33,6 +34,7 @@ namespace BE
             emailUsuario = datos[5].ToString();
             estado = Convert.ToBoolean(datos[6]);
             intentos = Convert.ToInt32(datos[7]);
+            lenguaje = datos[8].ToString();
         }
 
         public string nombreUsuario { get; set; }
@@ -43,5 +45,6 @@ namespace BE
         public string emailUsuario { get; set; }
         public bool estado  { get; set; }
         public int intentos { get; set; }
+        public string lenguaje { get; set; }
     }
 }

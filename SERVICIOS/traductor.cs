@@ -16,7 +16,7 @@ namespace SERVICIOS
     {
         private Dictionary<string, Dictionary<string, string>> traducciones;
         private string archivoTraduccion = "traducciones.json";
-        private string idiomaActual = "es"; // Idioma por defecto
+        
 
         public traductor()
         {
@@ -73,22 +73,22 @@ namespace SERVICIOS
         {
             if (traducciones.ContainsKey(nuevoIdioma))
             {
-                idiomaActual = nuevoIdioma;
+                sessionManager.Gestor.usuarioIdioma = nuevoIdioma;
             }
         }
 
         public string Traducir(string clave)
         {
-            if (traducciones.ContainsKey(idiomaActual) && traducciones[idiomaActual].ContainsKey(clave))
+            if (traducciones.ContainsKey(sessionManager.Gestor.usuarioIdioma) && traducciones[sessionManager.Gestor.usuarioIdioma].ContainsKey(clave))
             {
-                return traducciones[idiomaActual][clave];
+                return traducciones[sessionManager.Gestor.usuarioIdioma][clave];
             }
             return clave; // Si no hay traducción, retorna la clave original
         }
 
         public string ObtenerIdiomaActual()
         {
-            return idiomaActual;
+            return sessionManager.Gestor.usuarioIdioma;
         }
     }
 }

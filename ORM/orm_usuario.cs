@@ -21,9 +21,9 @@ namespace ORM
             dtUsuario = dao.RetornarTabla("Usuario");
         }
 
-        public void AltaUsuario(string nombreUsuario, string contraseñaUsuario,string nombre, string apellido, string rol, string emailUsuario,bool estado, int intentos)
+        public void AltaUsuario(string nombreUsuario, string contraseñaUsuario,string nombre, string apellido, string rol, string emailUsuario,bool estado, int intentos, string lenguaje)
         {
-            dtUsuario.Rows.Add(dtUsuario.NewRow().ItemArray = new object[] { nombreUsuario, contraseñaUsuario,nombre,apellido, rol, emailUsuario, estado, intentos });
+            dtUsuario.Rows.Add(dtUsuario.NewRow().ItemArray = new object[] { nombreUsuario, contraseñaUsuario,nombre,apellido, rol, emailUsuario, estado, intentos, lenguaje });
             dao.Update(dtUsuario);
         }
 
@@ -36,7 +36,7 @@ namespace ORM
         public void Modificar(Usuario usuario)
         {
             DataRow dr = dtUsuario.Rows.Find(usuario.nombreUsuario);
-            dr.ItemArray = new object[] { dr.Field<string>(0), usuario.contraseñaUsuario, usuario.nombre, usuario.apellido, usuario.rolUsuario, usuario.emailUsuario, usuario.estado, usuario.intentos};
+            dr.ItemArray = new object[] { dr.Field<string>(0), usuario.contraseñaUsuario, usuario.nombre, usuario.apellido, usuario.rolUsuario, usuario.emailUsuario, usuario.estado, usuario.intentos, usuario.lenguaje};
             dao.Update(dtUsuario);
         }
 

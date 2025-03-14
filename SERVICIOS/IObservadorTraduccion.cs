@@ -8,7 +8,6 @@ namespace SERVICIOS
 {
     public interface IObservadorTraduccion
     {
-        void ActualizarTraduccion();
-        
+        void ActualizarTraduccion();   
     }
 }

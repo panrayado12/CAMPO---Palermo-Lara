@@ -10,13 +10,6 @@ namespace GUI
     internal class EstadoLogIn : IEstado
     {
         FormularioLogIn login;
-        private GestorDeTraducciones gestorDeTraducciones;
-
-        public EstadoLogIn(GestorDeTraducciones gestor)
-        {
-            // Aquí inicializas el gestor de traducciones
-            gestorDeTraducciones = gestor;
-        }
 
         public void CerrarEstado()
         {
@@ -25,7 +18,7 @@ namespace GUI
 
         public void EjecutarEstado()
         {
-            login = new FormularioLogIn(gestorDeTraducciones);
+            login = new FormularioLogIn();
             login.ShowDialog();
         }
     }

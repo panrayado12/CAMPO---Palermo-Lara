@@ -19,22 +19,34 @@ namespace GUI
         bll_usuario bllUsuario;
         bll_bitacora bllBitacora;
         BackupRestore backupRestore;
-        private GestorDeTraducciones gestorTraducciones;
+        private FormularioBitacoraEventos formularioBitacoraEventos;
+        private FormAdministradorUsuario formularioAdministradorUsuario;
 
-
-        public FormularioMenu(GestorDeTraducciones gestor)
+        public FormularioMenu()
         {
             InitializeComponent();
             bllUsuario = new bll_usuario();
             backupRestore = new BackupRestore();
             bllBitacora = new bll_bitacora();
-            gestorTraducciones = gestor; // Asignamos el gestor recibido
-            // Registra los controles en el JSON
-            gestorTraducciones.RegistrarControles(this);
-            // Se registra como observador
-            gestorTraducciones.RegistrarObservador(this);
-            // Aplica la traducción actual
-            Load += (s, e) => ActualizarTraduccion();
+            formularioBitacoraEventos = new FormularioBitacoraEventos();
+            formularioAdministradorUsuario = new FormAdministradorUsuario();
+            RegistrarControlesDeFormularios();
+            RegistrarObservarDeFormularios();
+            GestorDeTraducciones.Gestor.NotificarCambioIdioma();
+        }
+
+        private void RegistrarControlesDeFormularios()
+        {
+            GestorDeTraducciones.Gestor.RegistrarControles(this);
+            GestorDeTraducciones.Gestor.RegistrarControles(formularioAdministradorUsuario);
+            GestorDeTraducciones.Gestor.RegistrarControles(formularioBitacoraEventos);
+        }
+
+        private void RegistrarObservarDeFormularios()
+        {
+            GestorDeTraducciones.Gestor.RegistrarObservador(this);
+            GestorDeTraducciones.Gestor.RegistrarObservador(formularioAdministradorUsuario);
+            GestorDeTraducciones.Gestor.RegistrarObservador(formularioBitacoraEventos);
         }
 
         private void btnCerrarSesion_Click(object sender, EventArgs e)
@@ -43,7 +55,7 @@ namespace GUI
             {
                 bllBitacora.Alta("Formulario Menú", "Cerrar sesión", 1);
                 sessionManager.Gestor.LogOut();
-                GestorFormulario.gestorFormSG.DefinirEstado(new EstadoLogIn(gestorTraducciones));
+                GestorFormulario.gestorFormSG.DefinirEstado(new EstadoLogIn());
             }
             catch (Exception)
             {
@@ -56,7 +68,7 @@ namespace GUI
         {
             try
             {
-                GestorFormulario.gestorFormSG.DefinirEstado(new EstadoAdmin(gestorTraducciones));
+                formularioAdministradorUsuario.ShowDialog();
             }
             catch (Exception)
             {
@@ -132,8 +144,7 @@ namespace GUI
         {
             try
             {
-           
-                GestorFormulario.gestorFormSG.DefinirEstado(new EstadoBitacora(gestorTraducciones));
+                formularioBitacoraEventos.ShowDialog();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
@@ -142,13 +153,26 @@ namespace GUI
         {
             try
             {
-
+                GestorDeTraducciones.Gestor.TraducirControles(this);
             }
             catch (Exception)
             {
 
                 throw;
             }
+        }
+
+        private void btnCambiarIdioma_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                GestorDeTraducciones.Gestor.CambiarIdioma(comboBoxIdiomas.Text);
+                string nombreusuario = sessionManager.Gestor.RetornarUsuarioSession();
+                Usuario usuario = bllUsuario.RetornarUsuarios().Find(X => X.nombreUsuario == nombreusuario);
+                usuario.lenguaje = comboBoxIdiomas.SelectedItem.ToString();
+                bllUsuario.Modificar(usuario);
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
     }
 }

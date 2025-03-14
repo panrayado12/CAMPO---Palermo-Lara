@@ -33,8 +33,6 @@
             this.txtNombreUsuario = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.txtContraseñaUsuario = new System.Windows.Forms.TextBox();
-            this.btnCambiarIdioma = new System.Windows.Forms.Button();
-            this.comboBoxIdioma = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // btnIniciarSesion
@@ -69,40 +67,16 @@
             this.txtContraseñaUsuario.Size = new System.Drawing.Size(289, 55);
             this.txtContraseñaUsuario.TabIndex = 3;
             // 
-            // btnCambiarIdioma
-            // 
-            this.btnCambiarIdioma.Location = new System.Drawing.Point(427, 515);
-            this.btnCambiarIdioma.Name = "btnCambiarIdioma";
-            this.btnCambiarIdioma.Size = new System.Drawing.Size(289, 36);
-            this.btnCambiarIdioma.TabIndex = 4;
-            this.btnCambiarIdioma.Text = "Cambiar idioma";
-            this.btnCambiarIdioma.UseVisualStyleBackColor = true;
-            this.btnCambiarIdioma.Click += new System.EventHandler(this.btnCambiarIdioma_Click);
-            // 
-            // comboBoxIdioma
-            // 
-            this.comboBoxIdioma.FormattingEnabled = true;
-            this.comboBoxIdioma.Items.AddRange(new object[] {
-            "en",
-            "es"});
-            this.comboBoxIdioma.Location = new System.Drawing.Point(427, 557);
-            this.comboBoxIdioma.Name = "comboBoxIdioma";
-            this.comboBoxIdioma.Size = new System.Drawing.Size(289, 33);
-            this.comboBoxIdioma.TabIndex = 5;
-            // 
             // FormularioLogIn
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1279, 736);
-            this.Controls.Add(this.comboBoxIdioma);
-            this.Controls.Add(this.btnCambiarIdioma);
             this.Controls.Add(this.txtContraseñaUsuario);
             this.Controls.Add(this.txtNombreUsuario);
             this.Controls.Add(this.btnIniciarSesion);
             this.Name = "FormularioLogIn";
             this.Text = "log in ";
-            this.Load += new System.EventHandler(this.FormularioLogIn_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -114,8 +88,6 @@
         private System.Windows.Forms.TextBox txtNombreUsuario;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.TextBox txtContraseñaUsuario;
-        private System.Windows.Forms.Button btnCambiarIdioma;
-        private System.Windows.Forms.ComboBox comboBoxIdioma;
     }
 }
 

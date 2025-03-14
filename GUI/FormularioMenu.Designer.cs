@@ -34,6 +34,8 @@
             this.btnRestore = new System.Windows.Forms.Button();
             this.btnBackUp = new System.Windows.Forms.Button();
             this.btnBitacora = new System.Windows.Forms.Button();
+            this.btnCambiarIdioma = new System.Windows.Forms.Button();
+            this.comboBoxIdiomas = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // btnCerrarSesion
@@ -96,11 +98,34 @@
             this.btnBitacora.UseVisualStyleBackColor = true;
             this.btnBitacora.Click += new System.EventHandler(this.btnBitacora_Click);
             // 
+            // btnCambiarIdioma
+            // 
+            this.btnCambiarIdioma.Location = new System.Drawing.Point(964, 524);
+            this.btnCambiarIdioma.Name = "btnCambiarIdioma";
+            this.btnCambiarIdioma.Size = new System.Drawing.Size(275, 47);
+            this.btnCambiarIdioma.TabIndex = 6;
+            this.btnCambiarIdioma.Text = "Cambiar idioma ";
+            this.btnCambiarIdioma.UseVisualStyleBackColor = true;
+            this.btnCambiarIdioma.Click += new System.EventHandler(this.btnCambiarIdioma_Click);
+            // 
+            // comboBoxIdiomas
+            // 
+            this.comboBoxIdiomas.FormattingEnabled = true;
+            this.comboBoxIdiomas.Items.AddRange(new object[] {
+            "en",
+            "es"});
+            this.comboBoxIdiomas.Location = new System.Drawing.Point(965, 588);
+            this.comboBoxIdiomas.Name = "comboBoxIdiomas";
+            this.comboBoxIdiomas.Size = new System.Drawing.Size(274, 33);
+            this.comboBoxIdiomas.TabIndex = 7;
+            // 
             // FormularioMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1623, 905);
+            this.Controls.Add(this.comboBoxIdiomas);
+            this.Controls.Add(this.btnCambiarIdioma);
             this.Controls.Add(this.btnBitacora);
             this.Controls.Add(this.btnBackUp);
             this.Controls.Add(this.btnRestore);
@@ -122,5 +147,7 @@
         private System.Windows.Forms.Button btnRestore;
         private System.Windows.Forms.Button btnBackUp;
         private System.Windows.Forms.Button btnBitacora;
+        private System.Windows.Forms.Button btnCambiarIdioma;
+        private System.Windows.Forms.ComboBox comboBoxIdiomas;
     }
 }

@@ -10,6 +10,7 @@ namespace SERVICIOS
     public class sessionManager
     {
         public string usuarioSession;
+        public string usuarioIdioma = "es";
         private static sessionManager instance;
 
         public static sessionManager Gestor
@@ -29,11 +30,17 @@ namespace SERVICIOS
             return usuarioSession;
         }
 
-        public void LogIn(string usuarioLogIn)
+        public string RetornarIdiomaDeUsuario()
+        {
+            return usuarioIdioma;
+        }
+
+        public void LogIn(string usuarioLogIn, string idioma)
         {
             if(Gestor.usuarioSession == null)
             {
-                Gestor.usuarioSession = usuarioLogIn;
+                usuarioSession = usuarioLogIn;
+                usuarioIdioma = idioma;
             }
         }
 

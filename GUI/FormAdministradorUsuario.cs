@@ -19,19 +19,12 @@ namespace GUI
     {
         bll_usuario bllUsuario;
         bll_bitacora bllBitacora;
-        private GestorDeTraducciones gestorTraducciones;
-        public FormAdministradorUsuario(GestorDeTraducciones gestor)
+        
+        public FormAdministradorUsuario()
         {
             InitializeComponent();
             bllBitacora = new bll_bitacora();
             bllUsuario = new bll_usuario();
-            gestorTraducciones = gestor; // Asignamos el gestor recibido
-            // Registra los controles en el JSON
-            gestorTraducciones.RegistrarControles(this);
-            // Se registra como observador
-            gestorTraducciones.RegistrarObservador(this);
-            // Aplica la traducción actual
-            Load += (s, e) => ActualizarTraduccion();
         }
 
         private void FormAdministradorUsuario_Load(object sender, EventArgs e)
@@ -59,7 +52,8 @@ namespace GUI
                 string contraseña = txtContraseña.Text;
                 string email = txtEmailUsuario.Text;
                 string rolUsuario = txtRolUsuario.Text;
-                bllUsuario.Alta(nombreUsuario, contraseña,nombre, apellido, rolUsuario, email, true,0);
+                string lenguaje = "es";
+                bllUsuario.Alta(nombreUsuario, contraseña,nombre, apellido, rolUsuario, email, true,0, lenguaje);
                 bllBitacora.Alta("Formulario Administrador de usuarios", "Alta usuario", 2);
                 CargarGrillaUsuario(bllUsuario.RetornarUsuarios());
             }
@@ -130,7 +124,7 @@ namespace GUI
         {
             try
             {
-                GestorFormulario.gestorFormSG.DefinirEstado(new EstadoMenu(gestorTraducciones));
+                this.Close();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
@@ -139,7 +133,7 @@ namespace GUI
         {
             try
             {
-
+                GestorDeTraducciones.Gestor.TraducirControles(this);
             }
             catch (Exception)
             {

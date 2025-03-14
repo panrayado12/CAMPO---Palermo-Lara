@@ -10,13 +10,6 @@ namespace GUI
     internal class EstadoAdmin : IEstado
     {
         FormAdministradorUsuario formAdmin;
-        GestorDeTraducciones gestorDeTraducciones;
-
-        public EstadoAdmin(GestorDeTraducciones gestor)
-        {
-            // Aquí inicializas el gestor de traducciones
-            gestorDeTraducciones = gestor;
-        }
 
         public void CerrarEstado()
         {
@@ -25,7 +18,7 @@ namespace GUI
 
         public void EjecutarEstado()
         {
-            formAdmin = new FormAdministradorUsuario(gestorDeTraducciones);
+            formAdmin = new FormAdministradorUsuario();
             formAdmin.ShowDialog();
         }
     }

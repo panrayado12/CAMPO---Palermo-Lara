@@ -12,6 +12,19 @@ namespace SERVICIOS
         private traductor servicioTraduccion;
         private List<IObservadorTraduccion> observadores;
 
+        private static GestorDeTraducciones instance;
+        public static GestorDeTraducciones Gestor
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new GestorDeTraducciones();
+                }
+                return instance;
+            }
+        }
+
         public GestorDeTraducciones()
         {
             servicioTraduccion = new traductor();
@@ -33,7 +46,6 @@ namespace SERVICIOS
                 observador.ActualizarTraduccion();
             }
         }
-
 
         public void RegistrarControles(Control parent)
         {

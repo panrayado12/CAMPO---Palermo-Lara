@@ -17,20 +17,13 @@ namespace GUI
     {
         bll_bitacora bllBitacora;
         bll_usuario bllUsuario;
-        private GestorDeTraducciones gestorTraducciones;
-        public FormularioBitacoraEventos(GestorDeTraducciones gestor)
+        
+        public FormularioBitacoraEventos()
         {
             InitializeComponent();
             bllBitacora = new bll_bitacora();
             bllUsuario = new bll_usuario();
             MostrarBitacora(bllBitacora.RetornarBitacora());
-            gestorTraducciones = gestor; // Asignamos el gestor recibido
-            // Registra los controles en el JSON
-            gestorTraducciones.RegistrarControles(this);
-            // Se registra como observador
-            gestorTraducciones.RegistrarObservador(this);
-            // Aplica la traducción actual
-            Load += (s, e) => ActualizarTraduccion();
         }
 
         private void MostrarBitacora(List<object[]> bitacora)
@@ -46,7 +39,7 @@ namespace GUI
         {
             try
             {
-                GestorFormulario.gestorFormSG.DefinirEstado(new EstadoMenu(gestorTraducciones));
+                this.Close();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
@@ -162,16 +155,15 @@ namespace GUI
 
         public void ActualizarTraduccion()
         {
-            gestorTraducciones.TraducirControles(this);
-        }
-
-        private void btnCambiarIdioma_Click(object sender, EventArgs e)
-        {
             try
             {
-                gestorTraducciones.CambiarIdioma("en");
+                GestorDeTraducciones.Gestor.TraducirControles(this);
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }

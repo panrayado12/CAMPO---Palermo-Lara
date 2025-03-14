@@ -15,10 +15,9 @@ namespace GUI
         [STAThread]
         static void Main()
         {
-            GestorDeTraducciones gestorDeTraducciones = new GestorDeTraducciones();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            GestorFormulario.gestorFormSG.DefinirEstado(new EstadoLogIn(gestorDeTraducciones));
+            GestorFormulario.gestorFormSG.DefinirEstado(new EstadoLogIn());
         }
     }
 }

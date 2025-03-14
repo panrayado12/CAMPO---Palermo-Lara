@@ -10,13 +10,6 @@ namespace GUI
     internal class EstadoMenu : IEstado
     {
         FormularioMenu menu;
-        GestorDeTraducciones gestorDeTraducciones;
-
-        public EstadoMenu(GestorDeTraducciones gestor)
-        {
-            // Aquí inicializas el gestor de traducciones
-            gestorDeTraducciones = gestor;
-        }
 
         public void CerrarEstado()
         {
@@ -25,7 +18,7 @@ namespace GUI
 
         public void EjecutarEstado()
         {
-            menu = new FormularioMenu(gestorDeTraducciones);
+            menu = new FormularioMenu();
             menu.ShowDialog();
         }
     }
