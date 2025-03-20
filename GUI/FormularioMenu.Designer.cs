@@ -36,6 +36,7 @@
             this.btnBitacora = new System.Windows.Forms.Button();
             this.btnCambiarIdioma = new System.Windows.Forms.Button();
             this.comboBoxIdiomas = new System.Windows.Forms.ComboBox();
+            this.btnAdministrarPermisos = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnCerrarSesion
@@ -119,11 +120,22 @@
             this.comboBoxIdiomas.Size = new System.Drawing.Size(274, 33);
             this.comboBoxIdiomas.TabIndex = 7;
             // 
+            // btnAdministrarPermisos
+            // 
+            this.btnAdministrarPermisos.Location = new System.Drawing.Point(663, 524);
+            this.btnAdministrarPermisos.Name = "btnAdministrarPermisos";
+            this.btnAdministrarPermisos.Size = new System.Drawing.Size(275, 47);
+            this.btnAdministrarPermisos.TabIndex = 8;
+            this.btnAdministrarPermisos.Text = "Permisos";
+            this.btnAdministrarPermisos.UseVisualStyleBackColor = true;
+            this.btnAdministrarPermisos.Click += new System.EventHandler(this.btnAdministrarPermisos_Click);
+            // 
             // FormularioMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1623, 905);
+            this.Controls.Add(this.btnAdministrarPermisos);
             this.Controls.Add(this.comboBoxIdiomas);
             this.Controls.Add(this.btnCambiarIdioma);
             this.Controls.Add(this.btnBitacora);
@@ -149,5 +161,6 @@
         private System.Windows.Forms.Button btnBitacora;
         private System.Windows.Forms.Button btnCambiarIdioma;
         private System.Windows.Forms.ComboBox comboBoxIdiomas;
+        private System.Windows.Forms.Button btnAdministrarPermisos;
     }
 }

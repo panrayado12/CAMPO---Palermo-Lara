@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="orm_bitacora.cs" />
+    <Compile Include="orm_permiso.cs" />
     <Compile Include="orm_usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

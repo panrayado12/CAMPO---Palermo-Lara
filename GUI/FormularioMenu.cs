@@ -174,5 +174,14 @@ namespace GUI
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
+
+        private void btnAdministrarPermisos_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
     }
 }
