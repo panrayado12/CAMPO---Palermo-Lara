@@ -27,7 +27,7 @@ namespace BE
             listaPermisos.Add(permiso);
         }
 
-        public void RemoverPermiso(Permiso permiso)
+        public void EliminarPermiso(Permiso permiso)
         {
             listaPermisos.Remove(permiso);
         }

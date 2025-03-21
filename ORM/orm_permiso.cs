@@ -12,141 +12,117 @@ namespace ORM
 {
     public class orm_permiso
     {
-        dao dao;
-        DataTable dtPermisos;
-        DataTable dtIntermedia;
-        private Dictionary<string, PermisoCompuesto> _cacheCompuestos; // Solo almacena compuestos
+        private dao dao;
+        private DataTable dtPermisos;
+        private DataTable dtIntermedia;
+
+        private static orm_permiso instacia;
+
+        public static orm_permiso Gestor
+        {
+            get
+            {
+                if(instacia == null)
+                {
+                    instacia = new orm_permiso();
+                }
+                return instacia;
+            }
+        }
 
         public orm_permiso()
         {
-            _cacheCompuestos = new Dictionary<string, PermisoCompuesto>();
             dtPermisos = dao.RetornarTabla("Permisos");
-            ConstruirEstructuraComposite();
+            dtIntermedia = dao.RetornarTabla("PermisosCompuestos");
         }
 
-        // Construye la estructura en memoria
-        private void ConstruirEstructuraComposite()
+        // Construye la estructura del Composite en cada llamada
+        public PermisoCompuesto ObtenerPermisoCompuesto(string nombrePermiso)
         {
-            // Crear solo permisos compuestos en memoria
-            foreach (DataRow fila in dtPermisos.Rows)
+            DataRow[] filas = dtPermisos.Select($"nombrePermiso = '{nombrePermiso}' AND compuesto = true");
+
+            if (filas.Length == 0)
+                return null;
+
+            bool esRol = Convert.ToBoolean(filas[0]["esRol"]);
+            PermisoCompuesto permisoCompuesto = new PermisoCompuesto(nombrePermiso, esRol);
+
+            // Obtener y agregar sus hijos
+            DataRow[] relaciones = dtIntermedia.Select($"nombrePermisoCompuesto = '{nombrePermiso}'");
+
+            foreach (DataRow fila in relaciones)
             {
-                string nombre = fila["nombrePermiso"].ToString();
-                bool esRol = Convert.ToBoolean(fila["esRol"]);
-                bool esCompuesto = Convert.ToBoolean(fila["compuesto"]);
-
-                if (esCompuesto)
-                    _cacheCompuestos[nombre] = new PermisoCompuesto(nombre, esRol);
+                string nombreHijo = fila["permisoAñadido"].ToString();
+                Permiso hijo = ObtenerPermiso(nombreHijo);
+                permisoCompuesto.AgregarPermiso(hijo);
             }
-
-            // Agregar relaciones (hijos) a los compuestos
-            foreach (DataRow fila in dtIntermedia.Rows)
-            {
-                string nombreCompuesto = fila["nombrePermisoCompuesto"].ToString();
-                string nombrePermisoHijo = fila["permisoAñadido"].ToString();
-
-                if (_cacheCompuestos.ContainsKey(nombreCompuesto))
-                {
-                    PermisoCompuesto compuesto = _cacheCompuestos[nombreCompuesto];
-
-                    // Buscar el permiso hijo en caché o crear un PermisoSimple
-                    Permiso permisoHijo;
-                    if (_cacheCompuestos.ContainsKey(nombrePermisoHijo))
-                    {
-                        permisoHijo = _cacheCompuestos[nombrePermisoHijo]; // Es un PermisoCompuesto
-                    }
-                    else
-                    {
-                        permisoHijo = new PermisoSimple(nombrePermisoHijo, false); // Asumimos que no es rol
-                    }
-
-                    compuesto.AgregarPermiso(permisoHijo); // Ahora sí recibe un Permiso válido
-                }
-            }
+            return permisoCompuesto;
         }
 
-        // Insertar un nuevo Permiso Compuesto
+        // Obtiene un permiso (ya sea compuesto o simple)
+        private Permiso ObtenerPermiso(string nombrePermiso)
+        {
+            DataRow[] filas = dtPermisos.Select($"nombrePermiso = '{nombrePermiso}'");
+
+            if (filas.Length == 0)
+                return null;
+
+            bool esRol = Convert.ToBoolean(filas[0]["esRol"]);
+            bool esCompuesto = Convert.ToBoolean(filas[0]["compuesto"]);
+
+            if (esCompuesto)
+                return ObtenerPermisoCompuesto(nombrePermiso);
+            else
+                return new PermisoSimple(nombrePermiso, esRol);
+        }
+
+        // Insertar un nuevo permiso compuesto
         public void InsertarPermisoCompuesto(string nombrePermiso, bool esRol)
         {
-            DataTable tabla = _dataSet.Tables["Permisos"];
-            DataRow nuevaFila = tabla.NewRow();
+            DataRow nuevaFila = dtPermisos.NewRow();
             nuevaFila["nombrePermiso"] = nombrePermiso;
             nuevaFila["esRol"] = esRol;
             nuevaFila["esCompuesto"] = true;
-            tabla.Rows.Add(nuevaFila);
-
-            // Agregarlo en la estructura en memoria
-            _cacheCompuestos[nombrePermiso] = new PermisoCompuesto(nombrePermiso, esRol);
+            dtPermisos.Rows.Add(nuevaFila);
         }
 
-        // Agregar un permiso a un compuesto (Composite)
-        public void InsertarRelacion(string nombreCompuesto, string permisoHijo)
+        // Insertar una relación entre un permiso compuesto y un hijo
+        public void InsertarRelacion(string nombreCompuesto, string nombrePermisoHijo)
         {
-            DataTable tabla = _dataSet.Tables["PermisosIntermedios"];
-            DataRow nuevaFila = tabla.NewRow();
+            DataRow nuevaFila = dtIntermedia.NewRow();
             nuevaFila["nombrePermisoCompuesto"] = nombreCompuesto;
-            nuevaFila["permisoAñadido"] = permisoHijo;
-            tabla.Rows.Add(nuevaFila);
-
-            // Agregarlo en memoria
-            if (_cacheCompuestos.ContainsKey(nombreCompuesto))
-            {
-                _cacheCompuestos[nombreCompuesto].Agregar(permisoHijo);
-            }
+            nuevaFila["permisoAñadido"] = nombrePermisoHijo;
+            dtIntermedia.Rows.Add(nuevaFila);
         }
 
-        // Eliminar una relación de un permiso compuesto (Composite)
-        public void EliminarRelacion(string nombreCompuesto, string permisoHijo)
+        // Eliminar una relación entre un permiso compuesto y un hijo
+        public void EliminarRelacion(string nombreCompuesto, string nombrePermisoHijo)
         {
-            DataTable tablaIntermedia = _dataSet.Tables["PermisosIntermedios"];
-            foreach (DataRow fila in tablaIntermedia.Select($"nombrePermisoCompuesto = '{nombreCompuesto}' AND permisoAñadido = '{permisoHijo}'"))
+            foreach (DataRow fila in dtIntermedia.Select($"nombrePermisoCompuesto = '{nombreCompuesto}' AND permisoAñadido = '{nombrePermisoHijo}'"))
             {
                 fila.Delete();
             }
-
-            // Eliminar en memoria
-            if (_cacheCompuestos.ContainsKey(nombreCompuesto))
-            {
-                _cacheCompuestos[nombreCompuesto].Eliminar(permisoHijo);
-            }
         }
 
-        // Eliminar un Permiso Compuesto y sus relaciones
+        // Eliminar un permiso compuesto y sus relaciones
         public void EliminarPermisoCompuesto(string nombrePermiso)
         {
-            DataTable tablaIntermedia = _dataSet.Tables["PermisosIntermedios"];
-            DataTable tablaPermisos = _dataSet.Tables["Permisos"];
-
-            // Eliminar relaciones
-            foreach (DataRow fila in tablaIntermedia.Select($"nombrePermisoCompuesto = '{nombrePermiso}'"))
+            foreach (DataRow fila in dtIntermedia.Select($"nombrePermisoCompuesto = '{nombrePermiso}'"))
             {
                 fila.Delete();
             }
 
-            // Eliminar el permiso compuesto
-            foreach (DataRow fila in tablaPermisos.Select($"nombrePermiso = '{nombrePermiso}'"))
+            foreach (DataRow fila in dtPermisos.Select($"nombrePermiso = '{nombrePermiso}'"))
             {
                 fila.Delete();
             }
-
-            // Eliminar de la estructura en memoria
-            _cacheCompuestos.Remove(nombrePermiso);
-        }
-
-        // Obtener un Permiso Compuesto con sus componentes
-        public PermisoCompuesto ObtenerPermisoCompuesto(string nombrePermiso)
-        {
-            return _cacheCompuestos.ContainsKey(nombrePermiso) ? _cacheCompuestos[nombrePermiso] : null;
         }
 
         // Guardar cambios en la base de datos
         public void GuardarCambios()
         {
-            using (SqlConnection conexion = new SqlConnection(_cadenaConexion))
-            {
-                conexion.Open();
-                _adapterPermisos.Update(_dataSet, "Permisos");
-                _adapterIntermedios.Update(_dataSet, "PermisosIntermedios");
-            }
+            dao.Update(dtPermisos);
+            dao.Update(dtIntermedia);
         }
     }
 }
