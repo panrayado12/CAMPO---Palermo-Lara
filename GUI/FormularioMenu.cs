@@ -21,6 +21,7 @@ namespace GUI
         BackupRestore backupRestore;
         private FormularioBitacoraEventos formularioBitacoraEventos;
         private FormAdministradorUsuario formularioAdministradorUsuario;
+        private FormularioPermisos formularioPermisos;
 
         public FormularioMenu()
         {
@@ -30,6 +31,7 @@ namespace GUI
             bllBitacora = new bll_bitacora();
             formularioBitacoraEventos = new FormularioBitacoraEventos();
             formularioAdministradorUsuario = new FormAdministradorUsuario();
+            formularioPermisos = new FormularioPermisos();
             RegistrarControlesDeFormularios();
             RegistrarObservarDeFormularios();
             GestorDeTraducciones.Gestor.NotificarCambioIdioma();
@@ -40,6 +42,7 @@ namespace GUI
             GestorDeTraducciones.Gestor.RegistrarControles(this);
             GestorDeTraducciones.Gestor.RegistrarControles(formularioAdministradorUsuario);
             GestorDeTraducciones.Gestor.RegistrarControles(formularioBitacoraEventos);
+            GestorDeTraducciones.Gestor.RegistrarControles(formularioPermisos);
         }
 
         private void RegistrarObservarDeFormularios()
@@ -47,6 +50,7 @@ namespace GUI
             GestorDeTraducciones.Gestor.RegistrarObservador(this);
             GestorDeTraducciones.Gestor.RegistrarObservador(formularioAdministradorUsuario);
             GestorDeTraducciones.Gestor.RegistrarObservador(formularioBitacoraEventos);
+            GestorDeTraducciones.Gestor.RegistrarObservador(formularioPermisos);
         }
 
         private void btnCerrarSesion_Click(object sender, EventArgs e)
@@ -81,14 +85,13 @@ namespace GUI
         {
             try
             {
-                string nombreUsuario = Interaction.InputBox("Ingrese su nombre de usuario: ", "USUARIO");
-                Usuario usuario = bllUsuario.RetornarUsuarios().Find(x => x.nombreUsuario == nombreUsuario);
+                Usuario usuario = bllUsuario.RetornarUsuarios().Find(x => x.nombreUsuario == sessionManager.Gestor.RetornarUsuarioSession());
                 if(usuario==null)
                 {
                     MessageBox.Show("USUARIO NO ENCONTRADO");
                     throw new Exception();
                 }
-                bllUsuario.Modificar(usuario);
+                bllUsuario.ModificarContraseña(usuario);
                 MessageBox.Show("Su contraseña a sido modificada con exito");
                 bllBitacora.Alta("Formulario Menú", "Cambio de contraseña", 2);
             }
@@ -179,7 +182,7 @@ namespace GUI
         {
             try
             {
-
+                formularioPermisos.ShowDialog();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }

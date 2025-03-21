@@ -49,6 +49,12 @@ namespace BLL
         public void Modificar(Usuario usuario)
         {
             usuario. nombreUsuario = seguridad.Encrypt(usuario.nombreUsuario);
+            orm.Modificar(usuario);
+        }
+
+        public void ModificarContraseña(Usuario usuario)
+        {
+            usuario.nombreUsuario = seguridad.Encrypt(usuario.nombreUsuario);
             usuario.contraseñaUsuario = seguridad.GetSHA256(Interaction.InputBox("Ingrese la nueva contraseña: ", "NUEVA CONTRASEÑA"));
             orm.Modificar(usuario);
         }

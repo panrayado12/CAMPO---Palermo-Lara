@@ -55,6 +55,7 @@
             this.btnAdministrarUsuarios.Name = "btnAdministrarUsuarios";
             this.btnAdministrarUsuarios.Size = new System.Drawing.Size(275, 47);
             this.btnAdministrarUsuarios.TabIndex = 1;
+            this.btnAdministrarUsuarios.Tag = "Acceder a administración de usuarios";
             this.btnAdministrarUsuarios.Text = "Administrar usuarios";
             this.btnAdministrarUsuarios.UseVisualStyleBackColor = true;
             this.btnAdministrarUsuarios.Click += new System.EventHandler(this.btnAñadirUsuario_Click);
@@ -65,6 +66,7 @@
             this.btnCambiarContraseña.Name = "btnCambiarContraseña";
             this.btnCambiarContraseña.Size = new System.Drawing.Size(275, 47);
             this.btnCambiarContraseña.TabIndex = 2;
+            this.btnCambiarContraseña.Tag = "";
             this.btnCambiarContraseña.Text = "Cambiar contraseña";
             this.btnCambiarContraseña.UseVisualStyleBackColor = true;
             this.btnCambiarContraseña.Click += new System.EventHandler(this.btnCambiarContraseña_Click);
@@ -75,6 +77,7 @@
             this.btnRestore.Name = "btnRestore";
             this.btnRestore.Size = new System.Drawing.Size(275, 47);
             this.btnRestore.TabIndex = 3;
+            this.btnRestore.Tag = "Realizar restore";
             this.btnRestore.Text = "Restore";
             this.btnRestore.UseVisualStyleBackColor = true;
             this.btnRestore.Click += new System.EventHandler(this.btnRestore_Click);
@@ -85,6 +88,7 @@
             this.btnBackUp.Name = "btnBackUp";
             this.btnBackUp.Size = new System.Drawing.Size(275, 47);
             this.btnBackUp.TabIndex = 4;
+            this.btnBackUp.Tag = "Realizar back up";
             this.btnBackUp.Text = "Back up";
             this.btnBackUp.UseVisualStyleBackColor = true;
             this.btnBackUp.Click += new System.EventHandler(this.btnBackUp_Click);
@@ -95,6 +99,7 @@
             this.btnBitacora.Name = "btnBitacora";
             this.btnBitacora.Size = new System.Drawing.Size(275, 47);
             this.btnBitacora.TabIndex = 5;
+            this.btnBitacora.Tag = "Acceder a bitacora";
             this.btnBitacora.Text = "Bitacora";
             this.btnBitacora.UseVisualStyleBackColor = true;
             this.btnBitacora.Click += new System.EventHandler(this.btnBitacora_Click);
@@ -105,6 +110,7 @@
             this.btnCambiarIdioma.Name = "btnCambiarIdioma";
             this.btnCambiarIdioma.Size = new System.Drawing.Size(275, 47);
             this.btnCambiarIdioma.TabIndex = 6;
+            this.btnCambiarIdioma.Tag = "";
             this.btnCambiarIdioma.Text = "Cambiar idioma ";
             this.btnCambiarIdioma.UseVisualStyleBackColor = true;
             this.btnCambiarIdioma.Click += new System.EventHandler(this.btnCambiarIdioma_Click);
@@ -126,6 +132,7 @@
             this.btnAdministrarPermisos.Name = "btnAdministrarPermisos";
             this.btnAdministrarPermisos.Size = new System.Drawing.Size(275, 47);
             this.btnAdministrarPermisos.TabIndex = 8;
+            this.btnAdministrarPermisos.Tag = "Acceder a permisos";
             this.btnAdministrarPermisos.Text = "Permisos";
             this.btnAdministrarPermisos.UseVisualStyleBackColor = true;
             this.btnAdministrarPermisos.Click += new System.EventHandler(this.btnAdministrarPermisos_Click);
@@ -134,7 +141,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1623, 905);
+            this.ClientSize = new System.Drawing.Size(1666, 905);
             this.Controls.Add(this.btnAdministrarPermisos);
             this.Controls.Add(this.comboBoxIdiomas);
             this.Controls.Add(this.btnCambiarIdioma);
