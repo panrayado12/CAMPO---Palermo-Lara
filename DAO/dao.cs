@@ -31,12 +31,23 @@ namespace DAO
             adapter.UpdateCommand = cmdBuilder.GetUpdateCommand();
             adapter.Fill(dataSet, tabla);
             dt = dataSet.Tables[$"{tabla}"];
-            dt.PrimaryKey = new DataColumn[] { dt.Columns[0] };
+            if (tabla == "PermisosIntermedia")
+            {
+                dt.PrimaryKey = new DataColumn[] { dt.Columns[0], dt.Columns[1] };
+            }
+            else
+            {
+                dt.PrimaryKey = new DataColumn[] { dt.Columns[0] };
+            }
             return dt;
         }
 
         public void Update(DataTable dt)
         {
+            adapter = new SqlDataAdapter($"select * from {dt.TableName}", connection);
+            cmdBuilder = new SqlCommandBuilder(adapter);
+            adapter.UpdateCommand = cmdBuilder.GetUpdateCommand();
+            adapter.Fill(dataSet, dt.TableName);
             adapter.Update(dt);
         }
     }

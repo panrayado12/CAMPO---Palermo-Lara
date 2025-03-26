@@ -1,4 +1,5 @@
-﻿using ORM;
+﻿using BE;
+using ORM;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,50 @@ namespace BLL
 {
     public class bll_permisos
     {
-         
+
+        public bll_permisos()
+        {
+
+        }
+
+        public PermisoCompuesto ObtenerPermisoCompuesto(string nombrePermiso)
+        {
+            return orm_permiso.Gestor.ObtenerPermisoCompuesto(nombrePermiso);
+        }
+
+        public Permiso ObtenerPermiso(string nombrePermiso)
+        {
+            return orm_permiso.Gestor.ObtenerPermiso(nombrePermiso);
+        }
+
+        public void InsertarPermisoCompuesto(string nombrePermiso, bool esRol)
+        {
+            orm_permiso.Gestor.InsertarPermisoCompuesto(nombrePermiso, esRol);
+        }
+
+        public void InsertarRelacion(string nombreCompuesto, List<string> nombresPermisosHijos)
+        {
+            orm_permiso.Gestor.InsertarRelacion(nombreCompuesto, nombresPermisosHijos);
+        }
+
+        public void EliminarRelacion(string nombreCompuesto, string nombrePermisoHijo)
+        {
+            orm_permiso.Gestor.EliminarRelacion(nombreCompuesto, nombrePermisoHijo);
+        }
+
+        public void EliminarPermisoCompuesto(string nombrePermiso)
+        {
+            orm_permiso.Gestor.EliminarPermisoCompuesto(nombrePermiso);
+        }
+
+        public List<Permiso> ObtenerTodosLosPermisosLista()
+        {
+            return orm_permiso.Gestor.ObtenerTodosLosPermisos();
+        }
+
+        public List<Permiso> ObtenerTodosLosRolesLista()
+        {
+            return orm_permiso.Gestor.ObtenerTodosLosRoles();
+        }
     }
 }

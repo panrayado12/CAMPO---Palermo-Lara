@@ -32,8 +32,9 @@ namespace ORM
 
         public orm_permiso()
         {
+            dao = new dao();
             dtPermisos = dao.RetornarTabla("Permisos");
-            dtIntermedia = dao.RetornarTabla("PermisosCompuestos");
+            dtIntermedia = dao.RetornarTabla("PermisosIntermedia");
         }
 
         // Construye la estructura del Composite en cada llamada
@@ -60,7 +61,7 @@ namespace ORM
         }
 
         // Obtiene un permiso (ya sea compuesto o simple)
-        private Permiso ObtenerPermiso(string nombrePermiso)
+        public Permiso ObtenerPermiso(string nombrePermiso)
         {
             DataRow[] filas = dtPermisos.Select($"nombrePermiso = '{nombrePermiso}'");
 
@@ -81,18 +82,22 @@ namespace ORM
         {
             DataRow nuevaFila = dtPermisos.NewRow();
             nuevaFila["nombrePermiso"] = nombrePermiso;
+            nuevaFila["compuesto"] = true;
             nuevaFila["esRol"] = esRol;
-            nuevaFila["esCompuesto"] = true;
             dtPermisos.Rows.Add(nuevaFila);
+            GuardarCambios();
         }
 
-        // Insertar una relación entre un permiso compuesto y un hijo
-        public void InsertarRelacion(string nombreCompuesto, string nombrePermisoHijo)
+        public void InsertarRelacion(string nombreCompuesto, List<string> nombresPermisosHijos)
         {
-            DataRow nuevaFila = dtIntermedia.NewRow();
-            nuevaFila["nombrePermisoCompuesto"] = nombreCompuesto;
-            nuevaFila["permisoAñadido"] = nombrePermisoHijo;
-            dtIntermedia.Rows.Add(nuevaFila);
+            foreach (string permisoHijo in nombresPermisosHijos)
+            {
+                DataRow nuevaFila = dtIntermedia.NewRow();
+                nuevaFila["nombrePermisoCompuesto"] = nombreCompuesto;
+                nuevaFila["permisoAñadido"] = permisoHijo;
+                dtIntermedia.Rows.Add(nuevaFila);
+            }
+            GuardarCambios();
         }
 
         // Eliminar una relación entre un permiso compuesto y un hijo
@@ -102,6 +107,7 @@ namespace ORM
             {
                 fila.Delete();
             }
+            GuardarCambios();
         }
 
         // Eliminar un permiso compuesto y sus relaciones
@@ -116,9 +122,41 @@ namespace ORM
             {
                 fila.Delete();
             }
+            GuardarCambios();
         }
 
-        // Guardar cambios en la base de datos
+        public List<Permiso> ObtenerTodosLosPermisos()
+        {
+            List<Permiso> listaPermisos = new List<Permiso>();
+            DataRow[] filas = dtPermisos.Select("esRol = false");
+            foreach (DataRow fila in filas)
+            {
+                string nombre = fila["nombrePermiso"].ToString();
+                bool esCompuesto = Convert.ToBoolean(fila["compuesto"]);
+                if (esCompuesto)
+                {
+                    listaPermisos.Add(ObtenerPermisoCompuesto(nombre));
+                }
+                else
+                {
+                    listaPermisos.Add(new PermisoSimple(nombre, false));
+                }
+            }
+            return listaPermisos;
+        }
+
+        public List<Permiso> ObtenerTodosLosRoles()
+        {
+            List<Permiso> listaRoles = new List<Permiso>();
+            DataRow[] filas = dtPermisos.Select("esRol = true AND compuesto = true");
+            foreach (DataRow fila in filas)
+            {
+                string nombre = fila["nombrePermiso"].ToString();
+                listaRoles.Add(ObtenerPermisoCompuesto(nombre));   
+            }
+            return listaRoles;
+        }
+
         public void GuardarCambios()
         {
             dao.Update(dtPermisos);

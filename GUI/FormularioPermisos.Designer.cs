@@ -34,16 +34,13 @@
             this.btnCrearRol = new System.Windows.Forms.Button();
             this.btnCrearConjuntoDePermisos = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
+            this.txtNombreRol = new System.Windows.Forms.TextBox();
+            this.btnAsignarPermisos = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // checkedListBoxRoles
             // 
             this.checkedListBoxRoles.FormattingEnabled = true;
-            this.checkedListBoxRoles.Items.AddRange(new object[] {
-            "jajaj",
-            "jajaj",
-            "ajjaj",
-            "ajaj"});
             this.checkedListBoxRoles.Location = new System.Drawing.Point(1114, 131);
             this.checkedListBoxRoles.Name = "checkedListBoxRoles";
             this.checkedListBoxRoles.Size = new System.Drawing.Size(377, 368);
@@ -52,11 +49,6 @@
             // checkedListBoxPermisos
             // 
             this.checkedListBoxPermisos.FormattingEnabled = true;
-            this.checkedListBoxPermisos.Items.AddRange(new object[] {
-            "jajaj",
-            "jajaj",
-            "ajjaj",
-            "ajaj"});
             this.checkedListBoxPermisos.Location = new System.Drawing.Point(651, 131);
             this.checkedListBoxPermisos.Name = "checkedListBoxPermisos";
             this.checkedListBoxPermisos.Size = new System.Drawing.Size(377, 368);
@@ -64,7 +56,7 @@
             // 
             // txtPermisosRol
             // 
-            this.txtPermisosRol.Location = new System.Drawing.Point(70, 344);
+            this.txtPermisosRol.Location = new System.Drawing.Point(70, 382);
             this.txtPermisosRol.Name = "txtPermisosRol";
             this.txtPermisosRol.Size = new System.Drawing.Size(400, 31);
             this.txtPermisosRol.TabIndex = 3;
@@ -78,6 +70,7 @@
             this.btnCrearRol.Tag = "Crear roles";
             this.btnCrearRol.Text = "Crear rol";
             this.btnCrearRol.UseVisualStyleBackColor = true;
+            this.btnCrearRol.Click += new System.EventHandler(this.btnCrearRol_Click);
             // 
             // btnCrearConjuntoDePermisos
             // 
@@ -88,6 +81,7 @@
             this.btnCrearConjuntoDePermisos.Tag = "Crear permisos compuestos";
             this.btnCrearConjuntoDePermisos.Text = "Crear conjunto de permisos";
             this.btnCrearConjuntoDePermisos.UseVisualStyleBackColor = true;
+            this.btnCrearConjuntoDePermisos.Click += new System.EventHandler(this.btnCrearConjuntoDePermisos_Click);
             // 
             // btnSalir
             // 
@@ -99,11 +93,30 @@
             this.btnSalir.UseVisualStyleBackColor = true;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
+            // txtNombreRol
+            // 
+            this.txtNombreRol.Location = new System.Drawing.Point(70, 131);
+            this.txtNombreRol.Name = "txtNombreRol";
+            this.txtNombreRol.Size = new System.Drawing.Size(400, 31);
+            this.txtNombreRol.TabIndex = 7;
+            // 
+            // btnAsignarPermisos
+            // 
+            this.btnAsignarPermisos.Location = new System.Drawing.Point(70, 189);
+            this.btnAsignarPermisos.Name = "btnAsignarPermisos";
+            this.btnAsignarPermisos.Size = new System.Drawing.Size(320, 85);
+            this.btnAsignarPermisos.TabIndex = 8;
+            this.btnAsignarPermisos.Tag = "Asignar permisos";
+            this.btnAsignarPermisos.Text = "Asignar permisos";
+            this.btnAsignarPermisos.UseVisualStyleBackColor = true;
+            // 
             // FormularioPermisos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1720, 805);
+            this.Controls.Add(this.btnAsignarPermisos);
+            this.Controls.Add(this.txtNombreRol);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnCrearConjuntoDePermisos);
             this.Controls.Add(this.btnCrearRol);
@@ -126,5 +139,7 @@
         private System.Windows.Forms.Button btnCrearRol;
         private System.Windows.Forms.Button btnCrearConjuntoDePermisos;
         private System.Windows.Forms.Button btnSalir;
+        private System.Windows.Forms.TextBox txtNombreRol;
+        private System.Windows.Forms.Button btnAsignarPermisos;
     }
 }
