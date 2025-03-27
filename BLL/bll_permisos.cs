@@ -36,7 +36,10 @@ namespace BLL
             orm_permiso.Gestor.InsertarRelacion(nombreCompuesto, nombresPermisosHijos);
         }
 
-        
+        public void EliminarRoles(List<string> nombreRolesEliminados)
+        {
+            orm_permiso.Gestor.EliminarRoles(nombreRolesEliminados);
+        }
 
         public void EliminarPermisoCompuesto(List<string> nombrePermisosEliminados)
         {

@@ -171,5 +171,65 @@ namespace GUI
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
+
+        private void btnEliminarRoles_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                List<string> rolesEliminados = new List<string>();
+                foreach (TreeNode treeNode in treeViewRoles.Nodes)
+                {
+                    if (treeNode.Checked)
+                    {
+                        rolesEliminados.Add(treeNode.Text);
+                    }
+                }
+                bllPermisos.EliminarRoles(rolesEliminados);
+                listaRoles = bllPermisos.ObtenerTodosLosRolesLista();
+                LlenarTreeViews (treeViewRoles, listaRoles);
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private void btnAsignarPermisos_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                List<string> permisos = new List<string>();
+                foreach (TreeNode node in treeViewPermisos.Nodes)
+                {
+                    if(node.Checked)
+                    {
+                        permisos.Add(node.Text);
+                    }
+                }
+                foreach(TreeNode rol in treeViewRoles.Nodes)
+                {
+                    if(rol.Checked)
+                    {
+                        bllPermisos.InsertarRelacion(rol.Text, permisos);
+                    }
+                }
+                listaRoles = bllPermisos.ObtenerTodosLosRolesLista();
+                LlenarTreeViews(treeViewRoles, listaRoles);
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private void btnModificarPermisosCompuestos_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string nombreNuevoPermisoCompuesto = txtPermisosRol.Text;
+                foreach(TreeNode permiso in treeViewPermisos.Nodes)
+                {
+                    if(permiso.Checked)
+                    {
+
+                    }
+                }
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
     }
 }

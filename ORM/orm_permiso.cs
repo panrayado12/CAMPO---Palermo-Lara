@@ -115,7 +115,7 @@ namespace ORM
                         string esrol = dtrow2["esRol"].ToString();
                         if (dtrow2["esRol"].ToString() == "False")
                         {
-                            foreach (DataRow row in dtIntermedia.Select($"nombrePermisoCompuesto = '{permiso}'"))
+                            foreach (DataRow row in dtIntermedia.Select($"nombrePermisoCompuesto = '{permiso}' OR permisoAñadido = '{permiso}'"))
                             {
                                 row.Delete();
                             }
@@ -131,6 +131,7 @@ namespace ORM
                         }
                     }
                 }
+                //si el permiso no es añadido, si es solo permisoCompuesto en la tabla intermedia
                 if(fila.Length==0)
                 {
                     foreach (DataRow row in dtIntermedia.Select($"nombrePermisoCompuesto = '{permiso}'"))
@@ -142,6 +143,23 @@ namespace ORM
                     {
                         row.Delete();
                     }
+                }
+            }
+            GuardarCambios();
+        }
+
+        public void EliminarRoles(List<string> nombreRolesEliminados)
+        {
+            foreach(string rol in nombreRolesEliminados)
+            {
+                foreach (DataRow row in dtIntermedia.Select($"nombrePermisoCompuesto = '{rol}'"))
+                {
+                    row.Delete();
+                }
+
+                foreach (DataRow row in dtPermisos.Select($"nombrePermiso = '{rol}'"))
+                {
+                    row.Delete();
                 }
             }
             GuardarCambios();
