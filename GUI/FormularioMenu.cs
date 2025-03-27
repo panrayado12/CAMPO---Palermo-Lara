@@ -61,11 +61,7 @@ namespace GUI
                 sessionManager.Gestor.LogOut();
                 GestorFormulario.gestorFormSG.DefinirEstado(new EstadoLogIn());
             }
-            catch (Exception)
-            {
-
-                throw;
-            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
         private void btnAñadirUsuario_Click(object sender, EventArgs e)

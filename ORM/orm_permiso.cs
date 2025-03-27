@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DAO;
+using System.Windows.Forms;
 
 namespace ORM
 {
@@ -100,27 +101,48 @@ namespace ORM
             GuardarCambios();
         }
 
-        // Eliminar una relación entre un permiso compuesto y un hijo
-        public void EliminarRelacion(string nombreCompuesto, string nombrePermisoHijo)
-        {
-            foreach (DataRow fila in dtIntermedia.Select($"nombrePermisoCompuesto = '{nombreCompuesto}' AND permisoAñadido = '{nombrePermisoHijo}'"))
-            {
-                fila.Delete();
-            }
-            GuardarCambios();
-        }
-
         // Eliminar un permiso compuesto y sus relaciones
-        public void EliminarPermisoCompuesto(string nombrePermiso)
+        public void EliminarPermisoCompuesto(List<string> nombrePermisosEliminados)
         {
-            foreach (DataRow fila in dtIntermedia.Select($"nombrePermisoCompuesto = '{nombrePermiso}'"))
+            foreach(string permiso in nombrePermisosEliminados)
             {
-                fila.Delete();
-            }
+                DataRow[] fila = dtIntermedia.Select($"permisoAñadido = '{permiso}'");
+                foreach(DataRow dtrow in fila)
+                {
+                    DataRow[] rol = dtPermisos.Select($"nombrePermiso = '{dtrow["nombrePermisoCompuesto"]}'");
+                    foreach(DataRow dtrow2 in rol)
+                    {
+                        string esrol = dtrow2["esRol"].ToString();
+                        if (dtrow2["esRol"].ToString() == "False")
+                        {
+                            foreach (DataRow row in dtIntermedia.Select($"nombrePermisoCompuesto = '{permiso}'"))
+                            {
+                                row.Delete();
+                            }
 
-            foreach (DataRow fila in dtPermisos.Select($"nombrePermiso = '{nombrePermiso}'"))
-            {
-                fila.Delete();
+                            foreach (DataRow row in dtPermisos.Select($"nombrePermiso = '{permiso}'"))
+                            {
+                                row.Delete();
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("No se puede eliminar el permiso porque esta asignado a un rol");
+                        }
+                    }
+                }
+                if(fila.Length==0)
+                {
+                    foreach (DataRow row in dtIntermedia.Select($"nombrePermisoCompuesto = '{permiso}'"))
+                    {
+                        row.Delete();
+                    }
+
+                    foreach (DataRow row in dtPermisos.Select($"nombrePermiso = '{permiso}'"))
+                    {
+                        row.Delete();
+                    }
+                }
             }
             GuardarCambios();
         }

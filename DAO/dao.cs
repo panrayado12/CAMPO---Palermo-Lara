@@ -22,6 +22,9 @@ namespace DAO
             dataSet = new DataSet("Sistema");
         }
 
+        // Diccionario para almacenar adaptadores por tabla
+        private Dictionary<string, SqlDataAdapter> adapters = new Dictionary<string, SqlDataAdapter>();
+
         public DataTable RetornarTabla(string tabla)
         {
             adapter = new SqlDataAdapter($"select * from {tabla}", connection);
@@ -39,15 +42,24 @@ namespace DAO
             {
                 dt.PrimaryKey = new DataColumn[] { dt.Columns[0] };
             }
+            adapters[tabla] = adapter;
             return dt;
         }
 
         public void Update(DataTable dt)
         {
-            adapter = new SqlDataAdapter($"select * from {dt.TableName}", connection);
-            cmdBuilder = new SqlCommandBuilder(adapter);
+            if (!adapters.ContainsKey(dt.TableName))
+            {
+                throw new Exception($"No se encontró el SqlDataAdapter para la tabla {dt.TableName}");
+            }
+
+            SqlDataAdapter adapter = adapters[dt.TableName]; // Usamos el adapter guardado
+            SqlCommandBuilder cmdBuilder = new SqlCommandBuilder(adapter);
+
             adapter.UpdateCommand = cmdBuilder.GetUpdateCommand();
-            adapter.Fill(dataSet, dt.TableName);
+            adapter.InsertCommand = cmdBuilder.GetInsertCommand();
+            adapter.DeleteCommand = cmdBuilder.GetDeleteCommand();
+
             adapter.Update(dt);
         }
     }

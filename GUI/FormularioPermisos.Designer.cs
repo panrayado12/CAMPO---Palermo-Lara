@@ -28,31 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.checkedListBoxRoles = new System.Windows.Forms.CheckedListBox();
-            this.checkedListBoxPermisos = new System.Windows.Forms.CheckedListBox();
             this.txtPermisosRol = new System.Windows.Forms.TextBox();
             this.btnCrearRol = new System.Windows.Forms.Button();
             this.btnCrearConjuntoDePermisos = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
             this.txtNombreRol = new System.Windows.Forms.TextBox();
             this.btnAsignarPermisos = new System.Windows.Forms.Button();
+            this.treeViewPermisos = new System.Windows.Forms.TreeView();
+            this.treeViewRoles = new System.Windows.Forms.TreeView();
+            this.btnEliminarPermisos = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // checkedListBoxRoles
-            // 
-            this.checkedListBoxRoles.FormattingEnabled = true;
-            this.checkedListBoxRoles.Location = new System.Drawing.Point(1114, 131);
-            this.checkedListBoxRoles.Name = "checkedListBoxRoles";
-            this.checkedListBoxRoles.Size = new System.Drawing.Size(377, 368);
-            this.checkedListBoxRoles.TabIndex = 1;
-            // 
-            // checkedListBoxPermisos
-            // 
-            this.checkedListBoxPermisos.FormattingEnabled = true;
-            this.checkedListBoxPermisos.Location = new System.Drawing.Point(651, 131);
-            this.checkedListBoxPermisos.Name = "checkedListBoxPermisos";
-            this.checkedListBoxPermisos.Size = new System.Drawing.Size(377, 368);
-            this.checkedListBoxPermisos.TabIndex = 2;
             // 
             // txtPermisosRol
             // 
@@ -110,19 +95,45 @@
             this.btnAsignarPermisos.Text = "Asignar permisos";
             this.btnAsignarPermisos.UseVisualStyleBackColor = true;
             // 
+            // treeViewPermisos
+            // 
+            this.treeViewPermisos.Location = new System.Drawing.Point(672, 131);
+            this.treeViewPermisos.Name = "treeViewPermisos";
+            this.treeViewPermisos.Size = new System.Drawing.Size(410, 617);
+            this.treeViewPermisos.TabIndex = 9;
+            // 
+            // treeViewRoles
+            // 
+            this.treeViewRoles.Location = new System.Drawing.Point(1154, 131);
+            this.treeViewRoles.Name = "treeViewRoles";
+            this.treeViewRoles.Size = new System.Drawing.Size(410, 617);
+            this.treeViewRoles.TabIndex = 10;
+            // 
+            // btnEliminarPermisos
+            // 
+            this.btnEliminarPermisos.Location = new System.Drawing.Point(70, 280);
+            this.btnEliminarPermisos.Name = "btnEliminarPermisos";
+            this.btnEliminarPermisos.Size = new System.Drawing.Size(320, 85);
+            this.btnEliminarPermisos.TabIndex = 11;
+            this.btnEliminarPermisos.Tag = "Eliminar permisos";
+            this.btnEliminarPermisos.Text = "Eliminar permisos";
+            this.btnEliminarPermisos.UseVisualStyleBackColor = true;
+            this.btnEliminarPermisos.Click += new System.EventHandler(this.btnEliminarPermisos_Click);
+            // 
             // FormularioPermisos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1720, 805);
+            this.Controls.Add(this.btnEliminarPermisos);
+            this.Controls.Add(this.treeViewRoles);
+            this.Controls.Add(this.treeViewPermisos);
             this.Controls.Add(this.btnAsignarPermisos);
             this.Controls.Add(this.txtNombreRol);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnCrearConjuntoDePermisos);
             this.Controls.Add(this.btnCrearRol);
             this.Controls.Add(this.txtPermisosRol);
-            this.Controls.Add(this.checkedListBoxPermisos);
-            this.Controls.Add(this.checkedListBoxRoles);
             this.Name = "FormularioPermisos";
             this.Text = " ";
             this.Load += new System.EventHandler(this.FormPermisos_Load);
@@ -132,14 +143,14 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.CheckedListBox checkedListBoxRoles;
-        private System.Windows.Forms.CheckedListBox checkedListBoxPermisos;
         private System.Windows.Forms.TextBox txtPermisosRol;
         private System.Windows.Forms.Button btnCrearRol;
         private System.Windows.Forms.Button btnCrearConjuntoDePermisos;
         private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.TextBox txtNombreRol;
         private System.Windows.Forms.Button btnAsignarPermisos;
+        private System.Windows.Forms.TreeView treeViewPermisos;
+        private System.Windows.Forms.TreeView treeViewRoles;
+        private System.Windows.Forms.Button btnEliminarPermisos;
     }
 }
