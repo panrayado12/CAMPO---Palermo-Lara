@@ -20,12 +20,14 @@ namespace GUI
         bll_usuario bllUsuario;
         bll_bitacora bllBitacora;
         bll_permisos bllPermisos;
+        gestorPermisosControles gestorPermisosControles;
         public FormAdministradorUsuario()
         {
             InitializeComponent();
             bllBitacora = new bll_bitacora();
             bllUsuario = new bll_usuario();
             bllPermisos = new bll_permisos();
+            gestorPermisosControles = new gestorPermisosControles();
         }
 
         private void FormAdministradorUsuario_Load(object sender, EventArgs e)
@@ -33,6 +35,7 @@ namespace GUI
             dataUsuarios.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             CargarGrillaUsuario(bllUsuario.RetornarUsuarios());
             CargarComboBoxRoles(bllPermisos.ObtenerTodosLosRolesLista());
+            gestorPermisosControles.AplicarPermisosAControles(this, bllPermisos.ObtenerPermisosDeRolEspecificoLista(sessionManager.Gestor.RetornarUsuarioRol()));
         }
 
         private void CargarGrillaUsuario(List<Usuario> usuariosLista)

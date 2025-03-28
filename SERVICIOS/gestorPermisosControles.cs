@@ -14,10 +14,14 @@ namespace SERVICIOS
         {
             foreach (Control ctrl in parent.Controls)
             {
-                if (ctrl.Tag != null)
+                if (ctrl.Tag != null && !string.IsNullOrWhiteSpace(ctrl.Tag.ToString()))
                 {
                     string permisoTag = ctrl.Tag.ToString();
                     ctrl.Enabled = permisosUsuario.Contains(permisoTag);
+                }
+                else
+                {
+                    ctrl.Enabled = true;
                 }
 
                 if (ctrl.HasChildren)

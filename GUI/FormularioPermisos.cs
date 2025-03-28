@@ -19,12 +19,14 @@ namespace GUI
         bll_permisos bllPermisos;
         List<Permiso> listaPermisos;
         List<Permiso> listaRoles;
+        gestorPermisosControles gestorPermisosControles;
         public FormularioPermisos()
         {
             InitializeComponent();
             bllPermisos = new bll_permisos();
             listaPermisos = new List<Permiso>();
             listaRoles = new List<Permiso>();
+            gestorPermisosControles = new gestorPermisosControles();
         }
 
         private void FormPermisos_Load(object sender, EventArgs e)
@@ -35,6 +37,7 @@ namespace GUI
             listaRoles = bllPermisos.ObtenerTodosLosRolesLista();
             LlenarTreeViews(treeViewPermisos, listaPermisos);
             LlenarTreeViews(treeViewRoles, listaRoles);
+            gestorPermisosControles.AplicarPermisosAControles(this, bllPermisos.ObtenerPermisosDeRolEspecificoLista(sessionManager.Gestor.usuarioRol));
         }
 
         private void LlenarTreeViews(System.Windows.Forms.TreeView treeView, List<Permiso> listaPermisosRoles)

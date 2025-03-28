@@ -17,12 +17,15 @@ namespace GUI
     {
         bll_bitacora bllBitacora;
         bll_usuario bllUsuario;
-        
+        bll_permisos bllPermisos;
+        gestorPermisosControles gestorPermisosControles;
         public FormularioBitacoraEventos()
         {
             InitializeComponent();
             bllBitacora = new bll_bitacora();
             bllUsuario = new bll_usuario();
+            bllPermisos  = new bll_permisos();
+            gestorPermisosControles = new gestorPermisosControles();
             MostrarBitacora(bllBitacora.RetornarBitacora());
         }
 
@@ -67,6 +70,7 @@ namespace GUI
                         comboBoxCriticidad.Items.Add(item[6]);
                     }
                 }
+                gestorPermisosControles.AplicarPermisosAControles(this,bllPermisos.ObtenerPermisosDeRolEspecificoLista(sessionManager.Gestor.RetornarUsuarioRol()));
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }

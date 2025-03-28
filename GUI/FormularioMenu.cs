@@ -140,7 +140,6 @@ namespace GUI
 
         private void FormularioMenu_Load(object sender, EventArgs e)
         {
-            List<string> permisos = new List<string>();
             gestorPermisosControles.AplicarPermisosAControles(this, bllPermisos.ObtenerPermisosDeRolEspecificoLista(sessionManager.Gestor.usuarioRol));
         }
 
