@@ -19,6 +19,8 @@ namespace GUI
         bll_usuario bllUsuario;
         bll_bitacora bllBitacora;
         BackupRestore backupRestore;
+        bll_permisos bllPermisos;
+        gestorPermisosControles gestorPermisosControles;
         private FormularioBitacoraEventos formularioBitacoraEventos;
         private FormAdministradorUsuario formularioAdministradorUsuario;
         private FormularioPermisos formularioPermisos;
@@ -32,6 +34,8 @@ namespace GUI
             formularioBitacoraEventos = new FormularioBitacoraEventos();
             formularioAdministradorUsuario = new FormAdministradorUsuario();
             formularioPermisos = new FormularioPermisos();
+            gestorPermisosControles = new gestorPermisosControles();
+            bllPermisos = new bll_permisos();
             RegistrarControlesDeFormularios();
             RegistrarObservarDeFormularios();
             GestorDeTraducciones.Gestor.NotificarCambioIdioma();
@@ -136,7 +140,8 @@ namespace GUI
 
         private void FormularioMenu_Load(object sender, EventArgs e)
         {
-
+            List<string> permisos = new List<string>();
+            gestorPermisosControles.AplicarPermisosAControles(this, bllPermisos.ObtenerPermisosDeRolEspecificoLista(sessionManager.Gestor.usuarioRol));
         }
 
         private void btnBitacora_Click(object sender, EventArgs e)
@@ -154,11 +159,7 @@ namespace GUI
             {
                 GestorDeTraducciones.Gestor.TraducirControles(this);
             }
-            catch (Exception)
-            {
-
-                throw;
-            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
         private void btnCambiarIdioma_Click(object sender, EventArgs e)

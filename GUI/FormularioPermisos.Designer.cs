@@ -43,7 +43,7 @@
             // 
             // txtPermisosRol
             // 
-            this.txtPermisosRol.Location = new System.Drawing.Point(70, 382);
+            this.txtPermisosRol.Location = new System.Drawing.Point(70, 367);
             this.txtPermisosRol.Name = "txtPermisosRol";
             this.txtPermisosRol.Size = new System.Drawing.Size(400, 31);
             this.txtPermisosRol.TabIndex = 3;
@@ -82,7 +82,7 @@
             // 
             // btnAsignarPermisos
             // 
-            this.btnAsignarPermisos.Location = new System.Drawing.Point(70, 94);
+            this.btnAsignarPermisos.Location = new System.Drawing.Point(70, 83);
             this.btnAsignarPermisos.Name = "btnAsignarPermisos";
             this.btnAsignarPermisos.Size = new System.Drawing.Size(320, 85);
             this.btnAsignarPermisos.TabIndex = 8;
@@ -93,21 +93,21 @@
             // 
             // treeViewPermisos
             // 
-            this.treeViewPermisos.Location = new System.Drawing.Point(566, 94);
+            this.treeViewPermisos.Location = new System.Drawing.Point(566, 83);
             this.treeViewPermisos.Name = "treeViewPermisos";
-            this.treeViewPermisos.Size = new System.Drawing.Size(410, 683);
+            this.treeViewPermisos.Size = new System.Drawing.Size(410, 694);
             this.treeViewPermisos.TabIndex = 9;
             // 
             // treeViewRoles
             // 
-            this.treeViewRoles.Location = new System.Drawing.Point(1095, 94);
+            this.treeViewRoles.Location = new System.Drawing.Point(1095, 83);
             this.treeViewRoles.Name = "treeViewRoles";
-            this.treeViewRoles.Size = new System.Drawing.Size(410, 683);
+            this.treeViewRoles.Size = new System.Drawing.Size(410, 694);
             this.treeViewRoles.TabIndex = 10;
             // 
             // btnEliminarPermisos
             // 
-            this.btnEliminarPermisos.Location = new System.Drawing.Point(70, 185);
+            this.btnEliminarPermisos.Location = new System.Drawing.Point(70, 174);
             this.btnEliminarPermisos.Name = "btnEliminarPermisos";
             this.btnEliminarPermisos.Size = new System.Drawing.Size(320, 85);
             this.btnEliminarPermisos.TabIndex = 11;
@@ -118,7 +118,7 @@
             // 
             // btnEliminarRoles
             // 
-            this.btnEliminarRoles.Location = new System.Drawing.Point(70, 276);
+            this.btnEliminarRoles.Location = new System.Drawing.Point(70, 265);
             this.btnEliminarRoles.Name = "btnEliminarRoles";
             this.btnEliminarRoles.Size = new System.Drawing.Size(320, 85);
             this.btnEliminarRoles.TabIndex = 12;
@@ -141,7 +141,7 @@
             // comboBoxPermisosCompuestos
             // 
             this.comboBoxPermisosCompuestos.FormattingEnabled = true;
-            this.comboBoxPermisosCompuestos.Location = new System.Drawing.Point(566, 39);
+            this.comboBoxPermisosCompuestos.Location = new System.Drawing.Point(566, 21);
             this.comboBoxPermisosCompuestos.Name = "comboBoxPermisosCompuestos";
             this.comboBoxPermisosCompuestos.Size = new System.Drawing.Size(410, 33);
             this.comboBoxPermisosCompuestos.TabIndex = 14;

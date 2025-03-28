@@ -11,6 +11,7 @@ namespace SERVICIOS
     {
         public string usuarioSession;
         public string usuarioIdioma = "es";
+        public string usuarioRol;
         private static sessionManager instance;
 
         public static sessionManager Gestor
@@ -30,17 +31,23 @@ namespace SERVICIOS
             return usuarioSession;
         }
 
+        public string RetornarUsuarioRol()
+        {
+            return usuarioRol;
+        }
+
         public string RetornarIdiomaDeUsuario()
         {
             return usuarioIdioma;
         }
 
-        public void LogIn(string usuarioLogIn, string idioma)
+        public void LogIn(string usuarioLogIn, string idioma, string rol)
         {
             if(Gestor.usuarioSession == null)
             {
                 usuarioSession = usuarioLogIn;
                 usuarioIdioma = idioma;
+                usuarioRol = rol;
             }
         }
 

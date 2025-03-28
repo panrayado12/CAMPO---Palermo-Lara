@@ -82,6 +82,7 @@
   <ItemGroup>
     <Compile Include="BackupRestore.cs" />
     <Compile Include="GestorDeTraducciones.cs" />
+    <Compile Include="gestorPermisosControles.cs" />
     <Compile Include="IObservadorTraduccion.cs" />
     <Compile Include="seguridad.cs" />
     <Compile Include="sessionManager.cs" />

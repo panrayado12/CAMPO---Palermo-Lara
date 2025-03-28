@@ -34,7 +34,7 @@ namespace GUI
                     Usuario usuario = bllUsuario.RetornarUsuarios().Find(x => x.nombreUsuario == txtNombreUsuario.Text);
                     if (bllUsuario.RetornarEstadoDeUsuario(usuario)==true)
                     {
-                        sessionManager.Gestor.LogIn(txtNombreUsuario.Text, usuario.lenguaje);
+                        sessionManager.Gestor.LogIn(txtNombreUsuario.Text, usuario.lenguaje, usuario.rolUsuario);
                         bllBitacora.Alta("Formulario de Inicio de Sesión", "Inicio de sesión", 1);
                         GestorFormulario.gestorFormSG.DefinirEstado(new EstadoMenu());
                     }

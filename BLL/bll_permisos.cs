@@ -51,6 +51,11 @@ namespace BLL
             return orm_permiso.Gestor.ObtenerTodosLosPermisos();
         }
 
+        public List<string> ObtenerPermisosDeRolEspecificoLista(string rol)
+        {
+            return orm_permiso.Gestor.ObtenerPermisosDeRolEspecifico(rol);
+        }
+
         public void ModificarNombrePermiso(string nombreNuevoPermiso, string nombreViejoPermiso)
         {
             orm_permiso.Gestor.ModificarNombrePermiso(nombreNuevoPermiso, nombreViejoPermiso);

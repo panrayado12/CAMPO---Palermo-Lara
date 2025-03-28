@@ -46,12 +46,12 @@
             this.label7 = new System.Windows.Forms.Label();
             this.txtNombreUsuario = new System.Windows.Forms.TextBox();
             this.txtContraseña = new System.Windows.Forms.TextBox();
-            this.txtRolUsuario = new System.Windows.Forms.TextBox();
             this.txtApellidoUsuario = new System.Windows.Forms.TextBox();
             this.txtEmailUsuario = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnDesbloquearUsuario = new System.Windows.Forms.Button();
             this.btnSalir = new System.Windows.Forms.Button();
+            this.comboBoxRoles = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataUsuarios)).BeginInit();
             this.SuspendLayout();
             // 
@@ -222,13 +222,6 @@
             this.txtContraseña.Size = new System.Drawing.Size(317, 31);
             this.txtContraseña.TabIndex = 13;
             // 
-            // txtRolUsuario
-            // 
-            this.txtRolUsuario.Location = new System.Drawing.Point(244, 579);
-            this.txtRolUsuario.Name = "txtRolUsuario";
-            this.txtRolUsuario.Size = new System.Drawing.Size(317, 31);
-            this.txtRolUsuario.TabIndex = 12;
-            // 
             // txtApellidoUsuario
             // 
             this.txtApellidoUsuario.Location = new System.Drawing.Point(244, 474);
@@ -272,18 +265,26 @@
             this.btnSalir.UseVisualStyleBackColor = true;
             this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
             // 
+            // comboBoxRoles
+            // 
+            this.comboBoxRoles.FormattingEnabled = true;
+            this.comboBoxRoles.Location = new System.Drawing.Point(244, 579);
+            this.comboBoxRoles.Name = "comboBoxRoles";
+            this.comboBoxRoles.Size = new System.Drawing.Size(317, 33);
+            this.comboBoxRoles.TabIndex = 20;
+            // 
             // FormAdministradorUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1653, 801);
+            this.Controls.Add(this.comboBoxRoles);
             this.Controls.Add(this.btnSalir);
             this.Controls.Add(this.btnDesbloquearUsuario);
             this.Controls.Add(this.txtEmailUsuario);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtApellidoUsuario);
             this.Controls.Add(this.txtContraseña);
-            this.Controls.Add(this.txtRolUsuario);
             this.Controls.Add(this.txtNombreUsuario);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label5);
@@ -314,7 +315,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtNombreUsuario;
         private System.Windows.Forms.TextBox txtContraseña;
-        private System.Windows.Forms.TextBox txtRolUsuario;
         private System.Windows.Forms.TextBox txtApellidoUsuario;
         private System.Windows.Forms.TextBox txtEmailUsuario;
         private System.Windows.Forms.Label label1;
@@ -328,5 +328,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
         private System.Windows.Forms.Button btnSalir;
+        private System.Windows.Forms.ComboBox comboBoxRoles;
     }
 }

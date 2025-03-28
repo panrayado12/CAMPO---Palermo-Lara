@@ -39,8 +39,11 @@ namespace GUI
 
         private void LlenarTreeViews(System.Windows.Forms.TreeView treeView, List<Permiso> listaPermisosRoles)
         {
-            treeView.Nodes.Clear(); // Limpiar antes de agregar
-
+            treeView.Nodes.Clear();
+            if(treeView.Name == "treeViewPermisos")
+            {
+                comboBoxPermisosCompuestos.Items.Clear();
+            }
             foreach (Permiso permiso in listaPermisosRoles)
             {
                 if (permiso is PermisoCompuesto compuesto)

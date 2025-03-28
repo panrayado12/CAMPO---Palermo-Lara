@@ -228,6 +228,37 @@ namespace ORM
             return listaRoles;
         }
 
+        public List<string> ObtenerPermisosDeRolEspecifico(string rol)
+        {
+            List<Permiso> permisos = new List<Permiso>();
+            DataRow[] filas = dtIntermedia.Select($"nombrePermisoCompuesto = '{rol}'");
+            foreach (DataRow fila in filas)
+            {
+                string nombre = fila["permisoAñadido"].ToString();
+                permisos.Add(ObtenerPermiso(nombre));
+            }
+            return ExtraerPermisosSimples(permisos);
+        }
+
+        private List<string> ExtraerPermisosSimples(List<Permiso> permisos)
+        {
+            List<string> permisosSimples = new List<string>();
+
+            foreach (Permiso permiso in permisos)
+            {
+                if (permiso is PermisoSimple permisoSimple)
+                {
+                    permisosSimples.Add(permisoSimple.nombrePermiso);
+                }
+                else if (permiso is PermisoCompuesto permisoCompuesto)
+                {
+                    // Llamada recursiva para procesar permisos compuestos anidados
+                    permisosSimples.AddRange(ExtraerPermisosSimples(permisoCompuesto.ObtenerPermisos()));
+                }
+            }
+            return permisosSimples;
+        }
+
         public void GuardarCambios()
         {
             dao.Update(dtPermisos);
