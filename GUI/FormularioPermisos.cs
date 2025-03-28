@@ -55,6 +55,7 @@ namespace GUI
                         }
                     }
                     treeView.Nodes.Add(nodoPadre);
+                    comboBoxPermisosCompuestos.Items.Add(nodoPadre.Text);
                 }
                 else
                 {
@@ -158,15 +159,40 @@ namespace GUI
             try
             {
                 List<string> permisosEliminados = new List<string>();
+                List<string> permisosEliminarSoloEnIntermedia = new List<string>();
                 foreach(TreeNode treeNode in treeViewPermisos.Nodes)
                 {
                     if(treeNode.Checked)
                     {
                         permisosEliminados.Add(treeNode.Text);
                     }
+                    foreach (TreeNode hijo in treeNode.Nodes)
+                    {
+                        if (hijo.Checked)
+                        {
+                            permisosEliminarSoloEnIntermedia.Add(hijo.Text);
+                        }
+                    }
+                }
+                foreach (TreeNode treeNode in treeViewRoles.Nodes)
+                {
+                    if (treeNode.Checked)
+                    {
+                        permisosEliminados.Add(treeNode.Text);
+                    }
+                    foreach (TreeNode hijo in treeNode.Nodes)
+                    {
+                        if (hijo.Checked)
+                        {
+                            permisosEliminarSoloEnIntermedia.Add(hijo.Text);
+                        }
+                    }
                 }
                 bllPermisos.EliminarPermisoCompuesto(permisosEliminados);
+                bllPermisos.EliminarPermisoEnIntermedia(permisosEliminarSoloEnIntermedia);
                 listaPermisos = bllPermisos.ObtenerTodosLosPermisosLista();
+                listaRoles = bllPermisos.ObtenerTodosLosRolesLista();
+                LlenarTreeViews(treeViewRoles, listaRoles);
                 LlenarTreeViews(treeViewPermisos, listaPermisos);
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
@@ -196,6 +222,7 @@ namespace GUI
             try
             {
                 List<string> permisos = new List<string>();
+                string permisoContenedor = comboBoxPermisosCompuestos.Text;
                 foreach (TreeNode node in treeViewPermisos.Nodes)
                 {
                     if(node.Checked)
@@ -210,7 +237,13 @@ namespace GUI
                         bllPermisos.InsertarRelacion(rol.Text, permisos);
                     }
                 }
+                if(permisoContenedor != null)
+                {
+                    bllPermisos.InsertarRelacion(permisoContenedor, permisos);
+                }
                 listaRoles = bllPermisos.ObtenerTodosLosRolesLista();
+                listaPermisos = bllPermisos.ObtenerTodosLosPermisosLista();
+                LlenarTreeViews(treeViewPermisos, listaPermisos);
                 LlenarTreeViews(treeViewRoles, listaRoles);
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
@@ -221,13 +254,19 @@ namespace GUI
             try
             {
                 string nombreNuevoPermisoCompuesto = txtPermisosRol.Text;
+                string nombreAntiguoPermisoCompuesto = null;
                 foreach(TreeNode permiso in treeViewPermisos.Nodes)
                 {
                     if(permiso.Checked)
                     {
-
+                        nombreAntiguoPermisoCompuesto = permiso.Text;
                     }
                 }
+                bllPermisos.ModificarNombrePermiso(nombreNuevoPermisoCompuesto, nombreAntiguoPermisoCompuesto);
+                listaPermisos = bllPermisos.ObtenerTodosLosPermisosLista();
+                listaRoles = bllPermisos.ObtenerTodosLosRolesLista();
+                LlenarTreeViews(treeViewPermisos, listaPermisos);
+                LlenarTreeViews(treeViewRoles, listaRoles);
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }

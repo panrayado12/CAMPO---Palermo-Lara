@@ -148,6 +148,18 @@ namespace ORM
             GuardarCambios();
         }
 
+        public void EliminarPermisosEnIntermedia(List<string> nombrePermisos)
+        {
+            foreach (string permiso in nombrePermisos)
+            {
+                foreach (DataRow row in dtIntermedia.Select($"permisoAñadido = '{permiso}'"))
+                {
+                    row.Delete();
+                }
+            }
+            GuardarCambios();
+        }
+
         public void EliminarRoles(List<string> nombreRolesEliminados)
         {
             foreach(string rol in nombreRolesEliminados)
@@ -161,6 +173,25 @@ namespace ORM
                 {
                     row.Delete();
                 }
+            }
+            GuardarCambios();
+        }
+
+        public void ModificarNombrePermiso(string nombreNuevoPermiso, string nombreViejoPermiso)
+        {
+            foreach (DataRow row in dtIntermedia.Select($"nombrePermisoCompuesto = '{nombreViejoPermiso}'"))
+            {
+                row.ItemArray = new object[] { nombreNuevoPermiso, row.Field<string>(1) };
+            }
+
+            foreach (DataRow row in dtIntermedia.Select($"permisoAñadido = '{nombreViejoPermiso}'"))
+            {
+                row.ItemArray = new object[] { row.Field<string>(0), nombreNuevoPermiso };
+            }
+
+            foreach (DataRow row in dtPermisos.Select($"nombrePermiso = '{nombreViejoPermiso}'"))
+            {
+                row.ItemArray = new object[] { nombreNuevoPermiso, row.Field<bool>(1), row.Field<bool>(2) };
             }
             GuardarCambios();
         }

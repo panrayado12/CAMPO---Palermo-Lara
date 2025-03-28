@@ -38,6 +38,7 @@
             this.btnEliminarPermisos = new System.Windows.Forms.Button();
             this.btnEliminarRoles = new System.Windows.Forms.Button();
             this.btnModificarPermisosCompuestos = new System.Windows.Forms.Button();
+            this.comboBoxPermisosCompuestos = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // txtPermisosRol
@@ -132,16 +133,25 @@
             this.btnModificarPermisosCompuestos.Name = "btnModificarPermisosCompuestos";
             this.btnModificarPermisosCompuestos.Size = new System.Drawing.Size(320, 85);
             this.btnModificarPermisosCompuestos.TabIndex = 13;
-            this.btnModificarPermisosCompuestos.Tag = "Modificar permisos compuestos";
-            this.btnModificarPermisosCompuestos.Text = "Modificar conjunto de permisos";
+            this.btnModificarPermisosCompuestos.Tag = "Modificar nombre permisos compuestos";
+            this.btnModificarPermisosCompuestos.Text = "Modificar nombre de permisos compuestos";
             this.btnModificarPermisosCompuestos.UseVisualStyleBackColor = true;
             this.btnModificarPermisosCompuestos.Click += new System.EventHandler(this.btnModificarPermisosCompuestos_Click);
+            // 
+            // comboBoxPermisosCompuestos
+            // 
+            this.comboBoxPermisosCompuestos.FormattingEnabled = true;
+            this.comboBoxPermisosCompuestos.Location = new System.Drawing.Point(566, 39);
+            this.comboBoxPermisosCompuestos.Name = "comboBoxPermisosCompuestos";
+            this.comboBoxPermisosCompuestos.Size = new System.Drawing.Size(410, 33);
+            this.comboBoxPermisosCompuestos.TabIndex = 14;
             // 
             // FormularioPermisos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1720, 805);
+            this.Controls.Add(this.comboBoxPermisosCompuestos);
             this.Controls.Add(this.btnModificarPermisosCompuestos);
             this.Controls.Add(this.btnEliminarRoles);
             this.Controls.Add(this.btnEliminarPermisos);
@@ -171,5 +181,6 @@
         private System.Windows.Forms.Button btnEliminarPermisos;
         private System.Windows.Forms.Button btnEliminarRoles;
         private System.Windows.Forms.Button btnModificarPermisosCompuestos;
+        private System.Windows.Forms.ComboBox comboBoxPermisosCompuestos;
     }
 }
