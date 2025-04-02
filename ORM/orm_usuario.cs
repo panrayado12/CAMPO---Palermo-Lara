@@ -21,41 +21,45 @@ namespace ORM
             dtUsuario = dao.RetornarTabla("Usuario");
         }
 
-        public void AltaUsuario(string nombreUsuario, string contraseñaUsuario,string nombre, string apellido, string rol, string emailUsuario,bool estado, int intentos, string lenguaje)
+        public void AltaUsuario(string dni, string nombreUsuario, string contraseñaUsuario,string nombre, string apellido, string rol, string emailUsuario,bool estado, int intentos, string lenguaje)
         {
-            dtUsuario.Rows.Add(dtUsuario.NewRow().ItemArray = new object[] { nombreUsuario, contraseñaUsuario,nombre,apellido, rol, emailUsuario, estado, intentos, lenguaje });
+            dtUsuario.Rows.Add(dtUsuario.NewRow().ItemArray = new object[] { dni, nombreUsuario, contraseñaUsuario,nombre,apellido, rol, emailUsuario, estado, intentos, lenguaje });
             dao.Update(dtUsuario);
         }
 
         public void Baja(Usuario usuario)
         {
-            dtUsuario.Rows.Find(usuario.nombreUsuario).Delete();
+            dtUsuario.Rows.Find(usuario.dni).Delete();
             dao.Update(dtUsuario);
         }
 
         public void Modificar(Usuario usuario)
         {
-            DataRow dr = dtUsuario.Rows.Find(usuario.nombreUsuario);
-            dr.ItemArray = new object[] { dr.Field<string>(0), usuario.contraseñaUsuario, usuario.nombre, usuario.apellido, usuario.rolUsuario, usuario.emailUsuario, usuario.estado, usuario.intentos, usuario.lenguaje};
+            DataRow dr = dtUsuario.Rows.Find(usuario.dni);
+            dr.ItemArray = new object[] { dr.Field<string>(0), dr.Field<string>(1), usuario.contraseñaUsuario, usuario.nombre, usuario.apellido, usuario.rolUsuario, usuario.emailUsuario, usuario.estado, usuario.intentos, usuario.lenguaje};
             dao.Update(dtUsuario);
         }
 
-        public bool ValidarUsuario(string nombreUsuario, string contraseñaUsuario)
+        public bool ValidarUsuario( string nombreUsuario, string contraseñaUsuario)
         {
             bool existe = false;
-            if (dtUsuario.Rows.Find(nombreUsuario)!=null)
+            string dni = null;
+            DataRow fila = dtUsuario.Select($"nombreUsuario = '{nombreUsuario}'").FirstOrDefault(); ;
+            if (fila!=null)
             {
-                if(dtUsuario.Rows.Find(nombreUsuario)["contraseña"].ToString() == contraseñaUsuario)
+                dni = fila["dni"].ToString();
+                if(dtUsuario.Rows.Find(dni)["contraseña"].ToString() == contraseñaUsuario)
                 {
                     existe = true;
                 }
                 else
                 {
-                    DataRow usuario = dtUsuario.Rows.Find(nombreUsuario);
-                    int intentos = (int)usuario[7];
+                    
+                    DataRow usuario = dtUsuario.Rows.Find(dni);
+                    int intentos = (int)usuario["intentos"];
                     if(intentos < 3)
                     {
-                        usuario[7] = intentos + 1;
+                        usuario["intentos"] = intentos + 1;
                         dao.Update(dtUsuario);
                     }
                     else
@@ -83,12 +87,12 @@ namespace ORM
             DataRow usuarioModificable = dtUsuario.Rows.Find(usuario.nombreUsuario);
             if(usuario.estado == true)
             {
-                usuarioModificable[6] = false;
+                usuarioModificable["estado"] = false;
             }
             else
             {
-                usuarioModificable[6] = true;
-                usuarioModificable[7] = 0;
+                usuarioModificable["estado"] = true;
+                usuarioModificable["intentos"] = 0;
             }
             dao.Update(dtUsuario);
         }

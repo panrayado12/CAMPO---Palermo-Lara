@@ -11,8 +11,9 @@ namespace BE
     {
         public Usuario() { }
 
-        public Usuario(string nombreUsuarioP,string nombreP, string apellidoP, string contraseñaUsuarioP, string rolP,string emailUsuarioP, bool estadoP, int intentosP, string pLenguaje)
+        public Usuario(string pDni, string nombreUsuarioP,string nombreP, string apellidoP, string contraseñaUsuarioP, string rolP,string emailUsuarioP, bool estadoP, int intentosP, string pLenguaje)
         {
+            dni = pDni;
             nombreUsuario = nombreUsuarioP;
             contraseñaUsuario = contraseñaUsuarioP;
             nombre = nombreP;
@@ -26,17 +27,19 @@ namespace BE
 
         public Usuario(object[] datos)
         {
-            nombreUsuario = datos[0].ToString();
-            contraseñaUsuario = datos[1].ToString();
-            nombre = datos[2].ToString();
-            apellido = datos[3].ToString();
-            rolUsuario = datos[4].ToString();
-            emailUsuario = datos[5].ToString();
-            estado = Convert.ToBoolean(datos[6]);
-            intentos = Convert.ToInt32(datos[7]);
-            lenguaje = datos[8].ToString();
+            dni = datos[0].ToString();
+            nombreUsuario = datos[1].ToString();
+            contraseñaUsuario = datos[2].ToString();
+            nombre = datos[3].ToString();
+            apellido = datos[4].ToString();
+            rolUsuario = datos[5].ToString();
+            emailUsuario = datos[6].ToString();
+            estado = Convert.ToBoolean(datos[7]);
+            intentos = Convert.ToInt32(datos[8]);
+            lenguaje = datos[9].ToString();
         }
 
+        public string dni { get; set; }
         public string nombreUsuario { get; set; }
         public string contraseñaUsuario { get; set; }
         public string nombre { get; set; }

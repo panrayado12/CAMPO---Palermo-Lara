@@ -21,14 +21,14 @@ namespace BLL
             seguridad = new seguridad();
         }
 
-        public void Alta(string nombreUsuario, string contraseñaUsuario,string nombre, string apellido, string rol, string emailUsuario, bool estado, int intentos, string lenguaje)
+        public void Alta(string dni, string nombreUsuario, string contraseñaUsuario,string nombre, string apellido, string rol, string emailUsuario, bool estado, int intentos, string lenguaje)
         {
             try
             {
                 string nombreUsuarioCifrado = seguridad.Encrypt(nombreUsuario);
                 string contraseñaHasheada = seguridad.GetSHA256(contraseñaUsuario);
                 if (ValidarUsuario(nombreUsuarioCifrado, contraseñaHasheada) == true) throw new Exception("Usuario ya existente");
-                orm.AltaUsuario(nombreUsuarioCifrado, contraseñaHasheada, nombre, apellido, rol, emailUsuario, estado, intentos, lenguaje);
+                orm.AltaUsuario(dni,nombreUsuarioCifrado, contraseñaHasheada, nombre, apellido, rol, emailUsuario, estado, intentos, lenguaje);
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }

@@ -43,7 +43,7 @@ namespace GUI
             dataUsuarios.Rows.Clear();
             foreach(Usuario u in usuariosLista)
             {
-                dataUsuarios.Rows.Add(u.nombreUsuario, u.contraseñaUsuario, u.nombre, u.apellido, u.rolUsuario, u.emailUsuario, u.estado, u.intentos);
+                dataUsuarios.Rows.Add(u.dni,u.nombreUsuario, u.contraseñaUsuario, u.nombre, u.apellido, u.rolUsuario, u.emailUsuario, u.estado, u.intentos);
             }
         }
 
@@ -60,6 +60,7 @@ namespace GUI
         {
             try
             {
+                string dni = txtDni.Text;
                 string nombre = txtNombreUsuario.Text;
                 string apellido = txtApellidoUsuario.Text;   
                 string nombreUsuario = Interaction.InputBox("Nombre de usuario: ");
@@ -67,7 +68,7 @@ namespace GUI
                 string email = txtEmailUsuario.Text;
                 string rolUsuario = comboBoxRoles.Text;
                 string lenguaje = "es";
-                bllUsuario.Alta(nombreUsuario, contraseña,nombre, apellido, rolUsuario, email, true,0, lenguaje);
+                bllUsuario.Alta(dni,nombreUsuario, contraseña,nombre, apellido, rolUsuario, email, true,0, lenguaje);
                 bllBitacora.Alta("Formulario Administrador de usuarios", "Alta usuario", 2);
                 CargarGrillaUsuario(bllUsuario.RetornarUsuarios());
             }
@@ -79,7 +80,7 @@ namespace GUI
         {
             try
             {
-                string nombreUsuario = dataUsuarios.SelectedRows[0].Cells[0].Value.ToString();
+                string nombreUsuario = dataUsuarios.SelectedRows[0].Cells["nombreUsuario"].Value.ToString();
                 Usuario usuario = bllUsuario.RetornarUsuarios().Find(x => x.nombreUsuario == nombreUsuario);
                 bllUsuario.Baja(usuario);
                 bllBitacora.Alta("Formulario Administrador de usuarios", "Baja usuario", 2);
@@ -93,7 +94,7 @@ namespace GUI
         {
             try
             {
-                string nombreUsuario = dataUsuarios.SelectedRows[0].Cells[0].Value.ToString();
+                string nombreUsuario = dataUsuarios.SelectedRows[0].Cells["nombreUsuario"].Value.ToString();
                 Usuario usuario = bllUsuario.RetornarUsuarios().Find(x => x.nombreUsuario == nombreUsuario);
                 usuario.nombre = txtNombreUsuario.Text;
                 usuario.apellido = txtApellidoUsuario.Text;
@@ -111,11 +112,13 @@ namespace GUI
         {
             try
             {
-                txtNombreUsuario.Text = dataUsuarios.SelectedRows[0].Cells[2].Value.ToString();
-                txtApellidoUsuario.Text = dataUsuarios.SelectedRows[0].Cells[3].Value.ToString();
-                txtContraseña.Text = dataUsuarios.SelectedRows[0].Cells[1].Value.ToString();
-                comboBoxRoles.Text = dataUsuarios.SelectedRows[0].Cells[4].Value.ToString();
-                txtEmailUsuario.Text = dataUsuarios.SelectedRows[0].Cells[5].Value.ToString();
+                txtDni.Text = dataUsuarios.SelectedRows[0].Cells[0].Value.ToString();
+                //nombre real
+                txtNombreUsuario.Text = dataUsuarios.SelectedRows[0].Cells[3].Value.ToString();
+                txtApellidoUsuario.Text = dataUsuarios.SelectedRows[0].Cells[4].Value.ToString();
+                txtContraseña.Text = dataUsuarios.SelectedRows[0].Cells[2].Value.ToString();
+                comboBoxRoles.Text = dataUsuarios.SelectedRows[0].Cells[5].Value.ToString();
+                txtEmailUsuario.Text = dataUsuarios.SelectedRows[0].Cells[6].Value.ToString();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
@@ -124,7 +127,7 @@ namespace GUI
         {
             try
             {
-                string nombreUsuario = dataUsuarios.SelectedRows[0].Cells[0].Value.ToString();
+                string nombreUsuario = dataUsuarios.SelectedRows[0].Cells["nombreUsuario"].Value.ToString();
                 Usuario usuario = bllUsuario.RetornarUsuarios().Find(x => x.nombreUsuario == nombreUsuario);
                 bllUsuario.BloquearDesbloquearUsuario(usuario);
                 bllBitacora.Alta("Formulario Administrador de usuarios", "Desbloquear/Bloquear usuario", 2);
