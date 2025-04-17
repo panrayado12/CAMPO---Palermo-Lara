@@ -17,7 +17,7 @@ namespace GUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            GestorFormulario.gestorFormSG.DefinirEstado(new EstadoLogIn());
+            GestorFormulario941lp.gestorFormSG.DefinirEstado(new EstadoLogIn941lp());
         }
     }
 }
