@@ -25,9 +25,11 @@ namespace BLL
         {
             try
             {
-                usuario.contraseñaUsuario = seguridad.GetSHA256(usuario.contraseñaUsuario);
-                if (ValidarUsuario(usuario.nombreUsuario, usuario.contraseñaUsuario) == true) throw new Exception("Usuario ya existente");
-                orm.AltaUsuario(usuario);
+                if (!(orm.ValidarExistenciaUsuario(usuario.dni, usuario.nombreUsuario)))
+                { 
+                    usuario.contraseñaUsuario = seguridad.GetSHA256(usuario.contraseñaUsuario);
+                    orm.AltaUsuario(usuario);
+                }
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
@@ -61,10 +63,10 @@ namespace BLL
         {
             List<Usuario941lp> usuarios = orm.RetornarUsuarios();
             // 🔹 Desencriptar el nombre de usuario antes de enviarlo a la GUI
-            foreach (var usuario in usuarios)
-            {
-                usuario.nombreUsuario = seguridad.Decrypt(usuario.nombreUsuario);
-            }
+            //foreach (var usuario in usuarios)
+            //{
+            //    usuario.nombreUsuario = seguridad.Decrypt(usuario.nombreUsuario);
+            //}
             return usuarios;
         }
     }

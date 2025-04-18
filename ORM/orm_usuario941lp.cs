@@ -23,9 +23,28 @@ namespace ORM
         }
 
         public void AltaUsuario(Usuario941lp usuario)
-        {
+        {   
             dtUsuario.Rows.Add(dtUsuario.NewRow().ItemArray = new object[] { usuario.dni, usuario.nombreUsuario, usuario.contraseñaUsuario,usuario.nombre,usuario.apellido, usuario.rolUsuario, usuario.emailUsuario, usuario.bloqueo, usuario.intentos, usuario.lenguaje, usuario.activo });
             dao.Update(dtUsuario);
+        }
+
+        public bool ValidarExistenciaUsuario(string dni, string nombreUsuario)
+        {
+            bool existe = true;
+            DataRow fila = dtUsuario.Rows.Find($"dni941lp = '{dni}'");
+            if (fila != null)
+            {
+                MessageBox.Show("DNI repetido");
+            }
+            else if(fila["nombreUsuario"] == nombreUsuario)
+            {
+                MessageBox.Show("Nombre de usuario repetido");
+            }
+            else
+            {
+                existe = false;
+            }
+                return existe;
         }
 
         public void Modificar(Usuario941lp usuario)
@@ -49,21 +68,33 @@ namespace ORM
                 }
                 else
                 {
-                    
-                    DataRow usuario = dtUsuario.Rows.Find(dni);
-                    int intentos = (int)usuario["intentos941lp"];
-                    if(intentos < 3)
-                    {
-                        usuario["intentos941lp"] = intentos + 1;
-                        dao.Update(dtUsuario);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Usuario bloqueado");
-                    }
+                    AumentarIntentos(dni);
                 }
             }
+            else
+            {
+                MessageBox.Show("Usuario no encontrado");
+            }
             return existe;
+        }
+
+        private void AumentarIntentos(string dni)
+        {
+            DataRow usuario = dtUsuario.Rows.Find(dni);
+            int intentos = (int)usuario["intentos941lp"];
+            if (intentos < 3)
+            {
+                MessageBox.Show("Contraseña incorrecta");
+                if (!(dtUsuario.Rows.Find(dni)["rol941lp"].ToString() == "Administrador"))
+                {
+                    usuario["intentos941lp"] = intentos + 1;
+                    dao.Update(dtUsuario);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Usuario bloqueado");
+            }
         }
 
         public List<Usuario941lp> RetornarUsuarios()

@@ -137,10 +137,11 @@
             this.btnAdministrarPermisos.UseVisualStyleBackColor = true;
             this.btnAdministrarPermisos.Click += new System.EventHandler(this.btnAdministrarPermisos_Click);
             // 
-            // FormularioMenu
+            // FormularioMenu941lp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.DarkOliveGreen;
             this.ClientSize = new System.Drawing.Size(1666, 905);
             this.Controls.Add(this.btnAdministrarPermisos);
             this.Controls.Add(this.comboBoxIdiomas);
@@ -151,7 +152,7 @@
             this.Controls.Add(this.btnCambiarContraseña);
             this.Controls.Add(this.btnAdministrarUsuarios);
             this.Controls.Add(this.btnCerrarSesion);
-            this.Name = "FormularioMenu";
+            this.Name = "FormularioMenu941lp";
             this.Text = "Menu";
             this.Load += new System.EventHandler(this.FormularioMenu_Load);
             this.ResumeLayout(false);

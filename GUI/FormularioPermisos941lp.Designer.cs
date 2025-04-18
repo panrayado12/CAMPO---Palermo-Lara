@@ -150,6 +150,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.DarkOliveGreen;
             this.ClientSize = new System.Drawing.Size(1720, 805);
             this.Controls.Add(this.comboBoxPermisosCompuestos);
             this.Controls.Add(this.btnModificarPermisosCompuestos);

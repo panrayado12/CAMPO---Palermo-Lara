@@ -29,6 +29,13 @@
         private void InitializeComponent()
         {
             this.dataUsuarios = new System.Windows.Forms.DataGridView();
+            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nombreUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btnAltaUsuario = new System.Windows.Forms.Button();
             this.btnActivarDesactivar = new System.Windows.Forms.Button();
             this.btnModificarUsuario = new System.Windows.Forms.Button();
@@ -52,13 +59,6 @@
             this.checkBoxActivosConsulta = new System.Windows.Forms.CheckBox();
             this.txtLoginUsuario = new System.Windows.Forms.TextBox();
             this.labelLogIn = new System.Windows.Forms.Label();
-            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nombreUsuario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataUsuarios)).BeginInit();
             this.SuspendLayout();
             // 
@@ -83,214 +83,6 @@
             this.dataUsuarios.Size = new System.Drawing.Size(1582, 394);
             this.dataUsuarios.TabIndex = 0;
             this.dataUsuarios.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataUsuarios_CellClick);
-            // 
-            // btnAltaUsuario
-            // 
-            this.btnAltaUsuario.Location = new System.Drawing.Point(1061, 415);
-            this.btnAltaUsuario.Name = "btnAltaUsuario";
-            this.btnAltaUsuario.Size = new System.Drawing.Size(258, 81);
-            this.btnAltaUsuario.TabIndex = 1;
-            this.btnAltaUsuario.Text = "ALTA";
-            this.btnAltaUsuario.UseVisualStyleBackColor = true;
-            this.btnAltaUsuario.Click += new System.EventHandler(this.btnAltaUsuario_Click);
-            // 
-            // btnActivarDesactivar
-            // 
-            this.btnActivarDesactivar.Location = new System.Drawing.Point(1336, 415);
-            this.btnActivarDesactivar.Name = "btnActivarDesactivar";
-            this.btnActivarDesactivar.Size = new System.Drawing.Size(258, 81);
-            this.btnActivarDesactivar.TabIndex = 2;
-            this.btnActivarDesactivar.Text = "ACT/DESACT";
-            this.btnActivarDesactivar.UseVisualStyleBackColor = true;
-            this.btnActivarDesactivar.Click += new System.EventHandler(this.btnActDesactUsuario_Click);
-            // 
-            // btnModificarUsuario
-            // 
-            this.btnModificarUsuario.Location = new System.Drawing.Point(1061, 502);
-            this.btnModificarUsuario.Name = "btnModificarUsuario";
-            this.btnModificarUsuario.Size = new System.Drawing.Size(258, 81);
-            this.btnModificarUsuario.TabIndex = 3;
-            this.btnModificarUsuario.Text = "MODIFICAR";
-            this.btnModificarUsuario.UseVisualStyleBackColor = true;
-            this.btnModificarUsuario.Click += new System.EventHandler(this.btnModificarUsuario_Click);
-            // 
-            // labelNombreAdministradorUsuarios
-            // 
-            this.labelNombreAdministradorUsuarios.AutoSize = true;
-            this.labelNombreAdministradorUsuarios.Location = new System.Drawing.Point(19, 493);
-            this.labelNombreAdministradorUsuarios.Name = "labelNombreAdministradorUsuarios";
-            this.labelNombreAdministradorUsuarios.Size = new System.Drawing.Size(104, 25);
-            this.labelNombreAdministradorUsuarios.TabIndex = 4;
-            this.labelNombreAdministradorUsuarios.Text = "NOMBRE";
-            // 
-            // labelRolAdministradorUsuarios
-            // 
-            this.labelRolAdministradorUsuarios.AutoSize = true;
-            this.labelRolAdministradorUsuarios.Location = new System.Drawing.Point(19, 659);
-            this.labelRolAdministradorUsuarios.Name = "labelRolAdministradorUsuarios";
-            this.labelRolAdministradorUsuarios.Size = new System.Drawing.Size(55, 25);
-            this.labelRolAdministradorUsuarios.TabIndex = 7;
-            this.labelRolAdministradorUsuarios.Text = "ROL";
-            // 
-            // labelApellidoAdministradorUsuarios
-            // 
-            this.labelApellidoAdministradorUsuarios.AutoSize = true;
-            this.labelApellidoAdministradorUsuarios.Location = new System.Drawing.Point(19, 548);
-            this.labelApellidoAdministradorUsuarios.Name = "labelApellidoAdministradorUsuarios";
-            this.labelApellidoAdministradorUsuarios.Size = new System.Drawing.Size(114, 25);
-            this.labelApellidoAdministradorUsuarios.TabIndex = 10;
-            this.labelApellidoAdministradorUsuarios.Text = "APELLIDO";
-            // 
-            // txtNombreUsuario
-            // 
-            this.txtNombreUsuario.Location = new System.Drawing.Point(251, 487);
-            this.txtNombreUsuario.Name = "txtNombreUsuario";
-            this.txtNombreUsuario.Size = new System.Drawing.Size(317, 31);
-            this.txtNombreUsuario.TabIndex = 11;
-            // 
-            // txtApellidoUsuario
-            // 
-            this.txtApellidoUsuario.Location = new System.Drawing.Point(251, 545);
-            this.txtApellidoUsuario.Name = "txtApellidoUsuario";
-            this.txtApellidoUsuario.Size = new System.Drawing.Size(317, 31);
-            this.txtApellidoUsuario.TabIndex = 15;
-            // 
-            // txtEmailUsuario
-            // 
-            this.txtEmailUsuario.Location = new System.Drawing.Point(251, 713);
-            this.txtEmailUsuario.Name = "txtEmailUsuario";
-            this.txtEmailUsuario.Size = new System.Drawing.Size(317, 31);
-            this.txtEmailUsuario.TabIndex = 17;
-            // 
-            // labelEmailAdministradorUsuarios
-            // 
-            this.labelEmailAdministradorUsuarios.AutoSize = true;
-            this.labelEmailAdministradorUsuarios.Location = new System.Drawing.Point(19, 713);
-            this.labelEmailAdministradorUsuarios.Name = "labelEmailAdministradorUsuarios";
-            this.labelEmailAdministradorUsuarios.Size = new System.Drawing.Size(75, 25);
-            this.labelEmailAdministradorUsuarios.TabIndex = 16;
-            this.labelEmailAdministradorUsuarios.Text = "EMAIL";
-            // 
-            // btnDesbloquearUsuario
-            // 
-            this.btnDesbloquearUsuario.Location = new System.Drawing.Point(1336, 502);
-            this.btnDesbloquearUsuario.Name = "btnDesbloquearUsuario";
-            this.btnDesbloquearUsuario.Size = new System.Drawing.Size(258, 81);
-            this.btnDesbloquearUsuario.TabIndex = 18;
-            this.btnDesbloquearUsuario.Text = "DESBLOQUEAR";
-            this.btnDesbloquearUsuario.UseVisualStyleBackColor = true;
-            this.btnDesbloquearUsuario.Click += new System.EventHandler(this.btnDesbloquearUsuario_Click);
-            // 
-            // btnSalir
-            // 
-            this.btnSalir.Location = new System.Drawing.Point(1061, 589);
-            this.btnSalir.Name = "btnSalir";
-            this.btnSalir.Size = new System.Drawing.Size(258, 81);
-            this.btnSalir.TabIndex = 19;
-            this.btnSalir.Text = "SALIR";
-            this.btnSalir.UseVisualStyleBackColor = true;
-            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
-            // 
-            // comboBoxRoles
-            // 
-            this.comboBoxRoles.FormattingEnabled = true;
-            this.comboBoxRoles.Location = new System.Drawing.Point(251, 659);
-            this.comboBoxRoles.Name = "comboBoxRoles";
-            this.comboBoxRoles.Size = new System.Drawing.Size(317, 33);
-            this.comboBoxRoles.TabIndex = 20;
-            // 
-            // txtDni
-            // 
-            this.txtDni.Location = new System.Drawing.Point(251, 437);
-            this.txtDni.Name = "txtDni";
-            this.txtDni.Size = new System.Drawing.Size(317, 31);
-            this.txtDni.TabIndex = 22;
-            // 
-            // labelDniAdministrtadorUsuarios
-            // 
-            this.labelDniAdministrtadorUsuarios.AutoSize = true;
-            this.labelDniAdministrtadorUsuarios.Location = new System.Drawing.Point(19, 443);
-            this.labelDniAdministrtadorUsuarios.Name = "labelDniAdministrtadorUsuarios";
-            this.labelDniAdministrtadorUsuarios.Size = new System.Drawing.Size(47, 25);
-            this.labelDniAdministrtadorUsuarios.TabIndex = 21;
-            this.labelDniAdministrtadorUsuarios.Text = "DNI";
-            // 
-            // btnCancelar
-            // 
-            this.btnCancelar.Location = new System.Drawing.Point(602, 530);
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(258, 81);
-            this.btnCancelar.TabIndex = 23;
-            this.btnCancelar.Text = "CANCELAR";
-            this.btnCancelar.UseVisualStyleBackColor = true;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
-            // 
-            // btnAplicar
-            // 
-            this.btnAplicar.Location = new System.Drawing.Point(602, 437);
-            this.btnAplicar.Name = "btnAplicar";
-            this.btnAplicar.Size = new System.Drawing.Size(258, 81);
-            this.btnAplicar.TabIndex = 24;
-            this.btnAplicar.Text = "APLICAR";
-            this.btnAplicar.UseVisualStyleBackColor = true;
-            this.btnAplicar.Click += new System.EventHandler(this.btnAplicar_Click);
-            // 
-            // txtModo
-            // 
-            this.txtModo.Location = new System.Drawing.Point(1061, 761);
-            this.txtModo.Multiline = true;
-            this.txtModo.Name = "txtModo";
-            this.txtModo.Size = new System.Drawing.Size(533, 83);
-            this.txtModo.TabIndex = 25;
-            // 
-            // labelModo
-            // 
-            this.labelModo.AutoSize = true;
-            this.labelModo.Location = new System.Drawing.Point(1056, 710);
-            this.labelModo.Name = "labelModo";
-            this.labelModo.Size = new System.Drawing.Size(72, 25);
-            this.labelModo.TabIndex = 26;
-            this.labelModo.Text = "Modo:";
-            // 
-            // checkBoxTodosConsulta
-            // 
-            this.checkBoxTodosConsulta.AutoSize = true;
-            this.checkBoxTodosConsulta.Location = new System.Drawing.Point(251, 797);
-            this.checkBoxTodosConsulta.Name = "checkBoxTodosConsulta";
-            this.checkBoxTodosConsulta.Size = new System.Drawing.Size(104, 29);
-            this.checkBoxTodosConsulta.TabIndex = 27;
-            this.checkBoxTodosConsulta.Text = "Todos";
-            this.checkBoxTodosConsulta.UseVisualStyleBackColor = true;
-            this.checkBoxTodosConsulta.CheckedChanged += new System.EventHandler(this.checkBoxTodosConsulta_CheckedChanged);
-            // 
-            // checkBoxActivosConsulta
-            // 
-            this.checkBoxActivosConsulta.AutoSize = true;
-            this.checkBoxActivosConsulta.Checked = true;
-            this.checkBoxActivosConsulta.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxActivosConsulta.Location = new System.Drawing.Point(454, 797);
-            this.checkBoxActivosConsulta.Name = "checkBoxActivosConsulta";
-            this.checkBoxActivosConsulta.Size = new System.Drawing.Size(114, 29);
-            this.checkBoxActivosConsulta.TabIndex = 28;
-            this.checkBoxActivosConsulta.Text = "Activos";
-            this.checkBoxActivosConsulta.UseVisualStyleBackColor = true;
-            this.checkBoxActivosConsulta.CheckedChanged += new System.EventHandler(this.checkBoxActivosConsulta_CheckedChanged);
-            // 
-            // txtLoginUsuario
-            // 
-            this.txtLoginUsuario.Location = new System.Drawing.Point(251, 601);
-            this.txtLoginUsuario.Name = "txtLoginUsuario";
-            this.txtLoginUsuario.Size = new System.Drawing.Size(317, 31);
-            this.txtLoginUsuario.TabIndex = 30;
-            // 
-            // labelLogIn
-            // 
-            this.labelLogIn.AutoSize = true;
-            this.labelLogIn.Location = new System.Drawing.Point(19, 604);
-            this.labelLogIn.Name = "labelLogIn";
-            this.labelLogIn.Size = new System.Drawing.Size(65, 25);
-            this.labelLogIn.TabIndex = 29;
-            this.labelLogIn.Text = "Login";
             // 
             // Column9
             // 
@@ -348,10 +140,229 @@
             this.Column2.ReadOnly = true;
             this.Column2.Width = 200;
             // 
+            // btnAltaUsuario
+            // 
+            this.btnAltaUsuario.Location = new System.Drawing.Point(1061, 415);
+            this.btnAltaUsuario.Name = "btnAltaUsuario";
+            this.btnAltaUsuario.Size = new System.Drawing.Size(258, 81);
+            this.btnAltaUsuario.TabIndex = 1;
+            this.btnAltaUsuario.Text = "ALTA";
+            this.btnAltaUsuario.UseVisualStyleBackColor = true;
+            this.btnAltaUsuario.Click += new System.EventHandler(this.btnAltaUsuario_Click);
+            // 
+            // btnActivarDesactivar
+            // 
+            this.btnActivarDesactivar.Location = new System.Drawing.Point(1336, 415);
+            this.btnActivarDesactivar.Name = "btnActivarDesactivar";
+            this.btnActivarDesactivar.Size = new System.Drawing.Size(258, 81);
+            this.btnActivarDesactivar.TabIndex = 2;
+            this.btnActivarDesactivar.Text = "ACT/DESACT";
+            this.btnActivarDesactivar.UseVisualStyleBackColor = true;
+            this.btnActivarDesactivar.Click += new System.EventHandler(this.btnActDesactUsuario_Click);
+            // 
+            // btnModificarUsuario
+            // 
+            this.btnModificarUsuario.Location = new System.Drawing.Point(1061, 502);
+            this.btnModificarUsuario.Name = "btnModificarUsuario";
+            this.btnModificarUsuario.Size = new System.Drawing.Size(258, 81);
+            this.btnModificarUsuario.TabIndex = 3;
+            this.btnModificarUsuario.Text = "MODIFICAR";
+            this.btnModificarUsuario.UseVisualStyleBackColor = true;
+            this.btnModificarUsuario.Click += new System.EventHandler(this.btnModificarUsuario_Click);
+            // 
+            // labelNombreAdministradorUsuarios
+            // 
+            this.labelNombreAdministradorUsuarios.AutoSize = true;
+            this.labelNombreAdministradorUsuarios.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelNombreAdministradorUsuarios.Location = new System.Drawing.Point(19, 493);
+            this.labelNombreAdministradorUsuarios.Name = "labelNombreAdministradorUsuarios";
+            this.labelNombreAdministradorUsuarios.Size = new System.Drawing.Size(133, 31);
+            this.labelNombreAdministradorUsuarios.TabIndex = 4;
+            this.labelNombreAdministradorUsuarios.Text = "NOMBRE";
+            // 
+            // labelRolAdministradorUsuarios
+            // 
+            this.labelRolAdministradorUsuarios.AutoSize = true;
+            this.labelRolAdministradorUsuarios.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelRolAdministradorUsuarios.Location = new System.Drawing.Point(19, 659);
+            this.labelRolAdministradorUsuarios.Name = "labelRolAdministradorUsuarios";
+            this.labelRolAdministradorUsuarios.Size = new System.Drawing.Size(70, 31);
+            this.labelRolAdministradorUsuarios.TabIndex = 7;
+            this.labelRolAdministradorUsuarios.Text = "ROL";
+            // 
+            // labelApellidoAdministradorUsuarios
+            // 
+            this.labelApellidoAdministradorUsuarios.AutoSize = true;
+            this.labelApellidoAdministradorUsuarios.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelApellidoAdministradorUsuarios.Location = new System.Drawing.Point(19, 548);
+            this.labelApellidoAdministradorUsuarios.Name = "labelApellidoAdministradorUsuarios";
+            this.labelApellidoAdministradorUsuarios.Size = new System.Drawing.Size(147, 31);
+            this.labelApellidoAdministradorUsuarios.TabIndex = 10;
+            this.labelApellidoAdministradorUsuarios.Text = "APELLIDO";
+            // 
+            // txtNombreUsuario
+            // 
+            this.txtNombreUsuario.Location = new System.Drawing.Point(251, 493);
+            this.txtNombreUsuario.Name = "txtNombreUsuario";
+            this.txtNombreUsuario.Size = new System.Drawing.Size(317, 31);
+            this.txtNombreUsuario.TabIndex = 11;
+            // 
+            // txtApellidoUsuario
+            // 
+            this.txtApellidoUsuario.Location = new System.Drawing.Point(251, 548);
+            this.txtApellidoUsuario.Name = "txtApellidoUsuario";
+            this.txtApellidoUsuario.Size = new System.Drawing.Size(317, 31);
+            this.txtApellidoUsuario.TabIndex = 15;
+            // 
+            // txtEmailUsuario
+            // 
+            this.txtEmailUsuario.Location = new System.Drawing.Point(251, 713);
+            this.txtEmailUsuario.Name = "txtEmailUsuario";
+            this.txtEmailUsuario.Size = new System.Drawing.Size(317, 31);
+            this.txtEmailUsuario.TabIndex = 17;
+            // 
+            // labelEmailAdministradorUsuarios
+            // 
+            this.labelEmailAdministradorUsuarios.AutoSize = true;
+            this.labelEmailAdministradorUsuarios.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelEmailAdministradorUsuarios.Location = new System.Drawing.Point(19, 713);
+            this.labelEmailAdministradorUsuarios.Name = "labelEmailAdministradorUsuarios";
+            this.labelEmailAdministradorUsuarios.Size = new System.Drawing.Size(95, 31);
+            this.labelEmailAdministradorUsuarios.TabIndex = 16;
+            this.labelEmailAdministradorUsuarios.Text = "EMAIL";
+            // 
+            // btnDesbloquearUsuario
+            // 
+            this.btnDesbloquearUsuario.Location = new System.Drawing.Point(1336, 502);
+            this.btnDesbloquearUsuario.Name = "btnDesbloquearUsuario";
+            this.btnDesbloquearUsuario.Size = new System.Drawing.Size(258, 81);
+            this.btnDesbloquearUsuario.TabIndex = 18;
+            this.btnDesbloquearUsuario.Text = "DESBLOQUEAR";
+            this.btnDesbloquearUsuario.UseVisualStyleBackColor = true;
+            this.btnDesbloquearUsuario.Click += new System.EventHandler(this.btnDesbloquearUsuario_Click);
+            // 
+            // btnSalir
+            // 
+            this.btnSalir.Location = new System.Drawing.Point(1061, 589);
+            this.btnSalir.Name = "btnSalir";
+            this.btnSalir.Size = new System.Drawing.Size(258, 81);
+            this.btnSalir.TabIndex = 19;
+            this.btnSalir.Text = "SALIR";
+            this.btnSalir.UseVisualStyleBackColor = true;
+            this.btnSalir.Click += new System.EventHandler(this.btnSalir_Click);
+            // 
+            // comboBoxRoles
+            // 
+            this.comboBoxRoles.FormattingEnabled = true;
+            this.comboBoxRoles.Location = new System.Drawing.Point(251, 659);
+            this.comboBoxRoles.Name = "comboBoxRoles";
+            this.comboBoxRoles.Size = new System.Drawing.Size(317, 33);
+            this.comboBoxRoles.TabIndex = 20;
+            // 
+            // txtDni
+            // 
+            this.txtDni.Location = new System.Drawing.Point(251, 443);
+            this.txtDni.Name = "txtDni";
+            this.txtDni.Size = new System.Drawing.Size(317, 31);
+            this.txtDni.TabIndex = 22;
+            // 
+            // labelDniAdministrtadorUsuarios
+            // 
+            this.labelDniAdministrtadorUsuarios.AutoSize = true;
+            this.labelDniAdministrtadorUsuarios.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDniAdministrtadorUsuarios.Location = new System.Drawing.Point(19, 443);
+            this.labelDniAdministrtadorUsuarios.Name = "labelDniAdministrtadorUsuarios";
+            this.labelDniAdministrtadorUsuarios.Size = new System.Drawing.Size(62, 31);
+            this.labelDniAdministrtadorUsuarios.TabIndex = 21;
+            this.labelDniAdministrtadorUsuarios.Text = "DNI";
+            // 
+            // btnCancelar
+            // 
+            this.btnCancelar.Location = new System.Drawing.Point(602, 530);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(258, 81);
+            this.btnCancelar.TabIndex = 23;
+            this.btnCancelar.Text = "CANCELAR";
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            // 
+            // btnAplicar
+            // 
+            this.btnAplicar.Location = new System.Drawing.Point(602, 437);
+            this.btnAplicar.Name = "btnAplicar";
+            this.btnAplicar.Size = new System.Drawing.Size(258, 81);
+            this.btnAplicar.TabIndex = 24;
+            this.btnAplicar.Text = "APLICAR";
+            this.btnAplicar.UseVisualStyleBackColor = true;
+            this.btnAplicar.Click += new System.EventHandler(this.btnAplicar_Click);
+            // 
+            // txtModo
+            // 
+            this.txtModo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtModo.Location = new System.Drawing.Point(1061, 761);
+            this.txtModo.Multiline = true;
+            this.txtModo.Name = "txtModo";
+            this.txtModo.Size = new System.Drawing.Size(533, 83);
+            this.txtModo.TabIndex = 25;
+            // 
+            // labelModo
+            // 
+            this.labelModo.AutoSize = true;
+            this.labelModo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelModo.Location = new System.Drawing.Point(1056, 710);
+            this.labelModo.Name = "labelModo";
+            this.labelModo.Size = new System.Drawing.Size(149, 44);
+            this.labelModo.TabIndex = 26;
+            this.labelModo.Text = "MODO:";
+            // 
+            // checkBoxTodosConsulta
+            // 
+            this.checkBoxTodosConsulta.AutoSize = true;
+            this.checkBoxTodosConsulta.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBoxTodosConsulta.Location = new System.Drawing.Point(251, 797);
+            this.checkBoxTodosConsulta.Name = "checkBoxTodosConsulta";
+            this.checkBoxTodosConsulta.Size = new System.Drawing.Size(186, 48);
+            this.checkBoxTodosConsulta.TabIndex = 27;
+            this.checkBoxTodosConsulta.Text = "TODOS";
+            this.checkBoxTodosConsulta.UseVisualStyleBackColor = true;
+            this.checkBoxTodosConsulta.CheckedChanged += new System.EventHandler(this.checkBoxTodosConsulta_CheckedChanged);
+            // 
+            // checkBoxActivosConsulta
+            // 
+            this.checkBoxActivosConsulta.AutoSize = true;
+            this.checkBoxActivosConsulta.Checked = true;
+            this.checkBoxActivosConsulta.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxActivosConsulta.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBoxActivosConsulta.Location = new System.Drawing.Point(602, 797);
+            this.checkBoxActivosConsulta.Name = "checkBoxActivosConsulta";
+            this.checkBoxActivosConsulta.Size = new System.Drawing.Size(216, 48);
+            this.checkBoxActivosConsulta.TabIndex = 28;
+            this.checkBoxActivosConsulta.Text = "ACTIVOS";
+            this.checkBoxActivosConsulta.UseVisualStyleBackColor = true;
+            this.checkBoxActivosConsulta.CheckedChanged += new System.EventHandler(this.checkBoxActivosConsulta_CheckedChanged);
+            // 
+            // txtLoginUsuario
+            // 
+            this.txtLoginUsuario.Location = new System.Drawing.Point(251, 604);
+            this.txtLoginUsuario.Name = "txtLoginUsuario";
+            this.txtLoginUsuario.Size = new System.Drawing.Size(317, 31);
+            this.txtLoginUsuario.TabIndex = 30;
+            // 
+            // labelLogIn
+            // 
+            this.labelLogIn.AutoSize = true;
+            this.labelLogIn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelLogIn.Location = new System.Drawing.Point(19, 604);
+            this.labelLogIn.Name = "labelLogIn";
+            this.labelLogIn.Size = new System.Drawing.Size(99, 31);
+            this.labelLogIn.TabIndex = 29;
+            this.labelLogIn.Text = "LOGIN";
+            // 
             // FormAdministradorUsuario941lp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.DarkOliveGreen;
             this.ClientSize = new System.Drawing.Size(1653, 856);
             this.Controls.Add(this.txtLoginUsuario);
             this.Controls.Add(this.labelLogIn);
