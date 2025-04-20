@@ -9,7 +9,7 @@ namespace GUI
 {
     internal class EstadoMenu941lp : IEstado941lp
     {
-        FormularioMenu941lp menu;
+        FormularioMenuPrincipal941lp menu;
 
         public void CerrarEstado()
         {
@@ -18,7 +18,7 @@ namespace GUI
 
         public void EjecutarEstado()
         {
-            menu = new FormularioMenu941lp();
+            menu = new FormularioMenuPrincipal941lp();
             menu.ShowDialog();
         }
     }

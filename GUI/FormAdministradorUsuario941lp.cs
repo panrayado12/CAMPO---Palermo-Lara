@@ -214,7 +214,7 @@ namespace GUI
                 Usuario941lp usuario = null;
                 if (modo != "Consulta" && modo!= "Alta")
                 {
-                    if (dataUsuarios.SelectedRows == null) throw new Exception("Selecciones un usuario");
+                    if (dataUsuarios.SelectedRows.Count == 0) throw new Exception("Seleccione un usuario");
                     nombreUsuarioEnGrilla = dataUsuarios.SelectedRows[0].Cells["nombreUsuario"].Value.ToString();
                     usuario = bllUsuario.RetornarUsuarios().Find(x => x.nombreUsuario == nombreUsuarioEnGrilla);
                 }
@@ -236,6 +236,10 @@ namespace GUI
                         bool bloqueo = false;
                         bool activo = true;
                         string lenguaje = "es";
+                        if(txtDni.Text == "" || txtNombreUsuario.Text == "" || txtApellidoUsuario.Text == "" || txtLoginUsuario.Text == "" || txtEmailUsuario.Text == "" || comboBoxRoles.SelectedItem == null)
+                        {
+                            throw new Exception("No se puede dar de alta al usuario. Faltan datos");
+                        }
                         Usuario941lp u = new Usuario941lp(dni, nombreUsuario, contraseña, nombre, apellido, rolUsuario, email, bloqueo, intentos, lenguaje, activo);
                         bllUsuario.Alta(u);
                         MostrarGrillaUsuarios(bllUsuario.RetornarUsuarios());
@@ -261,16 +265,14 @@ namespace GUI
                         MostrarGrillaUsuarios(bllUsuario.RetornarUsuarios());
                         break;
                     case "Desbloquear":
-                        btnAltaUsuario.Enabled = false;
-                        btnModificarUsuario.Enabled = false;
-                        btnActivarDesactivar.Enabled = false;
-                        checkBoxActivosConsulta.Enabled = false;
-                        checkBoxTodosConsulta.Enabled = false;
-                        btnAplicar.Enabled = true;
-                        btnCancelar.Enabled = true;
                         if (usuario.bloqueo == true)
                         {
                             usuario.bloqueo = false;
+                            MessageBox.Show("Usuario desbloqueado");
+                        }
+                        else
+                        {
+                            MessageBox.Show("El usuario esta desbloqueado");
                         }
                         bllUsuario.Modificar(usuario);
                         MostrarGrillaUsuarios(bllUsuario.RetornarUsuarios());

@@ -40,6 +40,12 @@ namespace BLL
             return orm.ValidarUsuario(nombreUsuario, contraseñaHasheada);
         }
 
+        public bool ValidarContraseñaUsuario(string dni, string contraseña)
+        {
+            string contraseñaHasheada = seguridad.GetSHA256(contraseña);
+            return orm.ValidarContraseñaActual(dni, contraseñaHasheada);
+        }
+
         public void Baja(Usuario941lp usuario)
         {
             usuario.nombreUsuario = seguridad.Encrypt(usuario.nombreUsuario);
@@ -48,25 +54,18 @@ namespace BLL
 
         public void Modificar(Usuario941lp usuario)
         {
-            usuario.nombreUsuario = seguridad.Encrypt(usuario.nombreUsuario);
             orm.Modificar(usuario);
         }
 
         public void ModificarContraseña(Usuario941lp usuario)
         {
-            usuario.nombreUsuario = seguridad.Encrypt(usuario.nombreUsuario);
-            usuario.contraseñaUsuario = seguridad.GetSHA256(Interaction.InputBox("Ingrese la nueva contraseña: ", "NUEVA CONTRASEÑA"));
+            usuario.contraseñaUsuario = seguridad.GetSHA256(usuario.contraseñaUsuario);
             orm.Modificar(usuario);
         }
 
         public List<Usuario941lp> RetornarUsuarios()
         {
             List<Usuario941lp> usuarios = orm.RetornarUsuarios();
-            // 🔹 Desencriptar el nombre de usuario antes de enviarlo a la GUI
-            //foreach (var usuario in usuarios)
-            //{
-            //    usuario.nombreUsuario = seguridad.Decrypt(usuario.nombreUsuario);
-            //}
             return usuarios;
         }
     }

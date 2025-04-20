@@ -47,6 +47,16 @@ namespace ORM
                 return existe;
         }
 
+        public bool ValidarContraseñaActual(string dni, string contraseña)
+        {
+            bool existe = false;
+            if(dtUsuario.Rows.Find(dni)["contraseña941lp"].ToString() == contraseña)
+            {
+                existe =true;
+            }
+            return existe;
+        }
+
         public void Modificar(Usuario941lp usuario)
         {
             DataRow dr = dtUsuario.Rows.Find(usuario.dni);

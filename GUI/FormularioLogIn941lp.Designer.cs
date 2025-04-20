@@ -37,6 +37,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.labelNombreUsuarioLogIn = new System.Windows.Forms.Label();
             this.labelContraseñaLogIN = new System.Windows.Forms.Label();
+            this.labelWhiskerWare = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -76,7 +77,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(735, 135);
+            this.pictureBox1.Location = new System.Drawing.Point(737, 89);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(400, 400);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -104,12 +105,23 @@
             this.labelContraseñaLogIN.TabIndex = 6;
             this.labelContraseñaLogIN.Text = "CONTRASEÑA:";
             // 
+            // labelWhiskerWare
+            // 
+            this.labelWhiskerWare.AutoSize = true;
+            this.labelWhiskerWare.Font = new System.Drawing.Font("Tahoma", 13.875F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelWhiskerWare.Location = new System.Drawing.Point(770, 520);
+            this.labelWhiskerWare.Name = "labelWhiskerWare";
+            this.labelWhiskerWare.Size = new System.Drawing.Size(332, 45);
+            this.labelWhiskerWare.TabIndex = 12;
+            this.labelWhiskerWare.Text = "WHISKER-WARE";
+            // 
             // FormularioLogIn941lp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.DarkOliveGreen;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(142)))), ((int)(((byte)(185)))));
             this.ClientSize = new System.Drawing.Size(1279, 736);
+            this.Controls.Add(this.labelWhiskerWare);
             this.Controls.Add(this.labelContraseñaLogIN);
             this.Controls.Add(this.labelNombreUsuarioLogIn);
             this.Controls.Add(this.pictureBox1);
@@ -134,6 +146,7 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label labelNombreUsuarioLogIn;
         private System.Windows.Forms.Label labelContraseñaLogIN;
+        private System.Windows.Forms.Label labelWhiskerWare;
     }
 }
 

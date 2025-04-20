@@ -14,7 +14,7 @@ using System.Windows.Forms;
 
 namespace GUI
 {
-    public partial class FormularioMenu941lp : Form, IObservadorTraduccion941lp
+    public partial class FormularioMenuPrincipal941lp : Form, IObservadorTraduccion941lp
     {
         bll_usuario941lp bllUsuario;
         bll_bitacora941lp bllBitacora;
@@ -24,8 +24,9 @@ namespace GUI
         private FormularioBitacoraEventos941lp formularioBitacoraEventos;
         private FormAdministradorUsuario941lp formularioAdministradorUsuario;
         private FormularioPermisos941lp formularioPermisos;
+        private FormCambiarContraseña formularioCambiarContraseña;
 
-        public FormularioMenu941lp()
+        public FormularioMenuPrincipal941lp()
         {
             InitializeComponent();
             bllUsuario = new bll_usuario941lp();
@@ -35,6 +36,7 @@ namespace GUI
             formularioAdministradorUsuario = new FormAdministradorUsuario941lp();
             formularioPermisos = new FormularioPermisos941lp();
             gestorPermisosControles = new gestorPermisosControles941lp();
+            formularioCambiarContraseña = new FormCambiarContraseña();
             bllPermisos = new bll_permisos941lp();
             RegistrarControlesDeFormularios();
             RegistrarObservarDeFormularios();
@@ -47,6 +49,7 @@ namespace GUI
             GestorDeTraducciones941lp.Gestor.RegistrarControles(formularioAdministradorUsuario);
             GestorDeTraducciones941lp.Gestor.RegistrarControles(formularioBitacoraEventos);
             GestorDeTraducciones941lp.Gestor.RegistrarControles(formularioPermisos);
+            GestorDeTraducciones941lp.Gestor.RegistrarControles(formularioCambiarContraseña);
         }
 
         private void RegistrarObservarDeFormularios()
@@ -55,20 +58,24 @@ namespace GUI
             GestorDeTraducciones941lp.Gestor.RegistrarObservador(formularioAdministradorUsuario);
             GestorDeTraducciones941lp.Gestor.RegistrarObservador(formularioBitacoraEventos);
             GestorDeTraducciones941lp.Gestor.RegistrarObservador(formularioPermisos);
+            GestorDeTraducciones941lp.Gestor.RegistrarObservador(formularioCambiarContraseña);
         }
 
         private void btnCerrarSesion_Click(object sender, EventArgs e)
         {
             try
             {
-                bllBitacora.Alta("Formulario Menú", "Cerrar sesión", 1);
-                sessionManager941lp.Gestor.LogOut();
-                GestorFormulario941lp.gestorFormSG.DefinirEstado(new EstadoLogIn941lp());
+                DialogResult dr = MessageBox.Show("¿Desea cerrar la sesión?", "CERRAR SESIÓN...", MessageBoxButtons.OKCancel);
+                if(dr == DialogResult.OK)
+                {
+                    sessionManager941lp.Gestor.LogOut();
+                    GestorFormulario941lp.gestorFormSG.DefinirEstado(new EstadoLogIn941lp());
+                }
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
-        private void btnAñadirUsuario_Click(object sender, EventArgs e)
+        private void btnGestionDeUsuario_Click(object sender, EventArgs e)
         {
             try
             {
@@ -81,10 +88,7 @@ namespace GUI
         {
             try
             {
-                Usuario941lp usuario = bllUsuario.RetornarUsuarios().Find(x => x.nombreUsuario == sessionManager941lp.Gestor.RetornarUsuarioSession());
-                bllUsuario.ModificarContraseña(usuario);
-                MessageBox.Show("Su contraseña a sido modificada con exito");
-                bllBitacora.Alta("Formulario Menú", "Cambio de contraseña", 2);
+                formularioCambiarContraseña.ShowDialog();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
@@ -132,6 +136,40 @@ namespace GUI
         private void FormularioMenu_Load(object sender, EventArgs e)
         {
             gestorPermisosControles.AplicarPermisosAControles(this, bllPermisos.ObtenerPermisosDeRolEspecificoLista(sessionManager941lp.Gestor.usuarioRol));
+            panelSubMenuAdministrador.Visible = false;
+            panelSubMenuMaestro.Visible = false;
+            panelSubMenuUsuario.Visible = false;
+            panelSubMenuAdopcion.Visible = false;
+            panelSubMenuReportes.Visible = false;
+        }
+
+        private void OcultarSubmenus()
+        {
+            if (panelSubMenuUsuario.Visible == true)
+            {
+                panelSubMenuUsuario.Visible = false;
+            }
+            if (panelSubMenuAdministrador.Visible == true)
+            {
+                panelSubMenuAdministrador.Visible = false;
+            }
+            if (panelSubMenuMaestro.Visible == true)
+            {
+                panelSubMenuMaestro.Visible = false;
+            }
+        }
+
+        private void MostrarSubMenu(Panel submenu)
+        {
+            if (submenu.Visible == false)
+            {
+                OcultarSubmenus();
+                submenu.Visible = true;
+            }
+            else
+            {
+                submenu.Visible = false;
+            }
         }
 
         private void btnBitacora_Click(object sender, EventArgs e)
@@ -171,6 +209,60 @@ namespace GUI
             try
             {
                 formularioPermisos.ShowDialog();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private void btnUsuarioMenuPrincipal_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                MostrarSubMenu(panelSubMenuUsuario);
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private void btnAdministradorMenuPrincipal_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                MostrarSubMenu(panelSubMenuAdministrador);
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private void btnMaestroMenuPrincipal_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                MostrarSubMenu(panelSubMenuMaestro);
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private void btnReportes_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                MostrarSubMenu(panelSubMenuReportes);
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private void btnAdopcion_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                MostrarSubMenu(panelSubMenuAdopcion);
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private void btnHelp_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OcultarSubmenus();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }

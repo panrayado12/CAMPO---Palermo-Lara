@@ -61,6 +61,12 @@
     <Compile Include="FormAdministradorUsuario941lp.Designer.cs">
       <DependentUpon>FormAdministradorUsuario941lp.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormCambiarContraseña.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormCambiarContraseña.Designer.cs">
+      <DependentUpon>FormCambiarContraseña.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormularioPermisos941lp.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -81,16 +87,19 @@
     <Compile Include="FormularioLogIn941lp.Designer.cs">
       <DependentUpon>FormularioLogIn941lp.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormularioMenu941lp.cs">
+    <Compile Include="FormularioMenuPrincipal941lp.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormularioMenu941lp.Designer.cs">
-      <DependentUpon>FormularioMenu941lp.cs</DependentUpon>
+    <Compile Include="FormularioMenuPrincipal941lp.Designer.cs">
+      <DependentUpon>FormularioMenuPrincipal941lp.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FormAdministradorUsuario941lp.resx">
       <DependentUpon>FormAdministradorUsuario941lp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormCambiarContraseña.resx">
+      <DependentUpon>FormCambiarContraseña.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormularioPermisos941lp.resx">
       <DependentUpon>FormularioPermisos941lp.cs</DependentUpon>
@@ -101,8 +110,8 @@
     <EmbeddedResource Include="FormularioLogIn941lp.resx">
       <DependentUpon>FormularioLogIn941lp.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormularioMenu941lp.resx">
-      <DependentUpon>FormularioMenu941lp.cs</DependentUpon>
+    <EmbeddedResource Include="FormularioMenuPrincipal941lp.resx">
+      <DependentUpon>FormularioMenuPrincipal941lp.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
