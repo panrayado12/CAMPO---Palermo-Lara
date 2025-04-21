@@ -150,6 +150,7 @@
             this.btnHelp.Size = new System.Drawing.Size(300, 71);
             this.btnHelp.TabIndex = 18;
             this.btnHelp.Text = "Help";
+            this.btnHelp.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnHelp.UseVisualStyleBackColor = true;
             this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
             // 
@@ -169,6 +170,7 @@
             this.btnAdopcion.Size = new System.Drawing.Size(300, 71);
             this.btnAdopcion.TabIndex = 16;
             this.btnAdopcion.Text = "Adopción";
+            this.btnAdopcion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAdopcion.UseVisualStyleBackColor = true;
             this.btnAdopcion.Click += new System.EventHandler(this.btnAdopcion_Click);
             // 
@@ -188,6 +190,7 @@
             this.btnReportes.Size = new System.Drawing.Size(300, 71);
             this.btnReportes.TabIndex = 14;
             this.btnReportes.Text = "Reportes";
+            this.btnReportes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnReportes.UseVisualStyleBackColor = true;
             this.btnReportes.Click += new System.EventHandler(this.btnReportes_Click);
             // 
@@ -236,13 +239,14 @@
             // 
             // btnAnimales
             // 
+            this.btnAnimales.BackColor = System.Drawing.Color.Transparent;
             this.btnAnimales.Dock = System.Windows.Forms.DockStyle.Top;
             this.btnAnimales.Location = new System.Drawing.Point(0, 0);
             this.btnAnimales.Name = "btnAnimales";
             this.btnAnimales.Size = new System.Drawing.Size(300, 67);
             this.btnAnimales.TabIndex = 19;
             this.btnAnimales.Text = "Animales";
-            this.btnAnimales.UseVisualStyleBackColor = true;
+            this.btnAnimales.UseVisualStyleBackColor = false;
             // 
             // btnMaestroMenuPrincipal
             // 
@@ -252,6 +256,7 @@
             this.btnMaestroMenuPrincipal.Size = new System.Drawing.Size(300, 71);
             this.btnMaestroMenuPrincipal.TabIndex = 10;
             this.btnMaestroMenuPrincipal.Text = "Maestro";
+            this.btnMaestroMenuPrincipal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnMaestroMenuPrincipal.UseVisualStyleBackColor = true;
             this.btnMaestroMenuPrincipal.Click += new System.EventHandler(this.btnMaestroMenuPrincipal_Click);
             // 
@@ -276,6 +281,7 @@
             this.btnAdministradorMenuPrincipal.Size = new System.Drawing.Size(300, 75);
             this.btnAdministradorMenuPrincipal.TabIndex = 10;
             this.btnAdministradorMenuPrincipal.Text = "Administrador";
+            this.btnAdministradorMenuPrincipal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAdministradorMenuPrincipal.UseVisualStyleBackColor = true;
             this.btnAdministradorMenuPrincipal.Click += new System.EventHandler(this.btnAdministradorMenuPrincipal_Click);
             // 
@@ -346,6 +352,7 @@
             this.btnUsuarioMenuPrincipal.Size = new System.Drawing.Size(300, 75);
             this.btnUsuarioMenuPrincipal.TabIndex = 10;
             this.btnUsuarioMenuPrincipal.Text = "Usuario";
+            this.btnUsuarioMenuPrincipal.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnUsuarioMenuPrincipal.UseVisualStyleBackColor = true;
             this.btnUsuarioMenuPrincipal.Click += new System.EventHandler(this.btnUsuarioMenuPrincipal_Click);
             // 
@@ -369,7 +376,7 @@
             this.labelWhiskerWare.TabIndex = 11;
             this.labelWhiskerWare.Text = "WHISKER-WARE";
             // 
-            // FormularioMenu941lp
+            // FormularioMenuPrincipal941lp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -378,7 +385,7 @@
             this.Controls.Add(this.labelWhiskerWare);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panelMenuPrincipal);
-            this.Name = "FormularioMenu941lp";
+            this.Name = "FormularioMenuPrincipal941lp";
             this.Text = "Menu";
             this.Load += new System.EventHandler(this.FormularioMenu_Load);
             this.panelMenuPrincipal.ResumeLayout(false);

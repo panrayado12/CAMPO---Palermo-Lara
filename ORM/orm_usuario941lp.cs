@@ -35,16 +35,16 @@ namespace ORM
             if (fila != null)
             {
                 MessageBox.Show("DNI repetido");
-            }
-            else if(fila["nombreUsuario"] == nombreUsuario)
-            {
-                MessageBox.Show("Nombre de usuario repetido");
+                if (fila["nombreUsuario"] == nombreUsuario)
+                {
+                    MessageBox.Show("Nombre de usuario repetido");
+                }
             }
             else
             {
                 existe = false;
             }
-                return existe;
+            return existe;
         }
 
         public bool ValidarContraseñaActual(string dni, string contraseña)

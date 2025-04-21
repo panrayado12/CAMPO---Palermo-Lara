@@ -93,7 +93,6 @@
             this.labelNombreUsuarioLogIn.Size = new System.Drawing.Size(201, 44);
             this.labelNombreUsuarioLogIn.TabIndex = 5;
             this.labelNombreUsuarioLogIn.Text = "USUARIO:";
-            this.labelNombreUsuarioLogIn.Click += new System.EventHandler(this.label1_Click);
             // 
             // labelContraseñaLogIN
             // 

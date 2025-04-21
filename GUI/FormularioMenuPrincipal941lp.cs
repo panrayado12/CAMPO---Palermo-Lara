@@ -157,6 +157,14 @@ namespace GUI
             {
                 panelSubMenuMaestro.Visible = false;
             }
+            if(panelSubMenuReportes.Visible==true)
+            {
+                panelSubMenuReportes.Visible = false;
+            }
+            if(panelSubMenuAdopcion.Visible == true)
+            {
+                panelSubMenuAdopcion.Visible = false;
+            }
         }
 
         private void MostrarSubMenu(Panel submenu)

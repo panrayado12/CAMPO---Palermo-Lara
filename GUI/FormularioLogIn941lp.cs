@@ -37,7 +37,7 @@ namespace GUI
                     {
                         if(usuario.bloqueo == false)
                         {
-                            sessionManager941lp.Gestor.LogIn(txtNombreUsuario.Text, usuario.lenguaje, usuario.rolUsuario);
+                            sessionManager941lp.Gestor.LogIn(usuario);
                             GestorFormulario941lp.gestorFormSG.DefinirEstado(new EstadoMenu941lp());
                         }
                         else
@@ -55,11 +55,6 @@ namespace GUI
         }
 
         private void FormularioLogIn941lp_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
         {
 
         }

@@ -41,13 +41,13 @@ namespace SERVICIOS
             return usuarioIdioma;
         }
 
-        public void LogIn(string usuarioLogIn, string idioma, string rol)
+        public void LogIn(Usuario941lp usuario)
         {
             if(Gestor.usuarioSession == null)
             {
-                usuarioSession = usuarioLogIn;
-                usuarioIdioma = idioma;
-                usuarioRol = rol;
+                usuarioSession = usuario.nombreUsuario;
+                usuarioIdioma = usuario.lenguaje;
+                usuarioRol = usuario.rolUsuario;
             }
         }
 

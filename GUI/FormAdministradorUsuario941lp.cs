@@ -35,6 +35,8 @@ namespace GUI
 
         private void FormAdministradorUsuario_Load(object sender, EventArgs e)
         {
+            dataUsuarios.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataUsuarios.MultiSelect = false;
             dataUsuarios.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             MostrarGrillaUsuarios(bllUsuario.RetornarUsuarios());
             CargarComboBoxRoles(bllPermisos.ObtenerTodosLosRolesLista());
@@ -45,12 +47,24 @@ namespace GUI
 
         private void EnableTxt(bool habilitar)
         {
-            txtDni.Enabled = habilitar;
-            txtApellidoUsuario.Enabled = habilitar;
-            txtNombreUsuario.Enabled = habilitar;
-            txtEmailUsuario.Enabled = habilitar;
-            comboBoxRoles.Enabled = habilitar;
-            txtLoginUsuario.Enabled = habilitar;
+            if(modo=="Modificar")
+            {
+                txtDni.Enabled = !habilitar;
+                txtApellidoUsuario.Enabled = habilitar;
+                txtNombreUsuario.Enabled = habilitar;
+                txtEmailUsuario.Enabled = habilitar;
+                comboBoxRoles.Enabled = habilitar;
+                txtLoginUsuario.Enabled = !habilitar;
+            }
+            else
+            {
+                txtDni.Enabled = habilitar;
+                txtApellidoUsuario.Enabled = habilitar;
+                txtNombreUsuario.Enabled = habilitar;
+                txtEmailUsuario.Enabled = habilitar;
+                comboBoxRoles.Enabled = habilitar;
+                txtLoginUsuario.Enabled = habilitar;
+            }
         }
 
         private void MostrarGrillaUsuarios(List<Usuario941lp> usuariosLista)
@@ -91,18 +105,24 @@ namespace GUI
             try
             {
                 modo = "Alta";
-                btnAltaUsuario.Enabled = false;
-                btnModificarUsuario.Enabled = false;
-                btnSalir.Enabled = false;
-                btnDesbloquearUsuario.Enabled=false;
-                btnActivarDesactivar.Enabled=false;
-                btnCancelar.Enabled = true;
-                btnAplicar.Enabled = true;
-                EnableTxt(true);
+                VisibilidadDeBotones();
+                EnableTxt(false);
                 DefinirModoEnTxt();
+                LimpiarTxt();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); bllBitacora.Alta("Formulario Administrador de usuarios", "Error alta usuario", 2);
             }
+        }
+
+        private void VisibilidadDeBotones()
+        {
+            btnAltaUsuario.Enabled = false;
+            btnModificarUsuario.Enabled = false;
+            btnSalir.Enabled = false;
+            btnDesbloquearUsuario.Enabled = false;
+            btnActivarDesactivar.Enabled = false;
+            btnCancelar.Enabled = true;
+            btnAplicar.Enabled = true;
         }
 
         private void DefinirModoEnTxt()
@@ -115,15 +135,10 @@ namespace GUI
             try
             {
                 modo = "Act/Descat";
-                btnAltaUsuario.Enabled = false;
-                btnModificarUsuario.Enabled = false;
-                btnSalir.Enabled = false;
-                btnDesbloquearUsuario.Enabled = false;
-                btnActivarDesactivar.Enabled = false;
-                btnCancelar.Enabled = true;
-                btnAplicar.Enabled = true;
+                VisibilidadDeBotones();
                 EnableTxt(false);
                 DefinirModoEnTxt();
+                LimpiarTxt();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); bllBitacora.Alta("Formulario Administrador de usuarios", "Error baja usuario", 2);
             }
@@ -134,15 +149,10 @@ namespace GUI
             try
             {
                 modo = "Modificar";
-                btnAltaUsuario.Enabled = false;
-                btnModificarUsuario.Enabled = false;
-                btnSalir.Enabled = false;
-                btnDesbloquearUsuario.Enabled = false;
-                btnActivarDesactivar.Enabled = false;
-                btnCancelar.Enabled = true;
-                btnAplicar.Enabled = true;
+                VisibilidadDeBotones();
                 EnableTxt(true);
                 DefinirModoEnTxt();
+                
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); bllBitacora.Alta("Formulario Administrador de usuarios", "Error modificar usuario", 2);
             }
@@ -152,13 +162,16 @@ namespace GUI
         {
             try
             {
-                txtDni.Text = dataUsuarios.SelectedRows[0].Cells[0].Value.ToString();
-                //nombre real
-                txtNombreUsuario.Text = dataUsuarios.SelectedRows[0].Cells[1].Value.ToString();
-                txtApellidoUsuario.Text = dataUsuarios.SelectedRows[0].Cells[2].Value.ToString();
-                txtLoginUsuario.Text = dataUsuarios.SelectedRows[0].Cells[3].Value.ToString();
-                comboBoxRoles.Text = dataUsuarios.SelectedRows[0].Cells[4].Value.ToString();
-                txtEmailUsuario.Text = dataUsuarios.SelectedRows[0].Cells[5].Value.ToString();
+                if(modo!="Alta")
+                {
+                    txtDni.Text = dataUsuarios.SelectedRows[0].Cells[0].Value.ToString();
+                    //nombre real
+                    txtNombreUsuario.Text = dataUsuarios.SelectedRows[0].Cells[1].Value.ToString();
+                    txtApellidoUsuario.Text = dataUsuarios.SelectedRows[0].Cells[2].Value.ToString();
+                    txtLoginUsuario.Text = dataUsuarios.SelectedRows[0].Cells[3].Value.ToString();
+                    comboBoxRoles.Text = dataUsuarios.SelectedRows[0].Cells[4].Value.ToString();
+                    txtEmailUsuario.Text = dataUsuarios.SelectedRows[0].Cells[5].Value.ToString();
+                }
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
@@ -168,15 +181,10 @@ namespace GUI
             try
             {
                 modo = "Desbloquear";
-                btnAltaUsuario.Enabled = false;
-                btnModificarUsuario.Enabled = false;
-                btnSalir.Enabled = false;
-                btnDesbloquearUsuario.Enabled = false;
-                btnActivarDesactivar.Enabled = false;
-                btnCancelar.Enabled = true;
-                btnAplicar.Enabled = true;
+                VisibilidadDeBotones();
                 EnableTxt(false);
                 DefinirModoEnTxt();
+                LimpiarTxt();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); bllBitacora.Alta("Formulario Administrador de usuarios", "Error desbloqueo/bloqueo usuario", 2);
             }
@@ -212,7 +220,7 @@ namespace GUI
                 btnSalir.Enabled = true;
                 string nombreUsuarioEnGrilla = "";
                 Usuario941lp usuario = null;
-                if (modo != "Consulta" && modo!= "Alta")
+                if (modo != "Consulta" && modo != "Alta")
                 {
                     if (dataUsuarios.SelectedRows.Count == 0) throw new Exception("Seleccione un usuario");
                     nombreUsuarioEnGrilla = dataUsuarios.SelectedRows[0].Cells["nombreUsuario"].Value.ToString();
@@ -236,7 +244,7 @@ namespace GUI
                         bool bloqueo = false;
                         bool activo = true;
                         string lenguaje = "es";
-                        if(txtDni.Text == "" || txtNombreUsuario.Text == "" || txtApellidoUsuario.Text == "" || txtLoginUsuario.Text == "" || txtEmailUsuario.Text == "" || comboBoxRoles.SelectedItem == null)
+                        if (txtDni.Text == "" || txtNombreUsuario.Text == "" || txtApellidoUsuario.Text == "" || txtLoginUsuario.Text == "" || txtEmailUsuario.Text == "" || comboBoxRoles.SelectedItem == null)
                         {
                             throw new Exception("No se puede dar de alta al usuario. Faltan datos");
                         }
@@ -253,7 +261,7 @@ namespace GUI
                         MostrarGrillaUsuarios(bllUsuario.RetornarUsuarios());
                         break;
                     case "Act/Descat":
-                        if(usuario.activo == true)
+                        if (usuario.activo == true)
                         {
                             usuario.activo = false;
                         }
@@ -283,8 +291,21 @@ namespace GUI
                 }
                 modo = "Consulta";
                 DefinirModoEnTxt();
+                LimpiarTxt();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private void LimpiarTxt()
+        {
+            foreach (Control c in this.Controls)
+            {
+                if (c is TextBox t)
+                {
+                    t.Text = "";
+                }
+            }
+            comboBoxRoles.SelectedItem = null;
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -300,6 +321,7 @@ namespace GUI
                 btnDesbloquearUsuario.Enabled = true;
                 btnSalir.Enabled = true;
                 DefinirModoEnTxt();
+                LimpiarTxt();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
